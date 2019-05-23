@@ -63,29 +63,30 @@ public class RegistrationPresenter implements RegistrationInterface {
         mAuth.createUserWithEmailAndPassword(email1, password1).addOnCompleteListener((Activity)mContext, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if (!task.isSuccessful()) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (task.isSuccessful() && user != null) {
+
+                    user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()){
+                                Toast.makeText(mContext, R.string.Emailsent, Toast.LENGTH_SHORT).show();
+                                Intent goToLogin = new Intent(mContext,LoginActivity.class);
+                                goToLogin.putExtra("name",name1);
+                                goToLogin.putExtra("surname",surname1);
+                                mContext.startActivity(goToLogin);
+                                ((Activity)mContext).finish();
+
+                }}});} else {
                     Toast.makeText(mContext, R.string.Failure, Toast.LENGTH_SHORT).show();
-                } else {
-                    //manda email di verifica e poi ritorna sulla login page
-                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                    if (user != null) {
-                        user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful()){
-                                    Toast.makeText(mContext, R.string.Emailsent, Toast.LENGTH_SHORT).show();
-                                    Intent goToLogin = new Intent(mContext,LoginActivity.class);
-                                    goToLogin.putExtra("name",name1);
-                                    goToLogin.putExtra("surname",surname1);
-                                    mContext.startActivity(goToLogin);
-                                    ((Activity)mContext).finish();
+
                                 }
                             }
-                        });
-                    }
-                }
-            }
+                        });}
 
-        });
-    }
+
+
+
+
+
 }

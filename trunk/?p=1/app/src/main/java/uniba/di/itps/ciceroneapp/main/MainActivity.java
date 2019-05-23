@@ -9,7 +9,7 @@ import android.view.MenuItem;
 
 import uniba.di.itps.ciceroneapp.AddEventMainFragment;
 import uniba.di.itps.ciceroneapp.MyEventMainFragment;
-import uniba.di.itps.ciceroneapp.ProfileMainFragment;
+import uniba.di.itps.ciceroneapp.manageProfile.ProfileMainFragment;
 import uniba.di.itps.ciceroneapp.SearchEventMainFragment;
 
 
@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
                         case R.id.navigation_profile:
                             selectedFragment = new ProfileMainFragment();
                             break;
+                        default:break;
                     }
 
                     if (selectedFragment != null) {
