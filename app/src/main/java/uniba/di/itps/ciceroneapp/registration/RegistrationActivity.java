@@ -15,7 +15,6 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
     private TextInputLayout layout_email,layout_password,layout_name,layout_surname;
     private EditText inputEmail,inputPassword,inputName,inputSurname;
-    private static final String TAG = "RegistrationActivity";
     private RegistrationPresenter registrationPresenter;
 
 
@@ -48,6 +47,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
             case R.id.Reg2:
                     registrationPresenter.createUser(layout_name,layout_surname,layout_email,layout_password,inputName,inputSurname,inputEmail,inputPassword);
                 break;
+            default:break;
         }
 
     }

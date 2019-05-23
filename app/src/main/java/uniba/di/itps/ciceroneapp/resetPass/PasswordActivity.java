@@ -36,6 +36,7 @@ public class PasswordActivity extends AppCompatActivity implements View.OnClickL
             case R.id.ResetPass:
                 passwordPresenter.sendPasswordResetEmail(emailReset);
                 break;
+            default:break;
         }
     }
 }

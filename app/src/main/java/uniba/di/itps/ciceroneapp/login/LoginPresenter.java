@@ -107,8 +107,8 @@ public class LoginPresenter implements LoginInterface.Presenter {
     public void checkIfEmailVerified(){
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            if(user.isEmailVerified()){
+        if (user != null && user.isEmailVerified()) {
+
                 Toast.makeText(mContext, "Email verificata", Toast.LENGTH_SHORT).show();
                 Intent receive = ((Activity)mContext).getIntent();
                 if(receive != null){
@@ -117,11 +117,11 @@ public class LoginPresenter implements LoginInterface.Presenter {
                     User userDatabase = new User(nome,cognome,user.getEmail(),user.getUid());
                     db.collection("utenti").document(user.getUid()).set(userDatabase);
                     mContext.startActivity(new Intent(mContext,MainActivity.class));
-            } else{
+            }} else{
                 Toast.makeText(mContext, "L'email non è stata verificata", Toast.LENGTH_SHORT).show();
             }
-        }
+
     }
     }
-}
+
 
