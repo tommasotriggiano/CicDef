@@ -20,6 +20,7 @@ import uniba.di.itps.ciceroneapp.login.LoginActivity;
 
 public class RegistrationPresenter implements RegistrationInterface {
     private FirebaseAuth mAuth;
+
     private final Context mContext;
 
     RegistrationPresenter(Context context, FirebaseAuth auth) {

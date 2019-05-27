@@ -34,7 +34,7 @@ import uniba.di.itps.ciceroneapp.R;
 public class LoginActivity extends AppCompatActivity implements LoginInterface.MvpView,View.OnClickListener  {
 
     static final int RC_SIGN_IN=1;
-    private LoginPresenter loginPresenter;
+    private LoginInterface.Presenter loginPresenter;
 
     private EditText inputEmail, inputPassword;
     private TextInputLayout layout_email,layout_password;
@@ -98,10 +98,7 @@ public class LoginActivity extends AppCompatActivity implements LoginInterface.M
         }
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
-    private void showProgressBar(boolean show) {
-        progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
-        signin.setVisibility(show ? View.GONE : View.VISIBLE);
-    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -141,6 +138,7 @@ public class LoginActivity extends AppCompatActivity implements LoginInterface.M
             case R.id.Reg2:
 
                 loginPresenter.signInWithEmailAndPasswordUser(layout_email,layout_password,inputEmail,inputPassword);
+
                 break;
 
             case R.id.tvForgotPassword:
