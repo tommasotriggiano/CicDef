@@ -91,17 +91,11 @@ public class LoginPresenter implements LoginInterface.Presenter {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (!task.isSuccessful()) {
-                    // there was an error
-                    if (password.length() < 6) {
-                        Toast.makeText(mContext, R.string.TstPassShort, Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(mContext, R.string.Authenticationf, Toast.LENGTH_SHORT).show();
-                    }
+                    Toast.makeText(mContext, R.string.Authenticationf, Toast.LENGTH_SHORT).show();
                 }
                 else{
                     checkIfEmailVerified();}
-
-            }
+                }
         });
     }
 
@@ -111,15 +105,10 @@ public class LoginPresenter implements LoginInterface.Presenter {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null && user.isEmailVerified()) {
 
-                Toast.makeText(mContext, "Email verificata", Toast.LENGTH_SHORT).show();
-                Intent receive = ((Activity)mContext).getIntent();
-                if(receive != null){
-                    String nome = receive.getStringExtra("name");
-                    String cognome = receive.getStringExtra("surname");
-                    User userDatabase = new User(nome,cognome,user.getEmail(),user.getUid());
-                    db.collection("utenti").document(user.getUid()).set(userDatabase);
+                    Toast.makeText(mContext, "Email verificata", Toast.LENGTH_SHORT).show();
+
                     mContext.startActivity(new Intent(mContext,MainActivity.class));
-            }} else{
+            } else{
                 Toast.makeText(mContext, "L'email non è stata verificata", Toast.LENGTH_SHORT).show();
             }
 

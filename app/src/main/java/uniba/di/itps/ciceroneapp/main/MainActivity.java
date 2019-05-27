@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import uniba.di.itps.ciceroneapp.AddEventMainFragment;
+import uniba.di.itps.ciceroneapp.GestioneAttività.AddEventMainFragment;
 import uniba.di.itps.ciceroneapp.MyEventMainFragment;
 import uniba.di.itps.ciceroneapp.manageProfile.ProfileMainFragment;
 import uniba.di.itps.ciceroneapp.SearchEventMainFragment;

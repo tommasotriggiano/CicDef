@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import uniba.di.itps.ciceroneapp.R;
 
@@ -25,7 +26,8 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        registrationPresenter = new RegistrationPresenter(this, mAuth);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        registrationPresenter = new RegistrationPresenter(this, mAuth,db);
 
         Button signUp = findViewById(R.id.Reg2);
         inputName = findViewById(R.id.name);
