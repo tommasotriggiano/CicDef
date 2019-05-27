@@ -13,19 +13,23 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import uniba.di.itps.ciceroneapp.R;
 import uniba.di.itps.ciceroneapp.login.LoginActivity;
+import uniba.di.itps.ciceroneapp.model.User;
 
 
 public class RegistrationPresenter implements RegistrationInterface {
     private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
 
     private final Context mContext;
 
-    RegistrationPresenter(Context context, FirebaseAuth auth) {
+    RegistrationPresenter(Context context, FirebaseAuth auth,FirebaseFirestore database) {
         mContext = context;
         mAuth = auth;
+        db = database;
     }
 
 
@@ -64,8 +68,10 @@ public class RegistrationPresenter implements RegistrationInterface {
         mAuth.createUserWithEmailAndPassword(email1, password1).addOnCompleteListener((Activity)mContext, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                if (task.isSuccessful() && user != null) {
+                final FirebaseUser user = mAuth.getInstance().getCurrentUser();
+                if (task.isSuccessful()) {
+                    User userDatabase = new User(name1,surname1,user.getEmail(),user.getUid());
+                    db.collection("utenti").document(user.getUid()).set(userDatabase);
 
                     user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
@@ -73,8 +79,6 @@ public class RegistrationPresenter implements RegistrationInterface {
                             if(task.isSuccessful()){
                                 Toast.makeText(mContext, R.string.Emailsent, Toast.LENGTH_SHORT).show();
                                 Intent goToLogin = new Intent(mContext,LoginActivity.class);
-                                goToLogin.putExtra("name",name1);
-                                goToLogin.putExtra("surname",surname1);
                                 mContext.startActivity(goToLogin);
                                 ((Activity)mContext).finish();
 

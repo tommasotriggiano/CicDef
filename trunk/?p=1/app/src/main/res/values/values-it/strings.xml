@@ -60,4 +60,14 @@
     <string name="name">NAME</string>
     <string name="surname">SURNAME</string>
     <string name="Auth_Failed">authentication failed</string>
+
+    <!--Create Activity-->
+    <string name="createActivity">Cliccando qui crei una nuova Attività</string>
+    <string name="addImage">Aggiungi una foto per la tua attività</string>
+    <string name="addImageDescription">Scegli una foto che rappresenterà la tua attività. Questa sarà l'immagine che apparirà ai Globetrotters quando ricercheranno cosa fare</string>
+    <string name="title">Inserisci il titolo della tua attività</string>
+    <string name="description">Inserisci una breve descrizione</string>
+    <string name="category">Scegli la categoria della tua attività</string>
+    <string name="goOn">Continua</string>
+    <string name="enterLocation">Inserisci il luogo in cui vuoi creare l'attività</string>
 </resources>

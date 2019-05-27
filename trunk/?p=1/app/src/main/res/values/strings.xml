@@ -61,4 +61,56 @@
     <string name="surname">SURNAME</string>
     <string name="Auth_Failed">authentication failed</string>
 
+    <!--Create Activity-->
+    <string name="createActivity">If you click here you create a new Activity</string>
+    <string name="addImage">Add photo to your Event</string>
+    <string name="addImageDescription">Choose a photo that represents your activity. This will be the image that will appear whene Globetrotters will search what to do </string>
+    <string name="title">Enter a title for your activity</string>
+    <string name="description">Enter a small description</string>
+    <string name="category">Enter the category of your activity</string>
+    <string name="goOn">continue</string>
+    <string name="enterLocation">Enter Location</string>
+    <string name="Address">Address</string>
+    <string name="enterMeetingAddress">Enter Meeting Address</string>
+    <string name="enterMeetingHour">Enter Meeting Hour</string>
+    <string name="startHour">The activity start from:</string>
+    <string name="endHour">The Activity ends at</string>
+    <array name="Hours">
+        <item>00:00</item>
+        <item>01:00</item>
+        <item>02:00</item>
+        <item>03:00</item>
+        <item>04:00</item>
+        <item>05:00</item>
+        <item>06:00</item>
+        <item>07:00</item>
+        <item>08:00</item>
+        <item>09:00</item>
+        <item>10:00</item>
+        <item>11:00</item>
+        <item>12:00</item>
+        <item>13:00</item>
+        <item>14:00</item>
+        <item>15:00</item>
+        <item>16:00</item>
+        <item>17:00</item>
+        <item>18:00</item>
+        <item>19:00</item>
+        <item>20:00</item>
+        <item>21:00</item>
+        <item>22:00</item>
+        <item>23:00</item>
+
+
+    </array>
+<array name="Categories">
+    <item>Night Life</item>
+    <item>Entertainment</item>
+    <item>Nature</item>
+    <item>Gastronomy</item>
+    <item>History</item>
+    <item>Sport</item>
+    <item>Wealth</item>
+    <item>Others</item>
+</array>
 </resources>
