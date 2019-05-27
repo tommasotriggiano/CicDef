@@ -13,7 +13,7 @@ import uniba.di.itps.ciceroneapp.R;
 public class PasswordActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText emailReset;
     private FirebaseAuth user;
-    private PasswordPresenter passwordPresenter;
+    private PasswordInterface passwordPresenter;
 
 
     @Override

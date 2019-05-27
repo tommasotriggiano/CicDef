@@ -15,7 +15,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
     private TextInputLayout layout_email,layout_password,layout_name,layout_surname;
     private EditText inputEmail,inputPassword,inputName,inputSurname;
-    private RegistrationPresenter registrationPresenter;
+    private RegistrationInterface registrationPresenter;
 
 
 

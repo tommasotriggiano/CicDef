@@ -59,7 +59,9 @@ public class LoginPresenter implements LoginInterface.Presenter {
                             String photoUrl = account.getPhotoUrl().toString();
                             User user = new User(name,surname,email,uid);
                             user.setFotoprofilo(photoUrl);
+
                             db.collection("utenti").document(user.getUid()).set(user);
+
                             Toast.makeText(mContext, "autenticazione avvenuta con successo", Toast.LENGTH_SHORT).show();
                             mView.startMainActivity();
                         } else {
