@@ -75,6 +75,8 @@
     <string name="enterMeetingHour">Inserisci ora d\'incontro</string>
     <string name="startHour">L\'attività inizia alle ore:</string>
     <string name="endHour">L\'attività finisce alle ore:</string>
+    <string name="selectLanguage">Selezione la tua lingua primaria</string>
+    <string name="selectLanguageDescription">La tua lingua primaria figurerà come quella principale impostata sulla pagina della tua attività</string>
     <array name="Categories">
         <item>Vita Notturna</item>
         <item>Intrattenimento</item>
@@ -85,4 +87,26 @@
         <item>Benessere</item>
         <item>Altro</item>
     </array>
+    <array name="languages">
+        <item>Italiano</item>
+        <item>English</item>
+        <item>Deutsch</item>
+        <item>Espanol</item>
+        <item>Français</item>
+
+    </array>
+    <string name="SecondaryLanguage">Seleziona la tua lingua secondaria(opzionale)</string>
+    <string name="SecondaryLanguageDescription">Se parli più lingue, puoi aggiungere una seconda lingua che verrà mostrata nella pagina delle attività</string>
+    <string name="numberOfPartecipants">Definisci il numero massimo dei partecipanti</string>
+    <string name="conditionPartecipants">Qui puoi scrivere alcuni requisiti che i partecipanti alla tua attività devono rispettare</string>
+    <string name="examplerequirements">Tutti i partecipanti dell\'attività devono essere muniti di una carta d\'identità e devono essere maggiorenni</string>
+    <string name="price">Prezzo a persona:</string>
+    <string name="goOn2">Salva e Continua</string>
+    <string name="SelectDate">Seleziona la data della tua attività</string>
+    <string name="Date">Data</string>
+    <string name="Itinerary">Itinerario</string>
+    <string name="Stage">Definisci le tappe del tuo itinerario</string>
+    <string name="StageName">Nome tappa</string>
+    <string name="StageDescription">Descrizione della tappa</string>
+    <string name="AddStage">AGGIUNGI TAPPA</string>
 </resources>

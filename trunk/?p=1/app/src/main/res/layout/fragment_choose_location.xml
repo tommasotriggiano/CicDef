@@ -8,6 +8,43 @@
 
 
     <TextView
+        android:id="@+id/date2"
+        android:layout_width="311dp"
+        android:layout_height="58dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="41dp"
+        android:layout_marginTop="180dp"
+        android:text="@string/SelectDate"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginRight="32dp"
+        android:layout_marginLeft="41dp" />
+
+    <TextView
+        android:id="@+id/Date"
+        android:layout_width="310dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="276dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="44dp"
+        android:background="?attr/editTextBackground"
+        android:gravity="center_vertical"
+        android:hint="@string/Date"
+        android:textColor="?attr/editTextColor"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/date2"
+        android:layout_marginLeft="44dp"
+        android:layout_marginRight="30dp" />
+
+    <TextView
         android:id="@+id/enterLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -43,13 +80,14 @@
         android:id="@+id/button3"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="260dp"
+        android:layout_marginBottom="140dp"
         android:layout_marginEnd="30dp"
         android:layout_marginStart="204dp"
-        android:layout_marginTop="126dp"
         android:text="@string/goOn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Indirizzo" />
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="204dp" />
 </android.support.constraint.ConstraintLayout>

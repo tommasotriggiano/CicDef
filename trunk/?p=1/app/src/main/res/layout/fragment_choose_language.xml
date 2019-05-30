@@ -1,6 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/selectLanguage"
+        android:layout_width="288dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/selectLanguage"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/description1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/languages"
+        android:layout_width="289dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="300dp"
+        android:layout_marginEnd="47dp"
+        android:layout_marginStart="48dp"
+        android:entries="@array/languages"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description1"
+        android:layout_marginRight="47dp"
+        android:layout_marginLeft="48dp" />
+
+    <TextView
+        android:id="@+id/description1"
+        android:layout_width="285dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="49dp"
+        android:layout_marginStart="50dp"
+        android:text="@string/selectLanguageDescription"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/languages"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selectLanguage"
+        android:layout_marginRight="49dp"
+        android:layout_marginLeft="50dp" />
+
+    <TextView
+        android:id="@+id/selectLanguage2"
+        android:layout_width="288dp"
+        android:layout_height="57dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="35dp"
+        android:text="@string/SecondaryLanguage"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/description2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/languages" />
+
+    <TextView
+        android:id="@+id/description2"
+        android:layout_width="285dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="49dp"
+        android:layout_marginStart="50dp"
+        android:text="@string/SecondaryLanguageDescription"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/languages2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selectLanguage2"
+        android:layout_marginRight="49dp"
+        android:layout_marginLeft="50dp" />
+
+    <Spinner
+        android:id="@+id/languages2"
+        android:layout_width="289dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="112dp"
+        android:layout_marginEnd="47dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="8dp"
+        android:entries="@array/languages"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description2"
+        android:layout_marginRight="47dp"
+        android:layout_marginLeft="48dp" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="17dp"
+        android:layout_marginEnd="27dp"
+        android:layout_marginStart="269dp"
+        android:layout_marginTop="37dp"
+        android:text="@string/goOn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/languages2"
+        android:layout_marginRight="27dp"
+        android:layout_marginLeft="269dp" />
 
 </android.support.constraint.ConstraintLayout>
