@@ -10,18 +10,20 @@
         android:id="@+id/meetingAddress"
         android:layout_width="283dp"
         android:layout_height="31dp"
+        android:layout_marginBottom="12dp"
         android:layout_marginEnd="85dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="28dp"
         android:text="@string/enterMeetingAddress"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/Indirizzo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="85dp" />
+        android:layout_marginRight="85dp"
+        android:layout_marginLeft="16dp" />
 
     <TextView
         android:id="@+id/Indirizzo"
@@ -45,18 +47,20 @@
         android:id="@+id/meetingHour"
         android:layout_width="283dp"
         android:layout_height="31dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="85dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="15dp"
 
+        android:layout_marginTop="15dp"
         android:text="@string/enterMeetingHour"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/meetingHourSpinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Indirizzo"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="85dp" />
+        android:layout_marginRight="85dp"
+        android:layout_marginLeft="16dp" />
 
     <Spinner
         android:id="@+id/meetingHourSpinner"
@@ -81,11 +85,12 @@
         android:text="@string/startHour"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/spinner4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/meetingHourSpinner"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="85dp" />
+        android:layout_marginRight="85dp"
+        android:layout_marginLeft="16dp" />
 
     <TextView
         android:id="@+id/endHour"
@@ -97,11 +102,12 @@
         android:text="@string/endHour"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/spinner3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner4"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="85dp" />
+        android:layout_marginRight="85dp"
+        android:layout_marginLeft="16dp" />
 
     <Spinner
         android:id="@+id/spinner3"
