@@ -1,7 +1,9 @@
+
 package uniba.di.itps.ciceroneapp.model;
 
 
 import java.util.List;
+import java.util.Map;
 
 public class Event {
 
@@ -10,7 +12,7 @@ public class Event {
     private String descrizione;
     private String categoria;
     private int nMaxPartecipanti;
-    private List<String> dateEvento;
+    private String dateEvento;
     private String orarioIncontro;
     private String orarioInizio;
     private String orarioFine;
@@ -20,7 +22,7 @@ public class Event {
     private String noteAggiuntive;
     private User cicerone;
 
-    public Event(String titolo, String descrizione, String categoria, int nMaxPartecipanti, List<String> dateEvento,
+    public Event(String titolo, String descrizione, String categoria, int nMaxPartecipanti, String dateEvento,
                  String orarioIncontro, String orarioInizio, double prezzo,
                  String valuta, Itinerary itinerario, User cicerone) {
         this.titolo = titolo;
@@ -35,6 +37,7 @@ public class Event {
         this.itinerario = itinerario;
         this.cicerone = cicerone;
     }
+
 
     public String getTitolo() {
         return titolo;
@@ -76,11 +79,11 @@ public class Event {
         this.nMaxPartecipanti = nMaxPartecipanti;
     }
 
-    public List<String> getDateEvento() {
+    public String getDateEvento() {
         return dateEvento;
     }
 
-    public void setDateEvento(List<String> dateEvento) {
+    public void setDateEvento(String dateEvento) {
         this.dateEvento = dateEvento;
     }
 
