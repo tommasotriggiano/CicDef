@@ -5,8 +5,10 @@ import android.support.v4.app.Fragment;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import uniba.di.itps.ciceroneapp.base.BaseFragment;
+import java.util.ArrayList;
 
+import uniba.di.itps.ciceroneapp.base.BaseFragment;
+import uniba.di.itps.ciceroneapp.model.Stage;
 
 
 public interface InterfaceGestioneAttività {
@@ -19,7 +21,8 @@ public interface InterfaceGestioneAttività {
     interface Presenter{
         void addFragment(Fragment fragment);
         boolean setArguument(Fragment fragment, Bundle bundle);
-        boolean getArguument(Bundle b);
+        void addStage(ArrayList<Stage> stage,String name,String description);
+        void createEvent(Bundle b);
 
 
     }

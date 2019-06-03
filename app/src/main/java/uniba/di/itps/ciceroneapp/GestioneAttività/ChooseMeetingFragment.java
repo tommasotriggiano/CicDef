@@ -9,15 +9,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import uniba.di.itps.ciceroneapp.R;
 
-/**
- * Created by tommaso on 27/05/2019.
- */
 
 public class ChooseMeetingFragment extends Fragment {
     private ImageButton goOn;
+    private TextView meetingAddress;
+    private Spinner meetingHour;
+    private Spinner start;
+    private Spinner end;
     private InterfaceGestioneAttività.Presenter presenter;
     private InterfaceGestioneAttività.MvpView mvpView;
     @Override
@@ -25,6 +28,10 @@ public class ChooseMeetingFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_choose_meeting, container, false);
         goOn = (ImageButton) view.findViewById(R.id.button6);
+        meetingAddress = (TextView) view.findViewById(R.id.Luogo);
+        meetingHour = (Spinner) view.findViewById(R.id.meetingHourSpinner);
+        start = (Spinner)view.findViewById(R.id.spinner4);
+        end = (Spinner)view.findViewById(R.id.spinner3);
         presenter = new PresenterGestioneAttività(getActivity());
         mvpView = (InterfaceGestioneAttività.MvpView)getActivity();
         mvpView.hideBottomNavigation();
@@ -38,7 +45,17 @@ public class ChooseMeetingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Fragment f = new ChooseLanguageFragment();
-                presenter.addFragment(f);
+                Bundle receive = getArguments();
+                if(meetingAddress.getText().toString().isEmpty()){
+                    meetingAddress.setError("Inserisci indirizzo di Incontro");
+                    return;
+                }
+                receive.putString("indirizzoIncontro",meetingAddress.getText().toString());
+                receive.putString("oraIncontro",meetingHour.getSelectedItem().toString());
+                receive.putString("oraInizio",start.getSelectedItem().toString());
+                receive.putString("oraFine",end.getSelectedItem().toString());
+                if(presenter.setArguument(f,receive))
+                    presenter.addFragment(f);
 
             }
         });

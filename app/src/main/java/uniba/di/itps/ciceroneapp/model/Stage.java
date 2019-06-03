@@ -1,6 +1,9 @@
 package uniba.di.itps.ciceroneapp.model;
 
-public class Stage {
+
+import java.io.Serializable;
+
+public class Stage implements Serializable{
     private String indirizzo;
     private String descrizione;
 
@@ -11,6 +14,12 @@ public class Stage {
 
     public String getIndirizzo() {
         return indirizzo;
+    }
+
+
+    @Override
+    public String toString() {
+        return indirizzo + " " + descrizione;
     }
 
     public void setIndirizzo(String indirizzo) {
@@ -24,4 +33,6 @@ public class Stage {
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
     }
+
+
 }

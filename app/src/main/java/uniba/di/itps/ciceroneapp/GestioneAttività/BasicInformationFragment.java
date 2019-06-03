@@ -79,9 +79,9 @@ public class BasicInformationFragment extends Fragment {
                     description.setError("Inserisci descrizione");
                     return;
                 }
-                b.putString("title",title.getText().toString());
-                b.putString("decription",title.getText().toString());
-                b.putString("category",category.getSelectedItem().toString());
+                b.putString("titolo",title.getText().toString());
+                b.putString("descrizione",title.getText().toString());
+                b.putString("categoria",category.getSelectedItem().toString());
 
                 if(presenter.setArguument(f,b)){
                     presenter.addFragment(f);}}

@@ -20,11 +20,17 @@ public class Event {
     private String valuta;
     private Itinerary itinerario;
     private String noteAggiuntive;
-    private User cicerone;
+    private String idCicerone;
+    private String lingua;
+    private String linguaSecondaria;
+    private List<Stage> tappe;
+    private String requisiti;
+    private String luogo;
+    private String indirizzo;
 
     public Event(String titolo, String descrizione, String categoria, int nMaxPartecipanti, String dateEvento,
                  String orarioIncontro, String orarioInizio, double prezzo,
-                 String valuta, Itinerary itinerario, User cicerone) {
+                 String valuta, List<Stage> tappe, String cicerone) {
         this.titolo = titolo;
         this.descrizione = descrizione;
         this.categoria = categoria;
@@ -34,11 +40,24 @@ public class Event {
         this.orarioInizio = orarioInizio;
         this.prezzo = prezzo;
         this.valuta = valuta;
-        this.itinerario = itinerario;
-        this.cicerone = cicerone;
+        this.tappe= tappe;
+        this.idCicerone = cicerone;
     }
 
+    public void setLinguaSecondaria(String linguaSecondaria) {
+        this.linguaSecondaria = linguaSecondaria;
+    }
 
+    public String getLinguaSecondaria() {
+        return linguaSecondaria;
+    }
+    public String getRequisiti() {
+        return requisiti;
+    }
+
+    public void setRequisiti(String requisiti) {
+        this.requisiti = requisiti;
+    }
     public String getTitolo() {
         return titolo;
     }
@@ -143,11 +162,37 @@ public class Event {
         this.noteAggiuntive = noteAggiuntive;
     }
 
-    public User getCicerone() {
-        return cicerone;
+    public String getCicerone() {
+        return idCicerone;
     }
 
-    public void setCicerone(User cicerone) {
-        this.cicerone = cicerone;
+    public void setCicerone(String cicerone) {
+        this.idCicerone = cicerone;
+    }
+
+
+    public String getIndirizzo() {
+        return indirizzo;
+    }
+
+    public void setIndirizzo(String indirizzo) {
+        this.indirizzo = indirizzo;
+    }
+
+    public String getLuogo() {
+        return luogo;
+    }
+
+
+    public void setLuogo(String luogo) {
+        this.luogo = luogo;
+    }
+
+    public String getLingua() {
+        return lingua;
+    }
+
+    public void setLingua(String lingua) {
+        this.lingua = lingua;
     }
 }
