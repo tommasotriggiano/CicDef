@@ -3,12 +3,24 @@ package uniba.di.itps.ciceroneapp.main;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.app.DatePickerDialog;
+import android.widget.DatePicker;
+import android.widget.TextView;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import uniba.di.itps.ciceroneapp.GestioneAttività.AddEventMainFragment;
+import uniba.di.itps.ciceroneapp.GestioneAttività.DatePickerFragment;
+import uniba.di.itps.ciceroneapp.GestioneAttività.InterfaceGestioneAttività;
 import uniba.di.itps.ciceroneapp.MyEventMainFragment;
+import uniba.di.itps.ciceroneapp.base.BaseFragment;
 import uniba.di.itps.ciceroneapp.manageProfile.ProfileMainFragment;
 import uniba.di.itps.ciceroneapp.SearchEventMainFragment;
 
@@ -16,13 +28,14 @@ import uniba.di.itps.ciceroneapp.SearchEventMainFragment;
 import uniba.di.itps.ciceroneapp.R;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements InterfaceGestioneAttività.MvpView {
+    private BottomNavigationView bottomNav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+        bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
         //I added this if statement to keep the selected fragment when rotating the device
@@ -62,4 +75,60 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
             };
+    @Override
+    public void setFragment(Fragment fragment) {
+        FragmentManager fm = this.getSupportFragmentManager();
+        fm.beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).replace(R.id.fragment_container,
+                fragment).commit();
+    }
+
+    @Override
+    public void hideBottomNavigation() {
+        bottomNav.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showDialogDate(TextView date) {
+        SimpleDateFormat sdf= new SimpleDateFormat("EEEE");
+        DatePickerDialog.OnDateSetListener ondate = new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Date pick= new Date(year,monthOfYear,dayOfMonth-1);
+                int month = Integer.parseInt(String.valueOf(monthOfYear+1));
+                int day = Integer.parseInt(String.valueOf(dayOfMonth));
+                String dateString;
+
+                if(month<10){
+                    if(day<10){
+                        dateString="0"+String.valueOf(dayOfMonth) + "-" + "0"+String.valueOf(monthOfYear+1)+ "-" + String.valueOf(year);
+                        date.setText(dateString);
+                    }
+                    else{
+                        dateString=String.valueOf(dayOfMonth) + "-" +"0"+String.valueOf(monthOfYear+1) + "-" + String.valueOf(year);
+                        date.setText(dateString);}
+                } else if(day<10){
+                    dateString="0"+String.valueOf(dayOfMonth) + "-" +String.valueOf(monthOfYear+1) + "-" + String.valueOf(year);
+                    date.setText(dateString);}
+                else{
+                    dateString=String.valueOf(dayOfMonth) + "-" + String.valueOf(monthOfYear+1) + "-" + String.valueOf(year);
+                    date.setText(dateString);}
+            }
+
+        };
+
+
+        DatePickerFragment datePickerFragment = new DatePickerFragment();
+        //Set Up Current Date Into dialog
+        Calendar calender = Calendar.getInstance();
+        Bundle args = new Bundle();
+        args.putInt("year", calender.get(Calendar.YEAR));
+        args.putInt("month", calender.get(Calendar.MONTH));
+        args.putInt("day", calender.get(Calendar.DAY_OF_MONTH));
+        datePickerFragment.setArguments(args);
+        datePickerFragment.setCallBack(ondate);
+        datePickerFragment.show((FragmentManager)getSupportFragmentManager(),"DatePicker");
+
+    }
+
+
 }

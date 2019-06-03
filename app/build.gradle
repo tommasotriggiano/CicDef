@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "uniba.di.itps.ciceroneapp"
-        minSdkVersion 15
+        minSdkVersion 20
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -29,8 +29,8 @@ apply plugin: 'org.sonarqube' // added for sonar qube
 // added for sonar qube
 sonarqube {
     properties {
-        property "sonar.projectName", "ContentResolver"
-        property "sonar.projectKey", "ContentResolver"
+        property "sonar.projectName", "Cicerone"
+        property "sonar.projectKey", "Cicerone"
         property "sonar.host.url", "http://localhost:9000"
         property "sonar.language", "java"
         property "sonar.sources", "src/main/java"
@@ -50,8 +50,12 @@ dependencies {
     implementation 'com.android.support:support-vector-drawable:28.0.0'
     implementation 'com.google.android.gms:play-services-auth:11.6.0'
     implementation 'com.google.firebase:firebase-auth:11.6.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.google.android.gms:play-services-places:11.6.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.google.firebase:firebase-firestore:11.6.0'
+
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

@@ -109,4 +109,7 @@
     <string name="StageName">Nome tappa</string>
     <string name="StageDescription">Descrizione della tappa</string>
     <string name="AddStage">AGGIUNGI TAPPA</string>
+    <string name="DescriptionActivity">Esempio: in questa attività visiteremo dei bellissimi paesaggi e attraverseremo uno dei fiumi più caratteristici del posto... </string>
+    <string name="found_new_activity_to_do_in_the_city_search">Trovata una nuova attività da fare</string>
+    <string name="Let_get_started_search">Inziamo</string>
 </resources>

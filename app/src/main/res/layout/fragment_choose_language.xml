@@ -17,7 +17,7 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/description1"
+        app:layout_constraintBottom_toTopOf="@+id/descriptionEdit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -34,12 +34,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description1"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionEdit"
         android:layout_marginRight="47dp"
         android:layout_marginLeft="48dp" />
 
     <TextView
-        android:id="@+id/description1"
+        android:id="@+id/descriptionEdit"
         android:layout_width="285dp"
         android:layout_height="70dp"
         android:layout_marginEnd="49dp"
@@ -100,15 +100,16 @@
         android:layout_marginRight="47dp"
         android:layout_marginLeft="48dp" />
 
-    <Button
+    <ImageButton
         android:id="@+id/button7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="17dp"
         android:layout_marginEnd="27dp"
         android:layout_marginStart="269dp"
         android:layout_marginTop="37dp"
-        android:text="@string/goOn"
+        android:background="@drawable/custom_button"
+        android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

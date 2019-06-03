@@ -143,5 +143,7 @@
         <item>Euro</item>
         <item>Pound</item>
     </array>
+    <string name="DescriptionActivity">Example: In this Activity we\'re enjoying some beautiful landscapes </string>
+    <string name="google_maps_key" translatable="false">AIzaSyBjrTFCrKIC4F1HWniBbwqxOiMqeh6FK6w</string>
 
 </resources>

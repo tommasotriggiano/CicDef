@@ -70,4 +70,5 @@
     <string name="category">Scegli la categoria della tua attività</string>
     <string name="goOn">Continua</string>
     <string name="enterLocation">Inserisci il luogo in cui vuoi creare l'attività</string>
+    <string name="google_maps_key">AIzaSyBjrTFCrKIC4F1HWniBbwqxOiMqeh6FK6w</string>
 </resources>

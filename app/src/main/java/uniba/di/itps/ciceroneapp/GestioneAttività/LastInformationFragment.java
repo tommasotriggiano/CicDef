@@ -14,10 +14,13 @@ import uniba.di.itps.ciceroneapp.R;
  */
 
 public class LastInformationFragment extends Fragment {
+    private InterfaceGestioneAttività.MvpView mvpView;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        mvpView = (InterfaceGestioneAttività.MvpView)getActivity();
+        mvpView.hideBottomNavigation();
         return inflater.inflate(R.layout.last_information_fragment, container, false);
     }
 }
