@@ -19,9 +19,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import uniba.di.itps.ciceroneapp.base.BaseFragment;
 import uniba.di.itps.ciceroneapp.login.LoginInterface;
@@ -68,11 +71,10 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
 
     @Override
     public void createEvent(Bundle b) {
-        String url = null;
         String linguasecondaria = null;
         String requirements = null;
-        if(b.getString("url") != null)
-            url = b.getString("url");
+        String url = null;
+
         String title = b.getString("titolo");
         String description = b.getString("descrizione");
         String categoria = b.getString ("categoria");
@@ -83,16 +85,15 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
         String oraInizio = b.getString("oraInizio");
         String oraFine = b.getString("oraFine");
         String linguaPrimaria = b.getString("linguaPrimaria");
-            if(b.getString("linguaSecondaria") != null){
-                linguasecondaria = b.getString("linguaSecondaria");
-            }
+
         ArrayList<Stage> stage = (ArrayList<Stage>) b.getSerializable("tappe");
         int num = b.getInt("numPartecipanti");
         double prezzo = b.getDouble("price");
         String valutes = b.getString("valutes");
-
+        Map<String, Object> map = new HashMap<>();
+        map.put("array",Arrays.asList(stage));
         //Creazione Evento
-        Event event = new Event(title,description,categoria,num,data,oraIncontro,oraInizio,prezzo,valutes,stage,user.getUid().toString());
+        Event event = new Event(title,description,categoria,num,data,oraIncontro,oraInizio,prezzo,valutes,map,user.getUid().toString());
         if(b.getString("requirementsPartecipanti") != null){
             requirements = b.getString("requirementsPartecipanti");
             event.setRequisiti(requirements);
@@ -101,15 +102,20 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
             linguasecondaria = b.getString("linguaSecondaria");
             event.setLinguaSecondaria(linguasecondaria);
         }
+        if(b.getString("url") != null){
+            url = b.getString("url");
+            event.setFoto(url);}
         event.setOrarioFine(oraFine);
         event.setLingua(linguaPrimaria);
-        event.setLuogo("PROVA");
-        event.setIndirizzo("PROVA");
+        event.setLuogo(luogo);
+        event.setIndirizzo(indirizzo);
+
+
 
         db.collection("Eventi").document().set(event).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Toast.makeText(mcontext,"SUCCESSO PUTTANA EVA MAIALA",Toast.LENGTH_LONG).show();
+                Toast.makeText(mcontext,"SUCCESSO",Toast.LENGTH_LONG).show();
             }
         });
 

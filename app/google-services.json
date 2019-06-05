@@ -52,6 +52,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "275319194457-gkq79m6sm19r39p7oijb8d314q6sghui.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "uniba.di.itps.ciceroneapp",
+            "certificate_hash": "5fb8f6495b58349540b153ad64e26865fea1b6d1"
+          }
+        },
+        {
           "client_id": "275319194457-4r9dmpfbd7jence4iqak95nmbvstt4mi.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

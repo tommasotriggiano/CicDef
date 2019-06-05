@@ -144,5 +144,13 @@
         <item>Pound</item>
     </array>
     <string name="DescriptionActivity">Example: In this Activity we\'re enjoying some beautiful landscapes </string>
+    <string name="logout">Log out</string>
+    <string name="viewProfile">VIEW PROFILE</string>
+    <string name="storico">Past Activities</string>
+    <string name="feedback">Feedback</string>
+    <string name="valuta">Select Valute</string>
+    <string name="save">Save</string>
+    <string name="edit_BirthDate">BIRTH DATE</string>
+    <string name="edit_Gender">GENDER</string>
 
 </resources>

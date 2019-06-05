@@ -18,11 +18,14 @@ import android.widget.Toast;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.Status;
-//import com.google.android.libraries.places.compat.Places;
-//import com.google.android.libraries.places.compat.ui.PlaceAutocomplete;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlaceAutocomplete;
-//import com.google.android.libraries.places.compat.Place;
+//import com.google.android.gms.location.places.Place;
+import com.google.android.libraries.places.compat.AutocompleteFilter;
+import com.google.android.libraries.places.compat.Place;
+import com.google.android.libraries.places.compat.Places;
+import com.google.android.libraries.places.compat.ui.PlaceAutocomplete;
+//import com.google.android.gms.location.places.Place;
+//import com.google.android.gms.location.places.ui.PlaceAutocomplete;
+
 
 
 
@@ -63,7 +66,10 @@ public class ChooseLocationFragment extends Fragment  {
             public void onClick(View v) {
                 Intent intent = null;
                 try {
-                    intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
+                    AutocompleteFilter typeFilter = new AutocompleteFilter.Builder()
+                            .setTypeFilter(AutocompleteFilter.TYPE_FILTER_CITIES)
+                            .build();
+                    intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY).setFilter(typeFilter)
                                         .build(getActivity());
                 } catch (GooglePlayServicesRepairableException e) {
                     e.printStackTrace();
@@ -107,22 +113,22 @@ public class ChooseLocationFragment extends Fragment  {
     @Override
     public void onActivityResult(int requestCode,int resultCode,Intent data){
         super.onActivityResult(requestCode,resultCode,data);
-        switch(requestCode){
-            case PLACE_AUTOCOMPLETE_REQUEST_CODE:
-                if (resultCode == RESULT_OK) {
-                    Place place = PlaceAutocomplete.getPlace(getContext(), data);
-                    Log.i(TAG, "Place: " + place.getName());
-                    address.setText(place.getAddress().toString());
-                } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
-                    Status status = PlaceAutocomplete.getStatus(getContext(), data);
-                    // TODO: Handle the error.
-                    Log.i(TAG, status.getStatusMessage());
+        if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlaceAutocomplete.getPlace(getContext(), data);
+                Log.i(TAG, "Place: " + place.getName());
+                address.setText(place.getName().toString());
+            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+                Status status = PlaceAutocomplete.getStatus(getContext(), data);
+                // TODO: Handle the error.
+                Log.i(TAG, status.getStatusMessage());
 
-                } else if (resultCode == RESULT_CANCELED) {
-                    Log.i(TAG, "error");
-                    // The user canceled the operation.
-                }
-                break;}}
+            } else if (resultCode == RESULT_CANCELED) {
+                Log.i(TAG, "error");
+                // The user canceled the operation.
+            }
+        }
+    }
 
 
 

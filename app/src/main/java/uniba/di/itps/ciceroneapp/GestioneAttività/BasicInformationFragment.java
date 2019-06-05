@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -80,7 +81,7 @@ public class BasicInformationFragment extends Fragment {
                     return;
                 }
                 b.putString("titolo",title.getText().toString());
-                b.putString("descrizione",title.getText().toString());
+                b.putString("descrizione",description.getText().toString());
                 b.putString("categoria",category.getSelectedItem().toString());
 
                 if(presenter.setArguument(f,b)){
@@ -94,6 +95,7 @@ public class BasicInformationFragment extends Fragment {
     {
         if (requestCode == PICK_IMAGE) {
             resultUri = data.getData();
+            Toast.makeText(getContext(),resultUri.toString(),Toast.LENGTH_LONG).show();
             addImage.setImageURI(resultUri);
 
         }

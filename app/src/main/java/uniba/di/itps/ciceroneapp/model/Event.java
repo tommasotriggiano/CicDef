@@ -2,6 +2,7 @@
 package uniba.di.itps.ciceroneapp.model;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -23,14 +24,14 @@ public class Event {
     private String idCicerone;
     private String lingua;
     private String linguaSecondaria;
-    private List<Stage> tappe;
+    private Map<String,Object> tappe;
     private String requisiti;
     private String luogo;
     private String indirizzo;
 
     public Event(String titolo, String descrizione, String categoria, int nMaxPartecipanti, String dateEvento,
                  String orarioIncontro, String orarioInizio, double prezzo,
-                 String valuta, List<Stage> tappe, String cicerone) {
+                 String valuta, Map<String,Object> tappe, String cicerone) {
         this.titolo = titolo;
         this.descrizione = descrizione;
         this.categoria = categoria;

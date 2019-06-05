@@ -57,8 +57,8 @@
     <string name="are_you_ready">Are you ready?</string>
 
     <!--Profile -->
-    <string name="name">NAME</string>
-    <string name="surname">SURNAME</string>
+    <string name="name">NOME</string>
+    <string name="surname">COGNOME</string>
     <string name="Auth_Failed">authentication failed</string>
 
     <!--Create Activity-->
@@ -112,4 +112,12 @@
     <string name="DescriptionActivity">Esempio: in questa attività visiteremo dei bellissimi paesaggi e attraverseremo uno dei fiumi più caratteristici del posto... </string>
     <string name="found_new_activity_to_do_in_the_city_search">Trovata una nuova attività da fare</string>
     <string name="Let_get_started_search">Inziamo</string>
+    <string name="logout">Esci</string>
+    <string name="viewProfile">VEDI PROFILO</string>
+    <string name="storico">Storico Attività</string>
+    <string name="feedback">Feedback</string>
+    <string name="valuta">Seleziona Valuta</string>
+    <string name="save">Salva</string>
+    <string name="edit_BirthDate">DATA DI NASCITA</string>
+    <string name="edit_Gender">GENERE</string>
 </resources>
