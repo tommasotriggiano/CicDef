@@ -69,9 +69,9 @@ public class ChooseMeetingFragment extends Fragment {
                     intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY).setFilter(typeFilter)
                             .build(getActivity());
                 } catch (GooglePlayServicesRepairableException e) {
-                    e.printStackTrace();
+                    Log.i(TAG,e.getMessage());
                 } catch (GooglePlayServicesNotAvailableException e) {
-                    e.printStackTrace();
+                    Log.i(TAG,e.getMessage());
                 }
                 startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
 
