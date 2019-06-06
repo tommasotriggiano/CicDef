@@ -1,144 +1,144 @@
 <resources>
-        <string name="app_name" translatable="false">CiceroneApp</string>
-        <string name="immaginesplash">imageSplash</string>
-        <string name="title_activity_main">MainActivity</string>
-        <string name="title_activity_password">MainActivity</string>
-        <string name="title_activity_registration">MainActivity</string>
-        <string name="welcome">Welcome to Cicerone!</string>
+    <string name="app_name" translatable="false">CiceroneApp</string>
+    <string name="immaginesplash">imageSplash</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_password">MainActivity</string>
+    <string name="title_activity_registration">MainActivity</string>
+    <string name="welcome">Welcome to Cicerone!</string>
 
-        <!-- login and registration activity-->
-        <string name="etUsername">Username</string>
-        <string name="etName">Username</string>
-        <string name="etUserEmail">E-MAIL</string>
-        <string name="etUserPassword">PASSWORD</string>
-        <string name="registrazione">SIGN UP</string>
-        <string name="btnRegister">Create new account</string>
-        <string name="Welcome">Welcome back!</string>
-        <string name="Welcome2">Let\'s get started!</string>
-        <string name="tvUserLogin">Login</string>
-        <string name="Register">Aren\'t you registered?</string>
-        <string name="CompleteRegistration">  Complete your registration  </string>
-        <string name="Login">Are you registered yet?</string>
-        <string name="Register2">Sign up now</string>
-        <string name="Messaggio">By clicking "Create New Account", it will send you a verification email</string>
-        <string name="Toast1">Enter email!</string>
-        <string name="Toast2">Enter password!</string>
-        <string name="errorName">Enter Your Name!</string>
-        <string name="errorSurname">Enter Your Surname!</string>
-        <string name="TstPassShort">Password is too short(at least 6 characters)</string>
-        <string name="Authenticationf">Authentication failed</string>
-        <string name="Successful">Login successful</string>
-        <string name="NotVerified">Email is not verified yet</string>
-        <string name="ForgotPassword">Forgot password?</string>
-        <string name="ResetPassword">Reset Password</string>
-        <string name="Description">Enter your registration email and we will send you a link in order to reset your password</string>
-        <string name="Emailsent">Email sent</string>
-        <string name="EmailNotRegistered">This email is not registered</string>
-        <string name="NotifyApproved">Your account has been approved</string>
-        <string name="Failure">Registration not successful</string>
-        <string name="title_activity_bottom_navigation">BottomNavigation</string>
-        <string name="title_home">Home</string>
-        <string name="title_dashboard">Dashboard</string>
-        <string name="title_notifications">Notifications</string>
-        <string name="search">Search</string>
-        <string name="add_event">Add Event</string>
-        <string name="event">Event</string>
-        <string name="profile">Profile</string>
-        <string name="create_a_new_activity">Create new Event</string>
-        <string name="activity">Activity</string>
-        <string name="title_profile">Profile</string>
-        <string name="title_activity">Activity</string>
-        <string name="title_create_activity">Create Activity</string>
-        <string name="title_search">Search activity</string>
-        <string name="title_activity_create_event">CreateEventActivity</string>
+    <!-- login and registration activity-->
+    <string name="etUsername">Username</string>
+    <string name="etName">Username</string>
+    <string name="etUserEmail">E-MAIL</string>
+    <string name="etUserPassword">PASSWORD</string>
+    <string name="registrazione">SIGN UP</string>
+    <string name="btnRegister">Create new account</string>
+    <string name="Welcome">Welcome back!</string>
+    <string name="Welcome2">Let\'s get started!</string>
+    <string name="tvUserLogin">Login</string>
+    <string name="Register">Aren\'t you registered?</string>
+    <string name="CompleteRegistration">  Complete your registration  </string>
+    <string name="Login">Are you registered yet?</string>
+    <string name="Register2">Sign up now</string>
+    <string name="Messaggio">By clicking "Create New Account", it will send you a verification email</string>
+    <string name="Toast1">Enter email!</string>
+    <string name="Toast2">Enter password!</string>
+    <string name="errorName">Enter Your Name!</string>
+    <string name="errorSurname">Enter Your Surname!</string>
+    <string name="TstPassShort">Password is too short(at least 6 characters)</string>
+    <string name="Authenticationf">Authentication failed</string>
+    <string name="Successful">Login successful</string>
+    <string name="NotVerified">Email is not verified yet</string>
+    <string name="ForgotPassword">Forgot password?</string>
+    <string name="ResetPassword">Reset Password</string>
+    <string name="Description">Enter your registration email and we will send you a link in order to reset your password</string>
+    <string name="Emailsent">Email sent</string>
+    <string name="EmailNotRegistered">This email is not registered</string>
+    <string name="NotifyApproved">Your account has been approved</string>
+    <string name="Failure">Registration not successful</string>
+    <string name="title_activity_bottom_navigation">BottomNavigation</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="search">Search</string>
+    <string name="add_event">Add Event</string>
+    <string name="event">Event</string>
+    <string name="profile">Profile</string>
+    <string name="create_a_new_activity">Create new Event</string>
+    <string name="activity">Activity</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_activity">Activity</string>
+    <string name="title_create_activity">Create Activity</string>
+    <string name="title_search">Search activity</string>
+    <string name="title_activity_create_event">CreateEventActivity</string>
 
-        <string name="hello_blank_fragment">Hello blank fragment</string>
-        <string name="my_activity">My Event</string>
-        <string name="are_you_ready">Are you ready?</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="my_activity">My Event</string>
+    <string name="are_you_ready">Are you ready?</string>
 
-        <!--Profile -->
-        <string name="name">NAME</string>
-        <string name="surname">SURNAME</string>
-        <string name="Auth_Failed">authentication failed</string>
+    <!--Profile -->
+    <string name="name">NAME</string>
+    <string name="surname">SURNAME</string>
+    <string name="Auth_Failed">authentication failed</string>
 
-        <!--Create Activity-->
-        <string name="createActivity">If you click here you create a new Activity</string>
-        <string name="addImage">Add photo to your Event</string>
-        <string name="addImageDescription">Choose a photo that represents your activity. This will be the image that will appear whene Globetrotters will search what to do </string>
-        <string name="title">Enter a title for your activity</string>
-        <string name="description">Enter a small description</string>
-        <string name="category">Enter the category of your activity</string>
-        <string name="goOn">continue</string>
-        <string name="enterLocation">Enter Location</string>
-        <string name="Address">Address</string>
-        <string name="enterMeetingAddress">Enter Meeting Address</string>
-        <string name="enterMeetingHour">Enter Meeting Hour</string>
-        <string name="startHour">The activity start from:</string>
-        <string name="endHour">The Activity ends at</string>
-        <string name="Let_get_started_search">Let Get\'s started!</string>
-        <string name="found_new_activity_to_do_in_the_city_search">Found new activity to do in the city!</string>
-        <array name="Hours">
-            <item>00:00</item>
-            <item>01:00</item>
-            <item>02:00</item>
-            <item>03:00</item>
-            <item>04:00</item>
-            <item>05:00</item>
-            <item>06:00</item>
-            <item>07:00</item>
-            <item>08:00</item>
-            <item>09:00</item>
-            <item>10:00</item>
-            <item>11:00</item>
-            <item>12:00</item>
-            <item>13:00</item>
-            <item>14:00</item>
-            <item>15:00</item>
-            <item>16:00</item>
-            <item>17:00</item>
-            <item>18:00</item>
-            <item>19:00</item>
-            <item>20:00</item>
-            <item>21:00</item>
-            <item>22:00</item>
-            <item>23:00</item>
+    <!--Create Activity-->
+    <string name="createActivity">If you click here you create a new Activity</string>
+    <string name="addImage">Add photo to your Event</string>
+    <string name="addImageDescription">Choose a photo that represents your activity. This will be the image that will appear whene Globetrotters will search what to do </string>
+    <string name="title">Enter a title for your activity</string>
+    <string name="description">Enter a small description</string>
+    <string name="category">Enter the category of your activity</string>
+    <string name="goOn">continue</string>
+    <string name="enterLocation">Enter Location</string>
+    <string name="Address">Address</string>
+    <string name="enterMeetingAddress">Enter Meeting Address</string>
+    <string name="enterMeetingHour">Enter Meeting Hour</string>
+    <string name="startHour">The activity start from:</string>
+    <string name="endHour">The Activity ends at</string>
+    <string name="Let_get_started_search">Let Get\'s started!</string>
+    <string name="found_new_activity_to_do_in_the_city_search">Found new activity to do in the city!</string>
+    <array name="Hours">
+        <item>00:00</item>
+        <item>01:00</item>
+        <item>02:00</item>
+        <item>03:00</item>
+        <item>04:00</item>
+        <item>05:00</item>
+        <item>06:00</item>
+        <item>07:00</item>
+        <item>08:00</item>
+        <item>09:00</item>
+        <item>10:00</item>
+        <item>11:00</item>
+        <item>12:00</item>
+        <item>13:00</item>
+        <item>14:00</item>
+        <item>15:00</item>
+        <item>16:00</item>
+        <item>17:00</item>
+        <item>18:00</item>
+        <item>19:00</item>
+        <item>20:00</item>
+        <item>21:00</item>
+        <item>22:00</item>
+        <item>23:00</item>
 
 
-        </array>
-        <array name="Categories">
-            <item>Night Life</item>
-            <item>Entertainment</item>
-            <item>Nature</item>
-            <item>Gastronomy</item>
-            <item>History</item>
-            <item>Sport</item>
-            <item>Wealth</item>
-            <item>Others</item>
-        </array>
-        <array name="languages">
-            <item>Italiano</item>
-            <item>English</item>
-            <item>Deutsch</item>
-            <item>Espanol</item>
-            <item>Français</item>
+    </array>
+    <array name="Categories">
+        <item>Night Life</item>
+        <item>Entertainment</item>
+        <item>Nature</item>
+        <item>Gastronomy</item>
+        <item>History</item>
+        <item>Sport</item>
+        <item>Wealth</item>
+        <item>Others</item>
+    </array>
+    <array name="languages">
+        <item>Italiano</item>
+        <item>English</item>
+        <item>Deutsch</item>
+        <item>Espanol</item>
+        <item>Français</item>
 
-        </array>
-        <string name="selectLanguage">Select Language</string>
-        <string name="selectLanguageDescription">Your first language will show as the main one on your activity\'s page</string>
-        <string name="SecondaryLanguage">Select your secondary language</string>
-        <string name="SecondaryLanguageDescription">If you talk more languages, you can add a new one that will appear in the activity\'s page</string>
-        <string name="numberOfPartecipants">Select the number of your participantas</string>
-        <string name="conditionPartecipants">Here you can define some requirements that partecipants must respect</string>
-        <string name="examplerequirements">All partecipants must have id card</string>
-        <string name="price">Price per person</string>
-        <string name="goOn2">Save and continue</string>
-        <string name="SelectDate">Select the dat eof your activity</string>
-        <string name="Date">Date</string>
-        <string name="Itinerary">Itinerary</string>
-        <string name="Stage">Select your stage</string>
-        <string name="StageName">Name of the stage</string>
-        <string name="StageDescription">Description of the stage</string>
-        <string name="AddStage">Add stage</string>
+    </array>
+    <string name="selectLanguage">Select Language</string>
+    <string name="selectLanguageDescription">Your first language will show as the main one on your activity\'s page</string>
+    <string name="SecondaryLanguage">Select your secondary language</string>
+    <string name="SecondaryLanguageDescription">If you talk more languages, you can add a new one that will appear in the activity\'s page</string>
+    <string name="numberOfPartecipants">Select the number of your participantas</string>
+    <string name="conditionPartecipants">Here you can define some requirements that partecipants must respect</string>
+    <string name="examplerequirements">All partecipants must have id card</string>
+    <string name="price">Price per person</string>
+    <string name="goOn2">Save and continue</string>
+    <string name="SelectDate">Select the dat eof your activity</string>
+    <string name="Date">Date</string>
+    <string name="Itinerary">Itinerary</string>
+    <string name="Stage">Select your stage</string>
+    <string name="StageName">Name of the stage</string>
+    <string name="StageDescription">Description of the stage</string>
+    <string name="AddStage">Add stage</string>
     <array name="valutes">
         <item>Euro</item>
         <item>Pound</item>
