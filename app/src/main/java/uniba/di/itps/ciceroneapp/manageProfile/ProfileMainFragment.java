@@ -27,6 +27,7 @@ public class ProfileMainFragment extends Fragment {
         attività = view.findViewById(R.id.storico);
         feedback = view.findViewById(R.id.feedback);
         valuta = view.findViewById(R.id.valuta);
+
         logout = view.findViewById(R.id.logout);
         return view;
     }

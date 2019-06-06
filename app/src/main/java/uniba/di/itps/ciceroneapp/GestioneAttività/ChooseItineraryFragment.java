@@ -22,6 +22,7 @@ import uniba.di.itps.ciceroneapp.model.Stage;
 
 
 public class ChooseItineraryFragment extends Fragment  {
+
     private Button add;
     private EditText name,description;
     private ImageButton goOn;

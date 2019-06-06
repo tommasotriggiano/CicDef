@@ -101,6 +101,7 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
         if(b.getString("linguaSecondaria") != null){
             linguasecondaria = b.getString("linguaSecondaria");
             event.setLinguaSecondaria(linguasecondaria);
+
         }
         if(b.getString("url") != null){
             url = b.getString("url");

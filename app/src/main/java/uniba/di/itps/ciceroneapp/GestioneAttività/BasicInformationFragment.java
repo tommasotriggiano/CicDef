@@ -22,6 +22,7 @@ import uniba.di.itps.ciceroneapp.R;
 
 
 public class BasicInformationFragment extends Fragment {
+
     public static final int PICK_IMAGE = 1;
     private Uri resultUri;
     private ImageButton goOn;

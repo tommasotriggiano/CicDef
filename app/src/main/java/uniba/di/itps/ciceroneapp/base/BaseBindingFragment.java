@@ -16,7 +16,7 @@ import uniba.di.itps.ciceroneapp.utils.PreferenceUtils;
 
 public abstract class BaseBindingFragment<T extends ViewDataBinding> extends Fragment {
 
-    public BaseBindingActivity context;
+    public  BaseBindingActivity context;
     T binding;
 
     protected abstract int attachView();

@@ -7,6 +7,7 @@
 
     <TextView
         android:id="@+id/numeroPartecipanti"
+
         android:layout_width="234dp"
         android:layout_height="54dp"
         android:layout_marginEnd="58dp"

@@ -32,6 +32,7 @@ public abstract class BaseBindingActivity<T extends ViewDataBinding> extends App
         super.onCreate(savedInstanceState);
         preferences = new PreferenceUtils(this);
 
+
         binding = DataBindingUtil.setContentView(this, attachView());
         initToolbar();
         initView();

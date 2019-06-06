@@ -24,6 +24,7 @@ import uniba.di.itps.ciceroneapp.main.MainActivity;
 
 
 public class LastInformationFragment extends Fragment {
+
     private EditText num,priceText;
     private int numPartecipants;
     private EditText requirements;

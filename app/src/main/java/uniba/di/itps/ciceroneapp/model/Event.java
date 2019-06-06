@@ -8,6 +8,7 @@ import java.util.Map;
 
 public class Event {
 
+
     private String titolo;
     private String foto;
     private String descrizione;

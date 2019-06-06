@@ -75,6 +75,7 @@ public class ChooseMeetingFragment extends Fragment {
                 }
                 startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
 
+
             }
 
         });

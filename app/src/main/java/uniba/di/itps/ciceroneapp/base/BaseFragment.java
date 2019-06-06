@@ -15,7 +15,7 @@ import uniba.di.itps.ciceroneapp.utils.PreferenceUtils;
 
 public abstract class BaseFragment extends Fragment {
 
-    public BaseActivity context;
+    private BaseActivity context;
 
     protected abstract int attachView();
 
