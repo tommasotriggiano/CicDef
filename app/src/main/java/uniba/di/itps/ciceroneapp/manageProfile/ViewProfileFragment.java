@@ -3,7 +3,6 @@ package uniba.di.itps.ciceroneapp.manageProfile;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,18 +10,14 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,10 +27,8 @@ import com.squareup.picasso.Picasso;
 import java.util.Calendar;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import io.opencensus.resource.Resource;
 import uniba.di.itps.ciceroneapp.GestioneAttività.InterfaceGestioneAttività;
 import uniba.di.itps.ciceroneapp.R;
-import uniba.di.itps.ciceroneapp.model.User;
 
 import static uniba.di.itps.ciceroneapp.GestioneAttività.BasicInformationFragment.PICK_IMAGE;
 
@@ -47,7 +40,9 @@ public class ViewProfileFragment extends Fragment implements InterfacciaGestione
     private TextView nome,cognome,sesso,dataNascita;
     private ImageView b_nome,b_cognome,b_sesso,b_dataNascita,addPhoto;
     private EditText e_nome,e_cognome;
-    private CardView c_nome,c_cognome,c_sesso,c_dataNascita;
+    private CardView c_nome;
+    private CardView c_cognome;
+    private CardView c_sesso;
     private CircleImageView profileImage;
     private Spinner gender;
     private Button modifica;
@@ -55,7 +50,6 @@ public class ViewProfileFragment extends Fragment implements InterfacciaGestione
 
     InterfaceGestioneAttività.MvpView mvpView;
     private static final String TAG = "ViewProfileFragment";
-    private Uri resultUri;
 
     @Nullable
     @Override
@@ -89,10 +83,11 @@ public class ViewProfileFragment extends Fragment implements InterfacciaGestione
         c_nome = view.findViewById(R.id.card_name);
         c_cognome = view.findViewById(R.id.card_surname);
         c_sesso = view.findViewById(R.id.card_gender);
-        c_dataNascita = view.findViewById(R.id.card_birth);
 
         mvpView = (InterfaceGestioneAttività.MvpView) getActivity();
-        mvpView.hideBottomNavigation();
+        if (mvpView != null) {
+            mvpView.hideBottomNavigation();
+        }
 
         return view;
     }
@@ -235,9 +230,11 @@ public class ViewProfileFragment extends Fragment implements InterfacciaGestione
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         if (requestCode == PICK_IMAGE) {
-            resultUri = data.getData();
+            Uri resultUri = data.getData();
             profileImage.setImageURI(resultUri);
-            fotoS = resultUri.toString();
+            if (resultUri != null) {
+                fotoS = resultUri.toString();
+            }
 
         }
     }

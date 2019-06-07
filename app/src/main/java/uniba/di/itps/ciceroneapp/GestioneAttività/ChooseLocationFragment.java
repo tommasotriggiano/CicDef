@@ -102,22 +102,22 @@ public class ChooseLocationFragment extends Fragment  {
     @Override
     public void onActivityResult(int requestCode,int resultCode,Intent data){
         super.onActivityResult(requestCode,resultCode,data);
-        switch(requestCode){
-            case PLACE_AUTOCOMPLETE_REQUEST_CODE:
-                if (resultCode == RESULT_OK) {
-                    Place place = PlaceAutocomplete.getPlace(getContext(), data);
-                    Log.i(TAG, "Place: " + place.getName());
-                    address.setText(place.getAddress().toString());
-                } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
-                    Status status = PlaceAutocomplete.getStatus(getContext(), data);
-                    // TODO: Handle the error.
-                    Log.i(TAG, status.getStatusMessage());
+        if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlaceAutocomplete.getPlace(getContext(), data);
+                Log.i(TAG, "Place: " + place.getName());
+                address.setText(place.getAddress().toString());
+            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+                Status status = PlaceAutocomplete.getStatus(getContext(), data);
+                // TODO: Handle the error.
+                Log.i(TAG, status.getStatusMessage());
 
-                } else if (resultCode == RESULT_CANCELED) {
-                    Log.i(TAG, "error");
-                    // The user canceled the operation.
-                }
-                break;}}
+            } else if (resultCode == RESULT_CANCELED) {
+                Log.i(TAG, "error");
+                // The user canceled the operation.
+            }
+        }
+    }
 
 
 

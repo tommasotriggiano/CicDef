@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,7 +30,6 @@ public class LastInformationFragment extends Fragment {
     FirebaseFirestore db;
     FirebaseUser user;
     private Button save;
-    private InterfaceGestioneAttività.MvpView mvpView;
     private  InterfaceGestioneAttività.Presenter presenter;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -41,14 +38,16 @@ public class LastInformationFragment extends Fragment {
         View view = inflater.inflate(R.layout.last_information_fragment, container, false);
         db = FirebaseFirestore.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
-        mvpView = (InterfaceGestioneAttività.MvpView)getActivity();
-        num = (EditText) view.findViewById(R.id.numPart);
+        InterfaceGestioneAttività.MvpView mvpView = (InterfaceGestioneAttività.MvpView) getActivity();
+        num = view.findViewById(R.id.numPart);
 
-        priceText = (EditText) view.findViewById(R.id.prezzoEdit);
-        requirements = (EditText)view.findViewById(R.id.requisitiEdit);
-        valute = (Spinner) view.findViewById(R.id.valuta);
-        save = (Button)view.findViewById(R.id.button8);
-        mvpView.hideBottomNavigation();
+        priceText = view.findViewById(R.id.prezzoEdit);
+        requirements = view.findViewById(R.id.requisitiEdit);
+        valute = view.findViewById(R.id.valuta);
+        save = view.findViewById(R.id.button8);
+        if (mvpView != null) {
+            mvpView.hideBottomNavigation();
+        }
         presenter = new PresenterGestioneAttività(getActivity(),db,user);
         return view;
     }
@@ -57,29 +56,26 @@ public class LastInformationFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //save
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment f = new MyEventMainFragment();
-                Bundle receive = getArguments();
-                if(num.getText().toString().isEmpty()){
-                    num.requestFocus();
-                    num.setError("Inserisci numero partecipanti");
-                    return;
-                }
-                if(priceText.getText().toString().isEmpty()){
-                    num.requestFocus();
-                    num.setError("Inserisci un prezzo a persona");
-                }
-                receive.putInt("numPartecipanti",Integer.parseInt(num.getText().toString()));
-                if(!(requirements.getText().toString().isEmpty())){
-                receive.putString("requirementsPartecipanti",requirements.getText().toString());}
-                receive.putDouble("price",Double.parseDouble(priceText.getText().toString()));
-                receive.putString("valutes",valute.getSelectedItem().toString());
-                presenter.createEvent(receive);
-                presenter.addFragment(f);
-
+        save.setOnClickListener(v -> {
+            Fragment f = new MyEventMainFragment();
+            Bundle receive = getArguments();
+            if(num.getText().toString().isEmpty()){
+                num.requestFocus();
+                num.setError("Inserisci numero partecipanti");
+                return;
             }
+            if(priceText.getText().toString().isEmpty()){
+                num.requestFocus();
+                num.setError("Inserisci un prezzo a persona");
+            }
+            receive.putInt("numPartecipanti",Integer.parseInt(num.getText().toString()));
+            if(!(requirements.getText().toString().isEmpty())){
+            receive.putString("requirementsPartecipanti",requirements.getText().toString());}
+            receive.putDouble("price",Double.parseDouble(priceText.getText().toString()));
+            receive.putString("valutes",valute.getSelectedItem().toString());
+            presenter.createEvent(receive);
+            presenter.addFragment(f);
+
         });
 
     }

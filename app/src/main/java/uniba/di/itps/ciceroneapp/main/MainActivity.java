@@ -1,27 +1,24 @@
 package uniba.di.itps.ciceroneapp.main;
 
+import android.app.DatePickerDialog;
+import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
-import android.app.DatePickerDialog;
 import android.widget.TextView;
-import java.text.SimpleDateFormat;
+
 import java.util.Calendar;
-import java.util.Date;
 
 import uniba.di.itps.ciceroneapp.GestioneAttività.AddEventMainFragment;
 import uniba.di.itps.ciceroneapp.GestioneAttività.DatePickerFragment;
 import uniba.di.itps.ciceroneapp.GestioneAttività.InterfaceGestioneAttività;
 import uniba.di.itps.ciceroneapp.MyEventMainFragment;
-import uniba.di.itps.ciceroneapp.manageProfile.ProfileMainFragment;
-import uniba.di.itps.ciceroneapp.SearchEventMainFragment;
-
-
 import uniba.di.itps.ciceroneapp.R;
+import uniba.di.itps.ciceroneapp.SearchEventMainFragment;
+import uniba.di.itps.ciceroneapp.manageProfile.ProfileMainFragment;
 
 
 public class MainActivity extends AppCompatActivity implements InterfaceGestioneAttività.MvpView {
@@ -117,9 +114,8 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestione
 
     @Override
     public void showDialogDate(TextView date,boolean birth) {
-        SimpleDateFormat sdf= new SimpleDateFormat("EEEE");
         DatePickerDialog.OnDateSetListener ondate = (view, year, monthOfYear, dayOfMonth) -> {
-            Date pick= new Date(year,monthOfYear,dayOfMonth-1);
+
             int month = Integer.parseInt(String.valueOf(monthOfYear+1));
             int day = Integer.parseInt(String.valueOf(dayOfMonth));
             String dateString;

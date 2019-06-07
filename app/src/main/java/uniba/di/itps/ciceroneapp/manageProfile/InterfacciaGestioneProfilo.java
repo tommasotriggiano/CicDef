@@ -1,15 +1,10 @@
 package uniba.di.itps.ciceroneapp.manageProfile;
 
 import android.content.Context;
-import android.net.Uri;
 import android.support.v4.app.Fragment;
-import android.widget.TextView;
-
-import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import uniba.di.itps.ciceroneapp.base.mvp.callback.IFirebaseCallbackListener;
-import uniba.di.itps.ciceroneapp.model.User;
 
 public interface InterfacciaGestioneProfilo {
     interface MvpView{

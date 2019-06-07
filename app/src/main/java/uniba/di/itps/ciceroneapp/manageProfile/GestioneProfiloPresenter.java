@@ -1,18 +1,11 @@
 package uniba.di.itps.ciceroneapp.manageProfile;
 
-import android.app.Activity;
 import android.content.Context;
-import android.net.Uri;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.Map;
 
 import uniba.di.itps.ciceroneapp.GestioneAttività.InterfaceGestioneAttività;
 import uniba.di.itps.ciceroneapp.R;
@@ -20,14 +13,13 @@ import uniba.di.itps.ciceroneapp.base.mvp.callback.IFirebaseCallbackListener;
 import uniba.di.itps.ciceroneapp.model.User;
 
 public class GestioneProfiloPresenter implements InterfacciaGestioneProfilo.Presenter {
-    private InterfacciaGestioneProfilo.MvpView mView;
     private InterfaceGestioneAttività.MvpView navigationView;
     private Context mcontext;
     private FirebaseUser user;
     private  FirebaseFirestore db;
 
     public GestioneProfiloPresenter(Context mcontext, FirebaseUser user, FirebaseFirestore db) {
-        mView=  new ViewProfileFragment();
+        InterfacciaGestioneProfilo.MvpView mView = new ViewProfileFragment();
         navigationView = (InterfaceGestioneAttività.MvpView)mcontext;
 
         this.mcontext = mcontext;
@@ -70,10 +62,7 @@ public class GestioneProfiloPresenter implements InterfacciaGestioneProfilo.Pres
         }
 
         db.collection("utenti").document(user.getUid()).update(userUpdate.toMap()).
-                addOnSuccessListener(aVoid -> {
-                    Toast.makeText(mcontext,mcontext.getResources().getString(R.string.saved),Toast.LENGTH_LONG).show();
-
-        });
+                addOnSuccessListener(aVoid -> Toast.makeText(mcontext,mcontext.getResources().getString(R.string.saved),Toast.LENGTH_LONG).show());
     }
 
 

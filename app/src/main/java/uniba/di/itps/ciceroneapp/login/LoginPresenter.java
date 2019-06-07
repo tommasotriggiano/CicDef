@@ -3,24 +3,20 @@ package uniba.di.itps.ciceroneapp.login;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import uniba.di.itps.ciceroneapp.main.MainActivity;
-import uniba.di.itps.ciceroneapp.model.User;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import uniba.di.itps.ciceroneapp.R;
+import uniba.di.itps.ciceroneapp.main.MainActivity;
+import uniba.di.itps.ciceroneapp.model.User;
 
 
 /**
