@@ -90,7 +90,6 @@ public class BasicInformationFragment extends Fragment {
     {
         if (requestCode == PICK_IMAGE) {
             resultUri = data.getData();
-            Toast.makeText(getContext(),resultUri.toString(),Toast.LENGTH_LONG).show();
             addImage.setImageURI(resultUri);
 
         }

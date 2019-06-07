@@ -29,6 +29,9 @@ public class Event {
     private String luogo;
     private String indirizzo;
 
+    public Event() {
+    } //per firebase.
+
     public Event(String titolo, String descrizione, String categoria, int nMaxPartecipanti, String dateEvento,
                  String orarioIncontro, String orarioInizio, double prezzo,
                  String valuta, Map<String,Object> tappe, String cicerone) {
