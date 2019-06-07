@@ -1,20 +1,33 @@
 package uniba.di.itps.ciceroneapp.GestioneAttività;
 
-
+import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+
+import uniba.di.itps.ciceroneapp.base.BaseFragment;
+import uniba.di.itps.ciceroneapp.login.LoginInterface;
 import uniba.di.itps.ciceroneapp.model.Event;
 import uniba.di.itps.ciceroneapp.model.Stage;
 
@@ -100,7 +113,12 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
 
 
 
-        db.collection("Eventi").document().set(event).addOnSuccessListener(aVoid -> Toast.makeText(mcontext,"SUCCESSO",Toast.LENGTH_LONG).show());
+        db.collection("Eventi").document().set(event).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(mcontext,"SUCCESSO",Toast.LENGTH_LONG).show();
+            }
+        });
 
 
 
@@ -109,7 +127,6 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
 
     @Override
     public void showMyEventCreated() {
-
 
     }
 

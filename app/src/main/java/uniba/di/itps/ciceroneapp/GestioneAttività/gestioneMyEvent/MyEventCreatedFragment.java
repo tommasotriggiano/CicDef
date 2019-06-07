@@ -1,4 +1,4 @@
-package uniba.di.itps.ciceroneapp;
+package uniba.di.itps.ciceroneapp.GestioneAttività.gestioneMyEvent;
 
 import android.content.Context;
 import android.net.Uri;
@@ -7,6 +7,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import uniba.di.itps.ciceroneapp.GestioneAttività.InterfaceGestioneAttività;
+import uniba.di.itps.ciceroneapp.R;
 
 
 /**
@@ -23,15 +26,16 @@ public class MyEventCreatedFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+
 
     private OnFragmentInteractionListener mListener;
 
     public MyEventCreatedFragment() {
         // Required empty public constructor
     }
+
+
+
 
     /**
      * Use this factory method to create a new instance of

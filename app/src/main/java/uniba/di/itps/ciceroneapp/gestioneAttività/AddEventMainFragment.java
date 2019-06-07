@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import uniba.di.itps.ciceroneapp.R;
+import uniba.di.itps.ciceroneapp.base.BaseFragment;
 
 
 public class AddEventMainFragment extends Fragment {
