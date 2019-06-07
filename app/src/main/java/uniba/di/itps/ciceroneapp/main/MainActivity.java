@@ -81,7 +81,12 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestione
     }
 
     @Override
-    public void showDialogDate(TextView date) {
+    public void showBottomNavigation() {
+        bottomNav.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showDialogDate(TextView date,boolean birth) {
         SimpleDateFormat sdf= new SimpleDateFormat("EEEE");
         DatePickerDialog.OnDateSetListener ondate = (view, year, monthOfYear, dayOfMonth) -> {
             Date pick= new Date(year,monthOfYear,dayOfMonth-1);
@@ -91,23 +96,24 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestione
 
             if(month<10){
                 if(day<10){
-                    dateString="0"+ dayOfMonth + "-" + "0"+ (monthOfYear + 1) + "-" + year;
+                    dateString="0"+ dayOfMonth + "/" + "0"+ (monthOfYear + 1) + "/" + year;
                     date.setText(dateString);
                 }
                 else{
-                    dateString= dayOfMonth + "-" +"0"+ (monthOfYear + 1) + "-" + year;
+                    dateString= dayOfMonth + "/" +"0"+ (monthOfYear + 1) + "/" + year;
                     date.setText(dateString);}
             } else if(day<10){
-                dateString="0"+ dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
+                dateString="0"+ dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
                 date.setText(dateString);}
             else{
-                dateString= dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
+                dateString= dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
                 date.setText(dateString);}
         };
 
 
         DatePickerFragment datePickerFragment = new DatePickerFragment();
         //Set Up Current Date Into dialog
+        if(!birth){
         Calendar calender = Calendar.getInstance();
         Bundle args = new Bundle();
         args.putInt("year", calender.get(Calendar.YEAR));
@@ -115,7 +121,11 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestione
         args.putInt("day", calender.get(Calendar.DAY_OF_MONTH));
         datePickerFragment.setArguments(args);
         datePickerFragment.setCallBack(ondate);
-        datePickerFragment.show(getSupportFragmentManager(),"DatePicker");
+        datePickerFragment.show(getSupportFragmentManager(),"DatePicker");}
+        else{
+            datePickerFragment.setCallBack(ondate);
+            datePickerFragment.show(getSupportFragmentManager(),"DatePicker");
+        }
 
     }
 

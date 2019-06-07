@@ -153,5 +153,14 @@
     <string name="save">Save</string>
     <string name="edit_BirthDate">BIRTH DATE</string>
     <string name="edit_Gender">GENDER</string>
+    <string name="notEntered">Not Entered</string>
+    <string name="saved">Information updated</string>
+    <array name="Genders">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+
+    </array>
+
 
 </resources>

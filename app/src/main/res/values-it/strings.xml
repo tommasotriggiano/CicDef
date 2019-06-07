@@ -121,4 +121,12 @@
     <string name="save">Salva</string>
     <string name="edit_BirthDate">DATA DI NASCITA</string>
     <string name="edit_Gender">GENERE</string>
+    <string name="notEntered">Non inserito</string>
+    <array name="Genders">
+        <item>Maschio</item>
+        <item>Femmina</item>
+        <item>Altro</item>
+
+    </array>
+    <string name="saved">Informazioni modificate</string>
 </resources>

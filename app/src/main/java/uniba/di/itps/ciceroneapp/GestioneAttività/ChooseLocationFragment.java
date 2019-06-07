@@ -78,7 +78,7 @@ public class ChooseLocationFragment extends Fragment  {
 
         });
         //data
-        date.setOnClickListener(v -> mvpView.showDialogDate(date));
+        date.setOnClickListener(v -> mvpView.showDialogDate(date,false));
         //continua
         goOn.setOnClickListener(v -> {
             Fragment f = new ChooseMeetingFragment();

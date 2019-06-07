@@ -1,5 +1,8 @@
 package uniba.di.itps.ciceroneapp.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class User {
     private String uid;
     private String nome;
@@ -15,6 +18,7 @@ public class User {
         this.cognome = cognome;
         this.email = email;
     }
+    public User(){}
 
     public String getNome() {
         return nome;
@@ -69,6 +73,18 @@ public class User {
     }
     public void setUid(String uid){
         this.uid = uid;
+    }
+
+    public Map<String,Object> toMap(){
+        Map<String,Object>user = new HashMap<>();
+        user.put("uid",this.uid);
+        user.put("nome",this.nome);
+        user.put("cognome",this.cognome);
+        user.put("datanascita",this.datanascita);
+        user.put("fotoprofilo",this.fotoprofilo);
+        user.put("sesso",this.sesso);
+        user.put("email",this.email);
+        return user;
     }
 
 

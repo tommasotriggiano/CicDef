@@ -11,8 +11,9 @@ public interface InterfaceGestioneAttività {
     interface MvpView{
         void setFragment(Fragment fragment);
         void hideBottomNavigation();
+        void showBottomNavigation();
 
-        void showDialogDate(TextView date);
+        void showDialogDate(TextView date,boolean birth);
     }
     interface Presenter{
         void addFragment(Fragment fragment);
