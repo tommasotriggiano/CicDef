@@ -24,7 +24,7 @@ import uniba.di.itps.ciceroneapp.SearchEventMainFragment;
 import uniba.di.itps.ciceroneapp.R;
 
 
-public abstract class MainActivity extends AppCompatActivity implements InterfaceGestioneAttività.MvpView {
+public class MainActivity extends AppCompatActivity implements InterfaceGestioneAttività.MvpView {
     private BottomNavigationView bottomNav;
 
     @Override
@@ -83,6 +83,36 @@ public abstract class MainActivity extends AppCompatActivity implements Interfac
     @Override
     public void showBottomNavigation() {
         bottomNav.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showDialogDate(TextView date) {
+
+    }
+
+    @Override
+    public void setFotoEvento(String string) {
+
+    }
+
+    @Override
+    public void setTitolo(String string) {
+
+    }
+
+    @Override
+    public void setCart_badge(String string) {
+
+    }
+
+    @Override
+    public void setDate(String string) {
+
+    }
+
+    @Override
+    public void setnIscritti(String string) {
+
     }
 
     @Override

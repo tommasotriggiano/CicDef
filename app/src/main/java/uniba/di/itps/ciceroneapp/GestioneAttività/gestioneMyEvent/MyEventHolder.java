@@ -73,7 +73,7 @@ public  class MyEventHolder extends RecyclerView.ViewHolder implements MvpView {
 
     @Override
     public void showBottomNavigation() {
-        
+
     }
 
     @Override
