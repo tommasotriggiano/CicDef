@@ -1,16 +1,13 @@
 package uniba.di.itps.ciceroneapp.main;
 
-import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.app.DatePickerDialog;
-import android.widget.DatePicker;
 import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -20,7 +17,6 @@ import uniba.di.itps.ciceroneapp.GestioneAttività.AddEventMainFragment;
 import uniba.di.itps.ciceroneapp.GestioneAttività.DatePickerFragment;
 import uniba.di.itps.ciceroneapp.GestioneAttività.InterfaceGestioneAttività;
 import uniba.di.itps.ciceroneapp.MyEventMainFragment;
-import uniba.di.itps.ciceroneapp.base.BaseFragment;
 import uniba.di.itps.ciceroneapp.manageProfile.ProfileMainFragment;
 import uniba.di.itps.ciceroneapp.SearchEventMainFragment;
 
@@ -46,34 +42,31 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestione
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    Fragment selectedFragment = null;
+            item -> {
+                Fragment selectedFragment = null;
 
-                    switch (item.getItemId()) {
-                        case R.id.navigation_search:
-                            selectedFragment = new SearchEventMainFragment();
-                            break;
-                        case R.id.navigation_add_event:
-                            selectedFragment = new AddEventMainFragment();
-                            break;
-                        case R.id.navigation_event:
-                            selectedFragment = new MyEventMainFragment();
-                            break;
-                        case R.id.navigation_profile:
-                            selectedFragment = new ProfileMainFragment();
-                            break;
-                        default:break;
-                    }
-
-                    if (selectedFragment != null) {
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                selectedFragment).commit();
-                    }
-
-                    return true;
+                switch (item.getItemId()) {
+                    case R.id.navigation_search:
+                        selectedFragment = new SearchEventMainFragment();
+                        break;
+                    case R.id.navigation_add_event:
+                        selectedFragment = new AddEventMainFragment();
+                        break;
+                    case R.id.navigation_event:
+                        selectedFragment = new MyEventMainFragment();
+                        break;
+                    case R.id.navigation_profile:
+                        selectedFragment = new ProfileMainFragment();
+                        break;
+                    default:break;
                 }
+
+                if (selectedFragment != null) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            selectedFragment).commit();
+                }
+
+                return true;
             };
     @Override
     public void setFragment(Fragment fragment) {
@@ -90,30 +83,26 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestione
     @Override
     public void showDialogDate(TextView date) {
         SimpleDateFormat sdf= new SimpleDateFormat("EEEE");
-        DatePickerDialog.OnDateSetListener ondate = new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog.OnDateSetListener ondate = (view, year, monthOfYear, dayOfMonth) -> {
+            Date pick= new Date(year,monthOfYear,dayOfMonth-1);
+            int month = Integer.parseInt(String.valueOf(monthOfYear+1));
+            int day = Integer.parseInt(String.valueOf(dayOfMonth));
+            String dateString;
 
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                Date pick= new Date(year,monthOfYear,dayOfMonth-1);
-                int month = Integer.parseInt(String.valueOf(monthOfYear+1));
-                int day = Integer.parseInt(String.valueOf(dayOfMonth));
-                String dateString;
-
-                if(month<10){
-                    if(day<10){
-                        dateString="0"+String.valueOf(dayOfMonth) + "-" + "0"+String.valueOf(monthOfYear+1)+ "-" + String.valueOf(year);
-                        date.setText(dateString);
-                    }
-                    else{
-                        dateString=String.valueOf(dayOfMonth) + "-" +"0"+String.valueOf(monthOfYear+1) + "-" + String.valueOf(year);
-                        date.setText(dateString);}
-                } else if(day<10){
-                    dateString="0"+String.valueOf(dayOfMonth) + "-" +String.valueOf(monthOfYear+1) + "-" + String.valueOf(year);
-                    date.setText(dateString);}
+            if(month<10){
+                if(day<10){
+                    dateString="0"+ dayOfMonth + "-" + "0"+ (monthOfYear + 1) + "-" + year;
+                    date.setText(dateString);
+                }
                 else{
-                    dateString=String.valueOf(dayOfMonth) + "-" + String.valueOf(monthOfYear+1) + "-" + String.valueOf(year);
+                    dateString= dayOfMonth + "-" +"0"+ (monthOfYear + 1) + "-" + year;
                     date.setText(dateString);}
-            }
-
+            } else if(day<10){
+                dateString="0"+ dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
+                date.setText(dateString);}
+            else{
+                dateString= dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
+                date.setText(dateString);}
         };
 
 
@@ -126,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestione
         args.putInt("day", calender.get(Calendar.DAY_OF_MONTH));
         datePickerFragment.setArguments(args);
         datePickerFragment.setCallBack(ondate);
-        datePickerFragment.show((FragmentManager)getSupportFragmentManager(),"DatePicker");
+        datePickerFragment.show(getSupportFragmentManager(),"DatePicker");
 
     }
 

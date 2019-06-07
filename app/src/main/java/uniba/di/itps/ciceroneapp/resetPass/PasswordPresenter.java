@@ -33,20 +33,17 @@ public class PasswordPresenter implements PasswordInterface {
             email.requestFocus();
         }
         else{
-            mAuth.sendPasswordResetEmail(userEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()){
-                        Toast.makeText(mContext, R.string.Emailsent, Toast.LENGTH_SHORT).show();
-                        ((Activity)mContext).finish();
-                        mContext.startActivity(new Intent(mContext,LoginActivity.class));
-                    }
-                    else{
-                        Toast.makeText(mContext, R.string.EmailNotRegistered, Toast.LENGTH_SHORT).show();
-
-                    }
+            mAuth.sendPasswordResetEmail(userEmail).addOnCompleteListener(task -> {
+                if (task.isSuccessful()){
+                    Toast.makeText(mContext, R.string.Emailsent, Toast.LENGTH_SHORT).show();
+                    ((Activity)mContext).finish();
+                    mContext.startActivity(new Intent(mContext,LoginActivity.class));
+                }
+                else{
+                    Toast.makeText(mContext, R.string.EmailNotRegistered, Toast.LENGTH_SHORT).show();
 
                 }
+
             });
         }
 

@@ -50,12 +50,9 @@ public class DialogUtils {
         alertDialog.setCancelable(false);
 
         alertDialog.setMessage(message);
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, context.getString(android.R.string.ok), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                clickListener.onClick(dialog, which);
-            }
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, context.getString(android.R.string.ok), (dialog, which) -> {
+            dialog.dismiss();
+            clickListener.onClick(dialog, which);
         });
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, context.getString(android.R.string.ok), (dialog, which) -> dialog.dismiss());
         if (!((Activity) context).isFinishing()) {

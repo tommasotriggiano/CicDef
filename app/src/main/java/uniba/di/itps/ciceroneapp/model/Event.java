@@ -2,8 +2,7 @@
 package uniba.di.itps.ciceroneapp.model;
 
 
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Map;
 
 public class Event {

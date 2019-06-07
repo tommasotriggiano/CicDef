@@ -2,12 +2,8 @@ package uniba.di.itps.ciceroneapp.GestioneAttività;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.widget.ImageView;
 import android.widget.TextView;
-
 import java.util.ArrayList;
-
-import uniba.di.itps.ciceroneapp.base.BaseFragment;
 import uniba.di.itps.ciceroneapp.model.Stage;
 
 

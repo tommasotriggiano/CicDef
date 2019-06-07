@@ -65,27 +65,22 @@ public class RegistrationPresenter implements RegistrationInterface {
             lpassword.requestFocus();
             return;}
 
-        mAuth.createUserWithEmailAndPassword(email1, password1).addOnCompleteListener((Activity)mContext, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                final FirebaseUser user = mAuth.getInstance().getCurrentUser();
-                if (task.isSuccessful()) {
-                    User userDatabase = new User(name1,surname1,user.getEmail(),user.getUid());
-                    db.collection("utenti").document(user.getUid()).set(userDatabase);
+        mAuth.createUserWithEmailAndPassword(email1, password1).addOnCompleteListener((Activity)mContext, task -> {
+            final FirebaseUser user = mAuth.getInstance().getCurrentUser();
+            if (task.isSuccessful()) {
+                User userDatabase = new User(name1,surname1,user.getEmail(),user.getUid());
+                db.collection("utenti").document(user.getUid()).set(userDatabase);
 
-                    user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
-                                Toast.makeText(mContext, R.string.Emailsent, Toast.LENGTH_SHORT).show();
-                                Intent goToLogin = new Intent(mContext,LoginActivity.class);
-                                mContext.startActivity(goToLogin);
-                                ((Activity)mContext).finish();
+                user.sendEmailVerification().addOnCompleteListener(task1 -> {
+                    if(task1.isSuccessful()){
+                        Toast.makeText(mContext, R.string.Emailsent, Toast.LENGTH_SHORT).show();
+                        Intent goToLogin = new Intent(mContext,LoginActivity.class);
+                        mContext.startActivity(goToLogin);
+                        ((Activity)mContext).finish();
 
-                }}});} else {
-                    Toast.makeText(mContext, R.string.Failure, Toast.LENGTH_SHORT).show();
+        }});} else {
+                Toast.makeText(mContext, R.string.Failure, Toast.LENGTH_SHORT).show();
 
-                                }
                             }
                         });}
 

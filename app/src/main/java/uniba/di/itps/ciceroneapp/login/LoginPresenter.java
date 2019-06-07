@@ -21,8 +21,6 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import uniba.di.itps.ciceroneapp.R;
-import uniba.di.itps.ciceroneapp.main.MainActivity;
-import uniba.di.itps.ciceroneapp.model.User;
 
 
 /**
@@ -48,25 +46,22 @@ public class LoginPresenter implements LoginInterface.Presenter {
     public void firebaseAuthWithGoogle(final GoogleSignInAccount account) {
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         mAuth.signInWithCredential(credential)
-                .addOnCompleteListener((Activity)mContext, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            String uid = mAuth.getCurrentUser().getUid();
-                            String email = mAuth.getCurrentUser().getEmail();
-                            String name = account.getGivenName();
-                            String surname = account.getFamilyName();
-                            String photoUrl = account.getPhotoUrl().toString();
-                            User user = new User(name,surname,email,uid);
-                            user.setFotoprofilo(photoUrl);
+                .addOnCompleteListener((Activity)mContext, task -> {
+                    if (task.isSuccessful()) {
+                        String uid = mAuth.getCurrentUser().getUid();
+                        String email = mAuth.getCurrentUser().getEmail();
+                        String name = account.getGivenName();
+                        String surname = account.getFamilyName();
+                        String photoUrl = account.getPhotoUrl().toString();
+                        User user = new User(name,surname,email,uid);
+                        user.setFotoprofilo(photoUrl);
 
-                            db.collection("utenti").document(user.getUid()).set(user);
+                        db.collection("utenti").document(user.getUid()).set(user);
 
-                            Toast.makeText(mContext, "autenticazione avvenuta con successo", Toast.LENGTH_SHORT).show();
-                            mView.startMainActivity();
-                        } else {
-                            mView.sendErrorMessage();
-                        }
+                        Toast.makeText(mContext, "autenticazione avvenuta con successo", Toast.LENGTH_SHORT).show();
+                        mView.startMainActivity();
+                    } else {
+                        mView.sendErrorMessage();
                     }
                 });
     }
@@ -87,16 +82,13 @@ public class LoginPresenter implements LoginInterface.Presenter {
 
             return;}
 
-        mAuth.signInWithEmailAndPassword(email1, password1).addOnCompleteListener((Activity)mContext, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (!task.isSuccessful()) {
-                    Toast.makeText(mContext, R.string.Authenticationf, Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    checkIfEmailVerified();}
-                }
-        });
+        mAuth.signInWithEmailAndPassword(email1, password1).addOnCompleteListener((Activity)mContext, task -> {
+            if (!task.isSuccessful()) {
+                Toast.makeText(mContext, R.string.Authenticationf, Toast.LENGTH_SHORT).show();
+            }
+            else{
+                checkIfEmailVerified();}
+            });
     }
 
     @Override
