@@ -24,7 +24,7 @@ import uniba.di.itps.ciceroneapp.SearchEventMainFragment;
 import uniba.di.itps.ciceroneapp.R;
 
 
-public class MainActivity extends AppCompatActivity implements InterfaceGestioneAttività.MvpView {
+public abstract class MainActivity extends AppCompatActivity implements InterfaceGestioneAttività.MvpView {
     private BottomNavigationView bottomNav;
 
     @Override

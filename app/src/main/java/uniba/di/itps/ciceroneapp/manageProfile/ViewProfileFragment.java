@@ -159,7 +159,7 @@ public class ViewProfileFragment extends Fragment implements InterfacciaGestione
             cognome.setText(user.getCognome());
             if(user.getFotoprofilo() != null){
                 fotoS = user.getFotoprofilo();
-                Picasso.with(getActivity()).load(user.getFotoprofilo()).into(profileImage);
+                Picasso.get().load(user.getFotoprofilo()).into(profileImage);
             }
             if(user.getSesso() != null){
                 sesso.setText(user.getSesso());
@@ -183,7 +183,8 @@ public class ViewProfileFragment extends Fragment implements InterfacciaGestione
     public void loadPhoto(Context context, CircleImageView profile, InterfacciaGestioneProfilo.Presenter presenter) {
         presenter.readDataProfile(user -> {
        if(user.getFotoprofilo() != null){
-           Picasso.with(context).load(user.getFotoprofilo()).into(profile);
+
+           Picasso.get().load(user.getFotoprofilo()).into(profile);
        }
         });
     }

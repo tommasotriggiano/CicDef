@@ -4,17 +4,16 @@ package uniba.di.itps.ciceroneapp.GestioneAttività;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
 import uniba.di.itps.ciceroneapp.model.Event;
 import uniba.di.itps.ciceroneapp.model.Stage;
 
@@ -58,9 +57,9 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
 
     @Override
     public void createEvent(Bundle b) {
-        String linguasecondaria = null;
-        String requirements = null;
-        String url = null;
+        String linguasecondaria;
+        String requirements;
+        String url;
 
         String title = b.getString("titolo");
         String description = b.getString("descrizione");
@@ -100,7 +99,12 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
 
 
 
-        db.collection("Eventi").document().set(event).addOnSuccessListener(aVoid -> Toast.makeText(mcontext,"SUCCESSO",Toast.LENGTH_LONG).show());
+        db.collection("Eventi").document().set(event).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(mcontext,"SUCCESSO",Toast.LENGTH_LONG).show();
+            }
+        });
 
 
 
@@ -109,7 +113,6 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
 
     @Override
     public void showMyEventCreated() {
-
 
     }
 

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -20,6 +21,7 @@ import com.google.android.libraries.places.compat.AutocompleteFilter;
 import com.google.android.libraries.places.compat.Place;
 import com.google.android.libraries.places.compat.ui.PlaceAutocomplete;
 
+import java.util.Objects;
 
 import uniba.di.itps.ciceroneapp.R;
 
@@ -36,21 +38,19 @@ public class ChooseMeetingFragment extends Fragment {
     private Spinner start;
     private Spinner end;
     private InterfaceGestioneAttività.Presenter presenter;
-
+    private InterfaceGestioneAttività.MvpView mvpView;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_choose_meeting, container, false);
-        goOn = view.findViewById(R.id.button6);
-        meetingAddress = view.findViewById(R.id.Luogo);
-        meetingHour = view.findViewById(R.id.meetingHourSpinner);
-        start = view.findViewById(R.id.spinner4);
-        end = view.findViewById(R.id.spinner3);
+        goOn = (ImageButton) view.findViewById(R.id.button6);
+        meetingAddress = (TextView) view.findViewById(R.id.Luogo);
+        meetingHour = (Spinner) view.findViewById(R.id.meetingHourSpinner);
+        start = (Spinner)view.findViewById(R.id.spinner4);
+        end = (Spinner)view.findViewById(R.id.spinner3);
         presenter = new PresenterGestioneAttività(getActivity());
-        InterfaceGestioneAttività.MvpView mvpView = (InterfaceGestioneAttività.MvpView) getActivity();
-        if (mvpView != null) {
-            mvpView.hideBottomNavigation();
-        }
+        mvpView = (InterfaceGestioneAttività.MvpView)getActivity();
+        mvpView.hideBottomNavigation();
         return view;
     }
 
@@ -58,37 +58,43 @@ public class ChooseMeetingFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //indirizzo
-        meetingAddress.setOnClickListener(v -> {
-            Intent intent = null;
-            try {
-                AutocompleteFilter typeFilter = new AutocompleteFilter.Builder()
-                        .setTypeFilter(AutocompleteFilter.TYPE_FILTER_ADDRESS)
-                        .build();
-                intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY).setFilter(typeFilter)
-                        .build(getActivity());
-            } catch (GooglePlayServicesRepairableException e) {
-                Log.i(TAG,e.getMessage());
-            } catch (GooglePlayServicesNotAvailableException e) {
-                Log.i(TAG,e.getMessage());
-            }
-            startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
+        meetingAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = null;
+                try {
+                    AutocompleteFilter typeFilter = new AutocompleteFilter.Builder()
+                            .setTypeFilter(AutocompleteFilter.TYPE_FILTER_ADDRESS)
+                            .build();
+                    intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY).setFilter(typeFilter)
+                            .build(getActivity());
+                } catch (GooglePlayServicesRepairableException e) {
+                    Log.i(TAG,e.getMessage());
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    Log.i(TAG,e.getMessage());
+                }
+                startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
 
+            }
 
         });
-        goOn.setOnClickListener(v -> {
-            Fragment f = new ChooseLanguageFragment();
-            Bundle receive = getArguments();
-            if(meetingAddress.getText().toString().isEmpty()){
-                meetingAddress.setError("Inserisci indirizzo di Incontro");
-                return;
-            }
-            receive.putString("indirizzoIncontro",meetingAddress.getText().toString());
-            receive.putString("oraIncontro",meetingHour.getSelectedItem().toString());
-            receive.putString("oraInizio",start.getSelectedItem().toString());
-            receive.putString("oraFine",end.getSelectedItem().toString());
-            if(presenter.setArguument(f,receive))
-                presenter.addFragment(f);
+        goOn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment f = new ChooseLanguageFragment();
+                Bundle receive = getArguments();
+                if(meetingAddress.getText().toString().isEmpty()){
+                    meetingAddress.setError("Inserisci indirizzo di Incontro");
+                    return;
+                }
+                receive.putString("indirizzoIncontro",meetingAddress.getText().toString());
+                receive.putString("oraIncontro",meetingHour.getSelectedItem().toString());
+                receive.putString("oraInizio",start.getSelectedItem().toString());
+                receive.putString("oraFine",end.getSelectedItem().toString());
+                if(presenter.setArguument(f,receive))
+                    presenter.addFragment(f);
 
+            }
         });
     }
 
