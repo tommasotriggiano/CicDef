@@ -1,11 +1,10 @@
 package uniba.di.itps.ciceroneapp.base.mvp.callback;
 
-/**
- * Created by H.T. on 01/12/17.
- */
+import java.util.ArrayList;
 
-public interface ICallbackListener<T> {
-    void onSuccess(T data);
+import uniba.di.itps.ciceroneapp.model.Event;
 
-    void onFailure(Throwable t);
+
+public interface ICallbackListener {
+    void onCallback(ArrayList<Event> events);
 }

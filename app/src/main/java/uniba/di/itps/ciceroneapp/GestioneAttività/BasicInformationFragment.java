@@ -74,7 +74,7 @@ public class BasicInformationFragment extends Fragment {
                 return;
             }
             b.putString("titolo",title.getText().toString());
-            b.putString("descrizione",title.getText().toString());
+            b.putString("descrizione",description.getText().toString());
             b.putString("categoria",category.getSelectedItem().toString());
 
             if(presenter.setArguument(f,b)){
