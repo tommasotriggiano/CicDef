@@ -106,7 +106,7 @@ public class ChooseLocationFragment extends Fragment  {
             if (resultCode == RESULT_OK) {
                 Place place = PlaceAutocomplete.getPlace(getContext(), data);
                 Log.i(TAG, "Place: " + place.getName());
-                address.setText(place.getAddress().toString());
+                address.setText(place.getName().toString());
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
                 Status status = PlaceAutocomplete.getStatus(getContext(), data);
                 // TODO: Handle the error.

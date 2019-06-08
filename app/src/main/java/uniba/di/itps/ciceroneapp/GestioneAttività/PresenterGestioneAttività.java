@@ -76,10 +76,12 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
         int num = b.getInt("numPartecipanti");
         double prezzo = b.getDouble("price");
         String valutes = b.getString("valutes");
+        String nomeTappa = stage.get(0).getIndirizzo();
+        String descrizioneTappa = stage.get(0).getDescrizione();
         Map<String, Object> map = new HashMap<>();
-        map.put("array",Arrays.asList(stage));
+        map.put(nomeTappa,descrizioneTappa);
         //Creazione Evento
-        Event event = new Event(title,description,categoria,num,data,oraIncontro,oraInizio,prezzo,valutes,map,user.getUid().toString());
+        Event event = new Event(title,description,categoria,num,data,oraIncontro,oraInizio,prezzo,valutes,map, user.getUid());
         if(b.getString("requirementsPartecipanti") != null){
             requirements = b.getString("requirementsPartecipanti");
             event.setRequisiti(requirements);
@@ -99,12 +101,7 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
 
 
 
-        db.collection("Eventi").document().set(event).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Toast.makeText(mcontext,"SUCCESSO",Toast.LENGTH_LONG).show();
-            }
-        });
+        db.collection("Eventi").document().set(event).addOnSuccessListener(aVoid -> Toast.makeText(mcontext,"SUCCESSO",Toast.LENGTH_LONG).show());
 
 
 

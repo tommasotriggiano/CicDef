@@ -17,8 +17,8 @@ import uniba.di.itps.ciceroneapp.GestioneAttività.DatePickerFragment;
 import uniba.di.itps.ciceroneapp.GestioneAttività.InterfaceGestioneAttività;
 import uniba.di.itps.ciceroneapp.MyEventMainFragment;
 import uniba.di.itps.ciceroneapp.R;
-import uniba.di.itps.ciceroneapp.SearchEventMainFragment;
 import uniba.di.itps.ciceroneapp.manageProfile.ProfileMainFragment;
+import uniba.di.itps.ciceroneapp.searchActivity.SearchActivityFragment;
 
 
 public class MainActivity extends AppCompatActivity implements InterfaceGestioneAttività.MvpView {
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestione
         //I added this if statement to keep the selected fragment when rotating the device
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new SearchEventMainFragment()).commit();
+                    new SearchActivityFragment()).commit();
         }
     }
 
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestione
 
                 switch (item.getItemId()) {
                     case R.id.navigation_search:
-                        selectedFragment = new SearchEventMainFragment();
+                        selectedFragment = new SearchActivityFragment();
                         break;
                     case R.id.navigation_add_event:
                         selectedFragment = new AddEventMainFragment();

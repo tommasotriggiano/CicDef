@@ -19,7 +19,7 @@ public class Event {
     private String orarioFine;
     private double prezzo;
     private String valuta;
-    private Itinerary itinerario;
+    private Map<String,Object> itinerario;
     private String noteAggiuntive;
     private String idCicerone;
     private String lingua;
@@ -34,7 +34,7 @@ public class Event {
 
     public Event(String titolo, String descrizione, String categoria, int nMaxPartecipanti, String dateEvento,
                  String orarioIncontro, String orarioInizio, double prezzo,
-                 String valuta, Map<String,Object> tappe, String cicerone) {
+                 String valuta, Map<String,Object> itinerario, String cicerone) {
         this.titolo = titolo;
         this.descrizione = descrizione;
         this.categoria = categoria;
@@ -150,11 +150,11 @@ public class Event {
         this.valuta = valuta;
     }
 
-    public Itinerary getItinerario() {
+    public Map<String, Object> getItinerario() {
         return itinerario;
     }
 
-    public void setItinerario(Itinerary itinerario) {
+    public void setItinerario(Map<String, Object> itinerario) {
         this.itinerario = itinerario;
     }
 

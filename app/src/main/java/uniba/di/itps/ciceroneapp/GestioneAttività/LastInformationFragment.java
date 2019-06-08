@@ -74,7 +74,7 @@ public class LastInformationFragment extends Fragment {
             receive.putDouble("price",Double.parseDouble(priceText.getText().toString()));
             receive.putString("valutes",valute.getSelectedItem().toString());
             presenter.createEvent(receive);
-            presenter.addFragment(f);
+            //presenter.addFragment(f);
 
         });
 
