@@ -12,6 +12,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import uniba.di.itps.ciceroneapp.model.Event;
@@ -26,6 +27,7 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
     private Context mcontext;
     private FirebaseUser user;
     private  FirebaseFirestore db;
+    private List<Event> events;
 
     PresenterGestioneAttività(Context context){
         mView= (InterfaceGestioneAttività.MvpView) context;
@@ -106,6 +108,21 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
 
 
 
+    }
+
+    @Override
+    public int getEventiRowsCount() {
+        return events.size();
+    }
+
+    @Override
+    public void onBindEventiRowsViewAtPosition(int position, InterfaceGestioneAttività.MvpView rowView) {
+        Event event = events.get(position);
+        rowView.setFotoEvento(event.getFoto());
+        rowView.setDate(event.getDateEvento());
+        rowView.setTitolo(event.getTitolo());
+        int nDisponibili = event.getnMaxPartecipanti() - event.getPartecipanti().size();
+        rowView.setnIscritti(""+event.getnMaxPartecipanti()+"/" + nDisponibili);
     }
 
     @Override

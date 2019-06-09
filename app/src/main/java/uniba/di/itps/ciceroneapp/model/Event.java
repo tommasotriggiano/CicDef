@@ -3,6 +3,7 @@ package uniba.di.itps.ciceroneapp.model;
 
 
 
+import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ public class Event {
     private String descrizione;
     private String categoria;
     private int nMaxPartecipanti;
+    private List<User> partecipanti;
     private String dateEvento;
     private String orarioIncontro;
     private String orarioInizio;
@@ -47,6 +49,30 @@ public class Event {
         this.valuta = valuta;
         this.tappe= tappe;
         this.idCicerone = cicerone;
+    }
+
+    public List<User> getPartecipanti() {
+        return partecipanti;
+    }
+
+    public void setPartecipanti(List<User> partecipanti) {
+        this.partecipanti = partecipanti;
+    }
+
+    public String getIdCicerone() {
+        return idCicerone;
+    }
+
+    public void setIdCicerone(String idCicerone) {
+        this.idCicerone = idCicerone;
+    }
+
+    public Map<String, Object> getTappe() {
+        return tappe;
+    }
+
+    public void setTappe(Map<String, Object> tappe) {
+        this.tappe = tappe;
     }
 
     public void setLinguaSecondaria(String linguaSecondaria) {
