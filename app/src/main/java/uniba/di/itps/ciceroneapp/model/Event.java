@@ -3,10 +3,10 @@ package uniba.di.itps.ciceroneapp.model;
 
 
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Event {
-
 
     private String titolo;
     private String foto;
@@ -28,6 +28,7 @@ public class Event {
     private String requisiti;
     private String luogo;
     private String indirizzo;
+    private String stato;
 
     public Event() {
     } //per firebase.
@@ -198,5 +199,39 @@ public class Event {
 
     public void setLingua(String lingua) {
         this.lingua = lingua;
+    }
+
+    public String getStato() {
+        return stato;
+    }
+    public void setStato(String stato) {
+        this.stato = stato;
+    }
+
+    public Map<String,Object>toMap(){
+        Map<String,Object> event = new HashMap<>();
+        event.put("titolo",this.titolo);
+        event.put("foto",this.foto);
+        event.put("descrizione",this.descrizione);
+        event.put("categoria",this.categoria);
+        event.put("nMaxPartecipanti",this.nMaxPartecipanti);
+        event.put("dateEvento",this.dateEvento);
+        event.put("orarioIncontro",this.orarioIncontro);
+        event.put("orarioInizio",this.orarioInizio);
+        event.put("orarioFine",this.orarioFine);
+        event.put("prezzo",this.prezzo);
+        event.put("valuta",this.valuta);
+        event.put("itinerario",this.itinerario);
+        event.put("noteAggiuntive",this.noteAggiuntive);
+        event.put("idCicerone",this.idCicerone);
+        event.put("lingua",this.lingua);
+        event.put("linguaSecondaria",this.linguaSecondaria);
+        event.put("tappe",this.tappe);
+        event.put("requisiti",this.requisiti);
+        event.put("luogo",this.luogo);
+        event.put("indirizzo",this.indirizzo);
+        event.put("stato",this.stato);
+        return event;
+
     }
 }

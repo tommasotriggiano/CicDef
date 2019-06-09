@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.Calendar;
 
 import uniba.di.itps.ciceroneapp.GestioneAttività.AddEventMainFragment;
@@ -23,6 +25,8 @@ import uniba.di.itps.ciceroneapp.searchActivity.SearchActivityFragment;
 
 public class MainActivity extends AppCompatActivity implements InterfaceGestioneAttività.MvpView {
     private BottomNavigationView bottomNav;
+    private FirebaseFirestore db;
+    private InterfaceMain.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,9 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestione
         setContentView(R.layout.activity_main);
         bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
+        db = FirebaseFirestore.getInstance();
+        presenter = new PresenterMain(this,db);
+        presenter.initAttivita();
 
         //I added this if statement to keep the selected fragment when rotating the device
         if (savedInstanceState == null) {

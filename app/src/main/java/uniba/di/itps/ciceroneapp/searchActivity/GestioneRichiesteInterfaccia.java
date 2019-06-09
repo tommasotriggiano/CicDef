@@ -10,13 +10,9 @@ import uniba.di.itps.ciceroneapp.model.Event;
 
 public interface GestioneRichiesteInterfaccia {
     interface MvpView{
-        void loadQuery();
-
-
     }
     interface Presenter{
         void showCategories(TextView category);
         void respondToQuery(ArrayList<Event>events, String city,String data,String categoria, ICallbackListener listener);
-        TextWatcher textWatcher();
     }
 }

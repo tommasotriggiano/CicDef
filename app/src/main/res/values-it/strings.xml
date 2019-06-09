@@ -130,4 +130,5 @@
     </array>
     <string name="saved">Informazioni modificate</string>
     <string name="category1">Categoria</string>
+    <string name="applyFilters">Applica Filtri</string>
 </resources>

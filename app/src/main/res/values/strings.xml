@@ -156,6 +156,7 @@
     <string name="notEntered">Not Entered</string>
     <string name="saved">Information updated</string>
     <string name="category1">Category</string>
+    <string name="applyFilters">Apply Filters</string>
     <array name="Genders">
         <item>Male</item>
         <item>Female</item>

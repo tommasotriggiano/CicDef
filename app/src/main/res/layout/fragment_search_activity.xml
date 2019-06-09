@@ -5,8 +5,7 @@
     android:id="@+id/costraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <RelativeLayout
         android:id="@+id/relative1"
@@ -87,24 +86,16 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="7dp"
             android:layout_marginEnd="206dp"
-            android:text="Button" />
+            android:text="@string/applyFilters"
+            android:visibility="invisible" />
     </RelativeLayout>
 
 
-    <RelativeLayout
-        android:id="@+id/relative2"
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/relative1"
+        android:id="@+id/attivitàRicercate"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="124dp"
-        android:layout_below="@+id/relative1">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/attivitàRicercate"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical" />
-    </RelativeLayout>
+        android:layout_height="match_parent"
+        android:scrollbars="vertical" />
 </RelativeLayout>
 
