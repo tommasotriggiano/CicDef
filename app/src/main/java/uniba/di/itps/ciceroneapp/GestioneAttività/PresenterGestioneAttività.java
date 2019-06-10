@@ -4,17 +4,12 @@ package uniba.di.itps.ciceroneapp.GestioneAttività;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import uniba.di.itps.ciceroneapp.model.Event;
 import uniba.di.itps.ciceroneapp.model.Stage;
 
@@ -83,7 +78,7 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
         Map<String, Object> map = new HashMap<>();
         map.put("io","tu");
         //Creazione Evento
-        Event event = new Event(title,description,categoria,num,data,oraIncontro,oraInizio,prezzo,valutes,map, user.getUid());
+        Event event = new Event(title,description,categoria,num,data,oraIncontro,oraInizio,prezzo,valutes,map, "ciao");
         if(b.getString("requirementsPartecipanti") != null){
             requirements = b.getString("requirementsPartecipanti");
             event.setRequisiti(requirements);
@@ -101,9 +96,10 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
         event.setLuogo(luogo);
         event.setIndirizzo(indirizzo);
 
+        //aggiunge l'oggetto al database
+        event.createEventToDatabase();
 
 
-        db.collection("Eventi").document().set(event).addOnSuccessListener(aVoid -> Toast.makeText(mcontext,"SUCCESSO",Toast.LENGTH_LONG).show());
 
 
 
