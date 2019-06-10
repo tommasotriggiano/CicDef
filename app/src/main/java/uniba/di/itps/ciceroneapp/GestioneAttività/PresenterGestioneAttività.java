@@ -122,7 +122,7 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
         rowView.setDate(event.getDateEvento());
         rowView.setTitolo(event.getTitolo());
         int nDisponibili = event.getnMaxPartecipanti() - event.getPartecipanti().size();
-        rowView.setnIscritti(""+event.getnMaxPartecipanti()+"/" + nDisponibili);
+        rowView.setnIscritti(""+nDisponibili);
     }
 
     @Override

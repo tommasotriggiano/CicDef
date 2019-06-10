@@ -24,11 +24,13 @@ public class RecyclerViewMyEventAdapter extends RecyclerView.Adapter<MyEventHold
 
     @Override
     public void onBindViewHolder(@NonNull MyEventHolder myEventHolder, int i) {
+        presenter.onBindEventiRowsViewAtPosition(i,myEventHolder);
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return presenter.getEventiRowsCount();
     }
+
 }
