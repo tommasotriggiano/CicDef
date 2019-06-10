@@ -163,6 +163,8 @@
         <item>Other</item>
 
     </array>
+    <string name="nump">Maximum of partecipants:</string>
+    <string name="toPerson">per Person</string>
 
 
 </resources>

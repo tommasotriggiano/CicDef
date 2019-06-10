@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -22,52 +23,72 @@
 
             <TextView
                 android:id="@+id/textViewTitle"
-                android:layout_width="200dp"
-                android:layout_height="20dp"
+                android:layout_width="199dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="9dp"
                 android:layout_toRightOf="@id/imageView"
+                android:fontFamily="sans-serif-smallcaps"
                 android:text="titolo"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/textViewShortDesc"
-                android:layout_width="200dp"
-                android:layout_height="20dp"
+                android:layout_width="249dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/textViewTitle"
                 android:layout_marginLeft="9dp"
                 android:layout_marginTop="5dp"
                 android:layout_toRightOf="@id/imageView"
+                android:fontFamily="serif"
                 android:text="categoria"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textSize="17sp" />
 
             <TextView
-                android:id="@+id/maxPartecipanti"
-                android:layout_width="139dp"
-                android:layout_height="20dp"
+                android:id="@+id/maxPartecipant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/textViewShortDesc"
-                android:layout_marginStart="9dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_toEndOf="@+id/imageView"
-                android:text="numPartecipanti" />
+                android:fontFamily="serif"
+                android:text="TextView"
+                android:textSize="15sp"
+                tools:text="@string/nump" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/num"
+                android:layout_width="42dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewShortDesc"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="6dp"
+                android:layout_toEndOf="@+id/maxPartecipant"
+                android:fontFamily="serif"
+                android:text="num"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/lingua"
                 android:layout_width="100dp"
                 android:layout_height="20dp"
-
-                android:layout_below="@+id/maxPartecipanti"
+                android:layout_below="@+id/num"
                 android:layout_marginStart="9dp"
                 android:layout_marginTop="6dp"
                 android:layout_marginBottom="3dp"
                 android:layout_toEndOf="@+id/imageView"
-                android:text="lingua" />
+                android:fontFamily="sans-serif-black"
+                android:text="lingua"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/textViewRating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textView5"
+                android:layout_below="@+id/lingua"
                 android:layout_marginLeft="9dp"
                 android:layout_marginTop="4dp"
                 android:layout_toRightOf="@id/imageView"
@@ -80,15 +101,40 @@
 
             <TextView
                 android:id="@+id/textViewPrice"
-                android:layout_width="81dp"
+                android:layout_width="36dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textViewRating"
                 android:layout_marginLeft="9dp"
                 android:layout_marginTop="9dp"
                 android:layout_toRightOf="@id/imageView"
-                android:text="prezzo"
+                android:text="pr"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/valuta"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/num"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="63dp"
+                android:layout_toEndOf="@+id/textViewPrice"
+                android:text="valuta"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/aPersona"
+                android:layout_width="104dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/num"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="67dp"
+                android:layout_toEndOf="@+id/valuta"
+                android:fontFamily="serif"
+                android:text="@string/toPerson"
+                android:textSize="15sp"
+                tools:text="a persona" />
 
         </RelativeLayout>
 

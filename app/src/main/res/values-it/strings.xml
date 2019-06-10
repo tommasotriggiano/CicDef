@@ -131,4 +131,6 @@
     <string name="saved">Informazioni modificate</string>
     <string name="category1">Categoria</string>
     <string name="applyFilters">Applica Filtri</string>
+    <string name="nump">Massimo partecipanti:</string>
+    <string name="toPerson">a persona</string>
 </resources>

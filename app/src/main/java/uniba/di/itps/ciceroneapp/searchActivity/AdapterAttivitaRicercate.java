@@ -44,6 +44,7 @@ public class AdapterAttivitaRicercate extends RecyclerView.Adapter<AdapterAttivi
         holder.lingua.setText(event.getLingua());
         holder.prezzo.setText(String.valueOf(event.getPrezzo()));
         holder.numPartecipanti.setText(String.valueOf(event.getnMaxPartecipanti()));
+        holder.valuta.setText(event.getValuta());
         if(event.getFoto() != null){
         Picasso.get().load(event.getFoto()).into(holder.image);}
     }
@@ -56,17 +57,19 @@ public class AdapterAttivitaRicercate extends RecyclerView.Adapter<AdapterAttivi
 
     class ViewHolderAttivitaRicercate extends RecyclerView.ViewHolder {
 
-        TextView titolo,categoria,numPartecipanti,lingua,prezzo,rating;
+        TextView titolo,categoria,numPartecipanti,lingua,prezzo,rating,valuta;
         ImageView image;
         ViewHolderAttivitaRicercate(@NonNull View itemView) {
             super(itemView);
             titolo = itemView.findViewById(R.id.textViewTitle);
             categoria = itemView.findViewById(R.id.textViewShortDesc);
-            numPartecipanti = itemView.findViewById(R.id.maxPartecipanti);
-            lingua = itemView.findViewById(R.id.textView5);
+            numPartecipanti = itemView.findViewById(R.id.num);
+            lingua = itemView.findViewById(R.id.lingua);
             prezzo = itemView.findViewById(R.id.textViewPrice);
             rating = itemView.findViewById(R.id.textViewRating);
             image = itemView.findViewById(R.id.imageView);
+            valuta = itemView.findViewById(R.id.valuta);
+
 
         }
     }
