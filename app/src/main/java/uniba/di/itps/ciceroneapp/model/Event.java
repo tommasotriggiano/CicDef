@@ -4,6 +4,7 @@ package uniba.di.itps.ciceroneapp.model;
 
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -17,10 +18,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.opencensus.tags.Tag;
 import uniba.di.itps.ciceroneapp.data.DataFetch;
 
 public class Event {
-
+    private static final String TAG ="Event";
     private String titolo;
     private String foto;
     private String descrizione;
@@ -289,7 +291,7 @@ public class Event {
                             FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document(ds.getId()).update(event.toMap());
                         }
                     } catch (ParseException e) {
-                        e.printStackTrace();
+                        Log.d(TAG,e.getMessage());
                     }
                 }
             }

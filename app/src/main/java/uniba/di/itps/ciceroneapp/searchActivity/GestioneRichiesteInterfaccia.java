@@ -1,5 +1,6 @@
 package uniba.di.itps.ciceroneapp.searchActivity;
 
+import android.support.v7.widget.RecyclerView;
 import android.text.TextWatcher;
 import android.widget.TextView;
 
@@ -13,6 +14,6 @@ public interface GestioneRichiesteInterfaccia {
     }
     interface Presenter{
         void showCategories(TextView category);
-        void respondToQuery(ArrayList<Event>events, String city,String data,String categoria, ICallbackListener listener);
+        void respondToQuery(RecyclerView recyclerView, String city, String data, String categoria);
     }
 }

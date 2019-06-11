@@ -16,17 +16,17 @@
             android:padding="8dp">
 
             <ImageView
-                android:id="@+id/picEventIW"
+                android:id="@+id/immagineA"
                 android:layout_width="136dp"
                 android:layout_height="161dp"
                 android:padding="4dp" />
 
             <TextView
-                android:id="@+id/titleTW"
+                android:id="@+id/titolo"
                 android:layout_width="240dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="9dp"
-                android:layout_toRightOf="@id/picEventIW"
+                android:layout_toRightOf="@id/immagineA"
                 android:fontFamily="sans-serif-black"
                 android:text="titolo"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
@@ -34,38 +34,38 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/dateTW"
+                android:id="@+id/data"
                 android:layout_width="249dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/titleTW"
+                android:layout_below="@id/titolo"
                 android:layout_marginLeft="9dp"
                 android:layout_marginTop="5dp"
-                android:layout_toRightOf="@id/picEventIW"
+                android:layout_toRightOf="@id/immagineA"
                 android:fontFamily="serif"
                 android:text="categoria"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textSize="17sp" />
 
             <TextView
-                android:id="@+id/maxPartecipant"
+                android:id="@+id/maxPartecipanti"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/dateTW"
+                android:layout_below="@+id/data"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
-                android:layout_toEndOf="@+id/picEventIW"
+                android:layout_toEndOf="@+id/immagineA"
                 android:fontFamily="serif"
                 android:text="@string/nump"
                 android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/subsAvaibleTW"
+                android:id="@+id/posti"
                 android:layout_width="42dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/dateTW"
+                android:layout_below="@+id/data"
                 android:layout_marginStart="17dp"
                 android:layout_marginTop="6dp"
-                android:layout_toEndOf="@+id/maxPartecipant"
+                android:layout_toEndOf="@+id/maxPartecipanti"
                 android:fontFamily="serif"
                 android:text="num"
                 android:textSize="15sp" />
@@ -74,11 +74,11 @@
                 android:id="@+id/lingua"
                 android:layout_width="100dp"
                 android:layout_height="20dp"
-                android:layout_below="@+id/subsAvaibleTW"
+                android:layout_below="@+id/posti"
                 android:layout_marginStart="9dp"
                 android:layout_marginTop="6dp"
                 android:layout_marginBottom="3dp"
-                android:layout_toEndOf="@+id/picEventIW"
+                android:layout_toEndOf="@+id/immagineA"
                 android:fontFamily="serif"
                 android:text="lingua"
                 android:textSize="15sp" />
@@ -90,7 +90,7 @@
                 android:layout_below="@+id/lingua"
                 android:layout_marginLeft="9dp"
                 android:layout_marginTop="4dp"
-                android:layout_toRightOf="@id/picEventIW"
+                android:layout_toRightOf="@id/immagineA"
                 android:background="@color/colorPrimary"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
@@ -102,10 +102,10 @@
                 android:id="@+id/textViewPrice"
                 android:layout_width="45dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/subsAvaibleTW"
+                android:layout_below="@+id/posti"
                 android:layout_marginLeft="9dp"
                 android:layout_marginTop="61dp"
-                android:layout_toRightOf="@id/picEventIW"
+                android:layout_toRightOf="@id/immagineA"
                 android:text="10.0"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                 android:textStyle="bold" />
@@ -114,7 +114,7 @@
                 android:id="@+id/valuta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/subsAvaibleTW"
+                android:layout_below="@+id/posti"
                 android:layout_marginStart="3dp"
                 android:layout_marginTop="60dp"
                 android:layout_toEndOf="@+id/textViewPrice"
@@ -126,7 +126,7 @@
                 android:id="@+id/aPersona"
                 android:layout_width="104dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/subsAvaibleTW"
+                android:layout_below="@+id/posti"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="63dp"
                 android:layout_toEndOf="@+id/valuta"

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -16,17 +15,17 @@
             android:padding="8dp">
 
             <ImageView
-                android:id="@+id/picEventIW"
+                android:id="@+id/immagineA"
                 android:layout_width="136dp"
                 android:layout_height="161dp"
                 android:padding="4dp" />
 
             <TextView
-                android:id="@+id/titleTW"
+                android:id="@+id/titolo"
                 android:layout_width="240dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="9dp"
-                android:layout_toRightOf="@id/picEventIW"
+                android:layout_toRightOf="@id/immagineA"
                 android:fontFamily="sans-serif-black"
                 android:text="titolo"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
@@ -34,13 +33,13 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/dateTW"
+                android:id="@+id/data"
                 android:layout_width="249dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/titleTW"
+                android:layout_below="@id/titolo"
                 android:layout_marginLeft="9dp"
                 android:layout_marginTop="5dp"
-                android:layout_toRightOf="@id/picEventIW"
+                android:layout_toRightOf="@id/immagineA"
                 android:fontFamily="serif"
                 android:text="data"
                 android:drawableStart="@drawable/ic_date_range_black_24dp"
@@ -48,26 +47,26 @@
                 android:textSize="17sp" />
 
             <TextView
-                android:id="@+id/maxPartecipant"
+                android:id="@+id/maxPartecipanti"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/dateTW"
+                android:layout_below="@+id/data"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
                 android:drawableStart="@drawable/ic_people"
-                android:layout_toEndOf="@+id/picEventIW"
+                android:layout_toEndOf="@+id/immagineA"
                 android:fontFamily="serif"
                 android:text="@string/nump"
                 android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/subsAvaibleTW"
+                android:id="@+id/posti"
                 android:layout_width="42dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/dateTW"
+                android:layout_below="@+id/data"
                 android:layout_marginStart="17dp"
                 android:layout_marginTop="6dp"
-                android:layout_toEndOf="@+id/maxPartecipant"
+                android:layout_toEndOf="@+id/maxPartecipanti"
                 android:fontFamily="serif"
                 android:text="num"
                 android:textSize="15sp" />

@@ -4,10 +4,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 
-import uniba.di.itps.ciceroneapp.base.mvp.callback.ICallbackListener;
-import uniba.di.itps.ciceroneapp.model.Event;
 import uniba.di.itps.ciceroneapp.model.Stage;
 
 
@@ -16,19 +15,6 @@ public interface InterfaceGestioneAttività {
         void setFragment(Fragment fragment);
         void hideBottomNavigation();
         void showBottomNavigation();
-
-        void showDialogDate(TextView date);
-
-        void setFotoEvento(String string);
-
-        void setTitolo(String string);
-
-        void setCart_badge(String string);
-
-        void setDate(String string);
-
-        void setnIscritti(String string);
-
         void showDialogDate(TextView date,boolean birth);
     }
     interface Presenter{
@@ -39,5 +25,6 @@ public interface InterfaceGestioneAttività {
         void initRecyclerViewCreate(RecyclerView recyclerView);
 
 
+        void initRecyclerViewRichieste(RecyclerView recyclerView);
     }
 }

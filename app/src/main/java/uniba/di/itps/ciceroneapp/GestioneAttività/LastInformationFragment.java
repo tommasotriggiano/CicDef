@@ -15,7 +15,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import uniba.di.itps.ciceroneapp.MyEventMainFragment;
 import uniba.di.itps.ciceroneapp.R;
 
 
@@ -57,7 +56,6 @@ public class LastInformationFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         //save
         save.setOnClickListener(v -> {
-            Fragment f = new MyEventMainFragment();
             Bundle receive = getArguments();
             if(num.getText().toString().isEmpty()){
                 num.requestFocus();

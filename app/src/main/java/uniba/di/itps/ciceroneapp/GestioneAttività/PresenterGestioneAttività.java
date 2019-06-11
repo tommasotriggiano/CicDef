@@ -111,17 +111,7 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
         event.createEventToDatabase();
     }
 
-    @Override
-    public int getEventiRowsCount() {
-        return events.size();
-    }
 
-
-
-    @Override
-    public void showMyEventCreated() {
-
-    }
 
     @Override
     public void initRecyclerViewCreate(RecyclerView recyclerView) {
@@ -140,7 +130,10 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
         events.clear();
     }
 
-
+    @Override
+    public void initRecyclerViewRichieste(RecyclerView recyclerView) {
+        Query requested;
+    }
 
 
 }

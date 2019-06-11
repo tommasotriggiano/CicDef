@@ -61,13 +61,13 @@ public class AdapterAttivitaRicercate extends RecyclerView.Adapter<AdapterAttivi
         ImageView image;
         ViewHolderAttivitaRicercate(@NonNull View itemView) {
             super(itemView);
-            titolo = itemView.findViewById(R.id.titleTW);
-            categoria = itemView.findViewById(R.id.dateTW);
-            numPartecipanti = itemView.findViewById(R.id.subsAvaibleTW);
+            titolo = itemView.findViewById(R.id.titolo);
+            categoria = itemView.findViewById(R.id.data);
+            numPartecipanti = itemView.findViewById(R.id.posti);
             lingua = itemView.findViewById(R.id.lingua);
             prezzo = itemView.findViewById(R.id.textViewPrice);
             rating = itemView.findViewById(R.id.rating);
-            image = itemView.findViewById(R.id.picEventIW);
+            image = itemView.findViewById(R.id.immagineA);
             valuta = itemView.findViewById(R.id.valuta);
 
 

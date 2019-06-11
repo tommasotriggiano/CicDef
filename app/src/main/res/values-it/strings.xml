@@ -131,9 +131,9 @@
     <string name="saved">Informazioni modificate</string>
     <string name="category1">Categoria</string>
     <string name="applyFilters">Applica Filtri</string>
-    <string name="nump">Massimo partecipanti:</string>
     <string name="toPerson">a persona</string>
-    <string name="nump">Massimo partecipanti:</string>
-    <string name="requestedTab">Requested</string>
-    <string name="createdTab">Created</string>
+    <string name="createdTab">Create</string>
+    <string name="nump">Massimo partecipanti</string>
+    <string name="requestedTab">Richieste</string>
+
 </resources>

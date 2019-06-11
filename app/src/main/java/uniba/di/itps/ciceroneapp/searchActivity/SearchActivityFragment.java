@@ -43,7 +43,6 @@ public class SearchActivityFragment extends Fragment implements GestioneRichiest
     private TextView date;
     private FirebaseUser user;
     private FirebaseFirestore db;
-    private ArrayList<Event> events;
     private RecyclerView recyclerView;
     private TextView category;
     private Button filtro;
@@ -69,7 +68,7 @@ public class SearchActivityFragment extends Fragment implements GestioneRichiest
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         //arrayList recyclerView
-        events = new ArrayList<>();
+
 
         return view;
     }
@@ -102,15 +101,7 @@ public class SearchActivityFragment extends Fragment implements GestioneRichiest
             public void onTextChanged(CharSequence s, int start, int before, int count) { }
             @Override
             public void afterTextChanged(Editable s) {
-                presenter.respondToQuery(events,
-                        searchBox.getText().toString(),
-                        date.getText().toString(),
-                        category.getText().toString(),
-                        events -> { AdapterAttivitaRicercate adapter = new AdapterAttivitaRicercate(getActivity(),events);
-                            recyclerView.setAdapter(adapter);
-                            adapter.notifyDataSetChanged();
-
-                        });
+                presenter.respondToQuery(recyclerView,searchBox.getText().toString(),date.getText().toString(),category.getText().toString());
         }});
         category.setOnClickListener(v -> presenter.showCategories(category));
         category.addTextChangedListener(new TextWatcher() {
@@ -120,14 +111,7 @@ public class SearchActivityFragment extends Fragment implements GestioneRichiest
             public void onTextChanged(CharSequence s, int start, int before, int count) {}
             @Override
             public void afterTextChanged(Editable s) {
-                presenter.respondToQuery(events,
-                        searchBox.getText().toString(),
-                        date.getText().toString(),
-                        category.getText().toString(),
-                        events -> { AdapterAttivitaRicercate adapter = new AdapterAttivitaRicercate(getActivity(),events);
-                            recyclerView.setAdapter(adapter);
-                            adapter.notifyDataSetChanged();
-                });
+                presenter.respondToQuery(recyclerView,searchBox.getText().toString(),date.getText().toString(),category.getText().toString());
             }
         });
         /*filtro.setOnClickListener(v ->
@@ -161,12 +145,7 @@ public class SearchActivityFragment extends Fragment implements GestioneRichiest
                 //filtro.setVisibility(View.VISIBLE);
 
                 //mostra recyclerView con la risposta della query
-                presenter.respondToQuery(events, searchBox.getText().toString(),
-                        date.getText().toString(), category.getText().toString(),
-                        events -> { AdapterAttivitaRicercate adapter = new AdapterAttivitaRicercate(getActivity(),events);
-                            recyclerView.setAdapter(adapter);
-                            adapter.notifyDataSetChanged();
-                });
+                presenter.respondToQuery(recyclerView,searchBox.getText().toString(),date.getText().toString(),category.getText().toString());
 
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
                 Status status = PlaceAutocomplete.getStatus(getContext(), data);
