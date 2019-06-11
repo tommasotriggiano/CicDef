@@ -13,7 +13,7 @@ import uniba.di.itps.ciceroneapp.GestioneAttività.InterfaceGestioneAttività;
 import uniba.di.itps.ciceroneapp.GestioneAttività.InterfaceGestioneAttività.MvpView;
 import uniba.di.itps.ciceroneapp.R;
 
-public  class MyEventHolder extends RecyclerView.ViewHolder implements MvpView {
+public  class MyEventHolder extends RecyclerView.ViewHolder implements InterfaceGestioneAttività.MvpView {
 
     LinearLayout root;
     ImageView fotoEvento;

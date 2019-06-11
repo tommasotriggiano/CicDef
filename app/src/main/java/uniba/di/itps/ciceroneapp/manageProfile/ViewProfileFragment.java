@@ -29,6 +29,9 @@ import java.util.Calendar;
 import de.hdodenhof.circleimageview.CircleImageView;
 import uniba.di.itps.ciceroneapp.GestioneAttività.InterfaceGestioneAttività;
 import uniba.di.itps.ciceroneapp.R;
+import uniba.di.itps.ciceroneapp.base.mvp.callback.ICallbackListener;
+import uniba.di.itps.ciceroneapp.base.mvp.callback.IFirebaseCallbackListener;
+import uniba.di.itps.ciceroneapp.model.User;
 
 import static uniba.di.itps.ciceroneapp.GestioneAttività.BasicInformationFragment.PICK_IMAGE;
 
@@ -149,21 +152,21 @@ public class ViewProfileFragment extends Fragment implements InterfacciaGestione
 
     @Override
     public void loadProfile() {
-        presenter.readDataProfile(user -> {
-            nome.setText(user.getNome());
-            cognome.setText(user.getCognome());
-            if(user.getFotoprofilo() != null){
-                fotoS = user.getFotoprofilo();
-                Picasso.get().load(user.getFotoprofilo()).into(profileImage);
+        presenter.readDataProfile(object -> {
+            nome.setText(((User)object).getNome());
+            cognome.setText(((User)object).getCognome());
+            if(((User)object).getFotoprofilo() != null){
+                fotoS = ((User)object).getFotoprofilo();
+                Picasso.get().load(((User)object).getFotoprofilo()).into(profileImage);
             }
-            if(user.getSesso() != null){
-                sesso.setText(user.getSesso());
+            if(((User)object).getSesso() != null){
+                sesso.setText(((User)object).getSesso());
             }
             else{
                 sesso.setText(getActivity().getResources().getString(R.string.notEntered));
             }
-            if(user.getDatanascita() != null){
-                dataNascita.setText(user.getDatanascita());
+            if(((User)object).getDatanascita() != null){
+                dataNascita.setText(((User)object).getDatanascita());
             }
             else{
                 dataNascita.setText(getActivity().getResources().getString(R.string.notEntered));
@@ -176,10 +179,11 @@ public class ViewProfileFragment extends Fragment implements InterfacciaGestione
 
     @Override
     public void loadPhoto(Context context, CircleImageView profile, InterfacciaGestioneProfilo.Presenter presenter) {
-        presenter.readDataProfile(user -> {
-       if(user.getFotoprofilo() != null){
 
-           Picasso.get().load(user.getFotoprofilo()).into(profile);
+        presenter.readDataProfile(object -> {
+       if(((User)object).getFotoprofilo() != null){
+
+           Picasso.get().load(((User)object).getFotoprofilo()).into(profile);
        }
         });
     }

@@ -1,7 +1,13 @@
 package uniba.di.itps.ciceroneapp.model;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.HashMap;
 import java.util.Map;
+
+import uniba.di.itps.ciceroneapp.data.DataFetch;
 
 public class User {
     private String uid;
@@ -11,7 +17,8 @@ public class User {
     private String fotoprofilo;
     private String sesso;
     private String email;
-    
+
+
     public User(String nome, String cognome, String email, String uid) {
         this.uid = uid;
         this.nome = nome;
@@ -85,6 +92,10 @@ public class User {
         user.put("sesso",this.sesso);
         user.put("email",this.email);
         return user;
+    }
+    public void createUsertoDatabase(){
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseFirestore.getInstance().collection(DataFetch.UTENTI).document(uid).set(this);
     }
 
 

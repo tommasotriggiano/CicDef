@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestione
         bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
         db = FirebaseFirestore.getInstance();
-        presenter = new PresenterMain(this,db);
+        presenter = new PresenterMain(this);
         presenter.initAttivita();
 
         //I added this if statement to keep the selected fragment when rotating the device

@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
@@ -50,9 +49,6 @@ public class SearchActivityFragment extends Fragment implements GestioneRichiest
     private Button filtro;
     private InterfaceGestioneAttività.MvpView mvpView;
     private GestioneRichiesteInterfaccia.Presenter presenter;
-    private String data;
-    private String categoria;
-    private String luogo;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -112,6 +108,7 @@ public class SearchActivityFragment extends Fragment implements GestioneRichiest
                         category.getText().toString(),
                         events -> { AdapterAttivitaRicercate adapter = new AdapterAttivitaRicercate(getActivity(),events);
                             recyclerView.setAdapter(adapter);
+                            adapter.notifyDataSetChanged();
 
                         });
         }});
@@ -129,6 +126,7 @@ public class SearchActivityFragment extends Fragment implements GestioneRichiest
                         category.getText().toString(),
                         events -> { AdapterAttivitaRicercate adapter = new AdapterAttivitaRicercate(getActivity(),events);
                             recyclerView.setAdapter(adapter);
+                            adapter.notifyDataSetChanged();
                 });
             }
         });
@@ -165,8 +163,9 @@ public class SearchActivityFragment extends Fragment implements GestioneRichiest
                 //mostra recyclerView con la risposta della query
                 presenter.respondToQuery(events, searchBox.getText().toString(),
                         date.getText().toString(), category.getText().toString(),
-                        events -> { AdapterAttivitaRicercate adpter = new AdapterAttivitaRicercate(getActivity(),events);
-                            recyclerView.setAdapter(adpter);
+                        events -> { AdapterAttivitaRicercate adapter = new AdapterAttivitaRicercate(getActivity(),events);
+                            recyclerView.setAdapter(adapter);
+                            adapter.notifyDataSetChanged();
                 });
 
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {

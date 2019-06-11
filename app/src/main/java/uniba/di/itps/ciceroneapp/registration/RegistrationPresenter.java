@@ -69,7 +69,7 @@ public class RegistrationPresenter implements RegistrationInterface {
             final FirebaseUser user = mAuth.getInstance().getCurrentUser();
             if (task.isSuccessful()) {
                 User userDatabase = new User(name1,surname1,user.getEmail(),user.getUid());
-                db.collection("utenti").document(user.getUid()).set(userDatabase);
+                userDatabase.createUsertoDatabase();
 
                 user.sendEmailVerification().addOnCompleteListener(task1 -> {
                     if(task1.isSuccessful()){

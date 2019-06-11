@@ -5,6 +5,8 @@ import android.support.v4.app.Fragment;
 import android.widget.TextView;
 import java.util.ArrayList;
 
+import uniba.di.itps.ciceroneapp.base.mvp.callback.ICallbackListener;
+import uniba.di.itps.ciceroneapp.model.Event;
 import uniba.di.itps.ciceroneapp.model.Stage;
 
 
@@ -36,6 +38,8 @@ public interface InterfaceGestioneAttività {
         int getEventiRowsCount();
         void onBindEventiRowsViewAtPosition(int position,MvpView rowView);
         void showMyEventCreated();
+        void fetchAttivitaCreate(ArrayList<Event> events,ICallbackListener listener);
+        void fetchAttivitaRichieste();
 
 
     }

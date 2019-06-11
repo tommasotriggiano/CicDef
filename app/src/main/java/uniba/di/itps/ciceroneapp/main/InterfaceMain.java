@@ -9,6 +9,5 @@ public interface InterfaceMain {
     interface MvpView{}
     interface Presenter{
         void initAttivita();
-
     }
 }

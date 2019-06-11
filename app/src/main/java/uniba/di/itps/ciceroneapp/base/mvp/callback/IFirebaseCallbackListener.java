@@ -9,5 +9,5 @@ import uniba.di.itps.ciceroneapp.model.User;
  */
 
 public interface IFirebaseCallbackListener {
-    void onCallback(User user);
+    void onCallback(Object object);
 }

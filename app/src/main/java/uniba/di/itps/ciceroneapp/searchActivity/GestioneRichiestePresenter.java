@@ -1,6 +1,5 @@
 package uniba.di.itps.ciceroneapp.searchActivity;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.widget.TextView;
@@ -11,13 +10,11 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import uniba.di.itps.ciceroneapp.R;
 import uniba.di.itps.ciceroneapp.base.mvp.callback.ICallbackListener;
+import uniba.di.itps.ciceroneapp.data.DataFetch;
 import uniba.di.itps.ciceroneapp.model.Event;
 
 public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia.Presenter{
@@ -50,9 +47,6 @@ public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia
     public void respondToQuery(ArrayList<Event> events, String city,String data,String categoria, ICallbackListener listener) {
         Query cities;
 
-        Date currentDate = new Date();
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
         //se sono stati scelti sia i filtri per la data che per la categoria esegui la query anche sugli altri due campi
         if(!(data.equals(context.getResources().getString(R.string.Date))) && !(categoria.equals(context.getResources().getString(R.string.category1)))){
             cities = db.collection("Eventi").
@@ -62,17 +56,17 @@ public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia
 
         //se è stato sceltro solo il campo data esegui le query solo sul campo data
         else if(!(data.equals(context.getResources().getString(R.string.Date))) && (categoria.equals(context.getResources().getString(R.string.category1)))){
-            cities = db.collection("Eventi").
+            cities = FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).
                     whereEqualTo("luogo",city).
                     whereEqualTo("dateEvento",data);}
 
         //se è stato scelto il campo categoria esegui ale query solo sul campo categoria
         else if((data.equals(context.getResources().getString(R.string.Date))) && !(categoria.equals(context.getResources().getString(R.string.category1)))){
-            cities = db.collection("Eventi").
+            cities = FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).
                     whereEqualTo("luogo",city).
                     whereEqualTo("categoria",categoria);}
         else{
-            cities = db.collection("Eventi").whereEqualTo("luogo",city);}
+            cities = FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).whereEqualTo("luogo",city);}
 
         cities.get().addOnSuccessListener(queryDocumentSnapshots -> {
             for(DocumentChange dc : queryDocumentSnapshots.getDocumentChanges()){
@@ -84,14 +78,14 @@ public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia
                             //se non c'è il filtro data
                             events.add(event);
                             listener.onCallback(events);
-                                break;
-                            }
+                            break;
+                        }
                     case MODIFIED:
-                            if(!(event.getCicerone().equals(user.getUid())) && event.getStato().equals("IN CORSO")){
-                                events.set(dc.getNewIndex(),event);
-                                listener.onCallback(events);
-                                break;
-                            }
+                        if(!(event.getCicerone().equals(user.getUid())) && event.getStato().equals("IN CORSO")){
+                            events.set(dc.getNewIndex(),event);
+                            listener.onCallback(events);
+                            break;
+                        }
 
                     case REMOVED:
                         if(!(event.getCicerone().equals(user.getUid())) && event.getStato().equals("IN CORSO")){

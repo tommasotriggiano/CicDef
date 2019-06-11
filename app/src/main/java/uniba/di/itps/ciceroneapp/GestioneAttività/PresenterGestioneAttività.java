@@ -3,13 +3,24 @@ package uniba.di.itps.ciceroneapp.GestioneAttività;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import uniba.di.itps.ciceroneapp.base.mvp.callback.ICallbackListener;
+import uniba.di.itps.ciceroneapp.data.DataFetch;
 import uniba.di.itps.ciceroneapp.model.Event;
 import uniba.di.itps.ciceroneapp.model.Stage;
 
@@ -98,12 +109,6 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
 
         //aggiunge l'oggetto al database
         event.createEventToDatabase();
-
-
-
-
-
-
     }
 
     @Override
@@ -123,6 +128,27 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
 
     @Override
     public void showMyEventCreated() {
+
+    }
+
+    @Override
+    public void fetchAttivitaCreate(ArrayList<Event> events, ICallbackListener listener) {
+        FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                for(DocumentSnapshot documentSnapshot : task.getResult()){
+                    Event event = documentSnapshot.toObject(Event.class);
+                    events.add(event);
+                    listener.onCallback(events);
+                }
+            }
+        });
+        events.clear();
+    }
+
+    @Override
+    public void fetchAttivitaRichieste() {
+
 
     }
 

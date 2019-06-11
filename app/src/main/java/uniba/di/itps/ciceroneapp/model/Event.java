@@ -3,9 +3,28 @@ package uniba.di.itps.ciceroneapp.model;
 
 
 
-import java.util.List;
+import android.annotation.SuppressLint;
+import android.content.Context;
+
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import uniba.di.itps.ciceroneapp.R;
+import uniba.di.itps.ciceroneapp.base.mvp.callback.ICallbackListener;
+import uniba.di.itps.ciceroneapp.data.DataFetch;
 
 public class Event {
 
@@ -37,7 +56,7 @@ public class Event {
 
     public Event(String titolo, String descrizione, String categoria, int nMaxPartecipanti, String dateEvento,
                  String orarioIncontro, String orarioInizio, double prezzo,
-                 String valuta, Map<String,Object> itinerario, String cicerone) {
+                 String valuta, Map<String,Object> itinerario,String idCicerone) {
         this.titolo = titolo;
         this.descrizione = descrizione;
         this.categoria = categoria;
@@ -48,7 +67,7 @@ public class Event {
         this.prezzo = prezzo;
         this.valuta = valuta;
         this.tappe= tappe;
-        this.idCicerone = cicerone;
+        this.idCicerone = idCicerone;
     }
 
     public List<User> getPartecipanti() {
@@ -234,6 +253,7 @@ public class Event {
         this.stato = stato;
     }
 
+
     public Map<String,Object>toMap(){
         Map<String,Object> event = new HashMap<>();
         event.put("titolo",this.titolo);
@@ -258,6 +278,46 @@ public class Event {
         event.put("indirizzo",this.indirizzo);
         event.put("stato",this.stato);
         return event;
+    }
+
+    public void createEventToDatabase(){
+
+        this.setIdCicerone(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document().set(this);
+    }
+
+    public void initStatus(){
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date currentDate = new Date();
+        String date = sdf.format(currentDate);
+
+        FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for(DocumentSnapshot ds : queryDocumentSnapshots.getDocuments()){
+                    Event event = ds.toObject(Event.class);
+                    try {
+                        if(sdf.parse(event.getDateEvento()).before(sdf.parse(date))){
+                            event.setStato("PASSATO");
+                            FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document(ds.getId()).update(event.toMap());
+                        }
+                        else if (sdf.parse(event.getDateEvento()).equals(sdf.parse(date))||sdf.parse(event.getDateEvento()).after(sdf.parse(date))){
+                            event.setStato("IN CORSO");
+                            FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document(ds.getId()).update(event.toMap());
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
 
     }
+
+    public void updateEventToDatabase(String idDocument){
+        FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document(idDocument).update(this.toMap());
+    }
+
 }
+
+
