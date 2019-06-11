@@ -4,26 +4,19 @@ package uniba.di.itps.ciceroneapp.model;
 
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import uniba.di.itps.ciceroneapp.R;
-import uniba.di.itps.ciceroneapp.base.mvp.callback.ICallbackListener;
 import uniba.di.itps.ciceroneapp.data.DataFetch;
 
 public class Event {
@@ -212,15 +205,6 @@ public class Event {
         this.noteAggiuntive = noteAggiuntive;
     }
 
-    public String getCicerone() {
-        return idCicerone;
-    }
-
-    public void setCicerone(String cicerone) {
-        this.idCicerone = cicerone;
-    }
-
-
     public String getIndirizzo() {
         return indirizzo;
     }
@@ -282,7 +266,6 @@ public class Event {
 
     public void createEventToDatabase(){
 
-        this.setIdCicerone(FirebaseAuth.getInstance().getCurrentUser().getUid());
         FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document().set(this);
     }
 

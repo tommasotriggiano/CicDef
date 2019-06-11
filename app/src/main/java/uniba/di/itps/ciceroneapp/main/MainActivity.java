@@ -17,6 +17,7 @@ import java.util.Calendar;
 import uniba.di.itps.ciceroneapp.GestioneAttività.AddEventMainFragment;
 import uniba.di.itps.ciceroneapp.GestioneAttività.DatePickerFragment;
 import uniba.di.itps.ciceroneapp.GestioneAttività.InterfaceGestioneAttività;
+import uniba.di.itps.ciceroneapp.GestioneAttività.gestioneMyEvent.MyEventCreatedFragment;
 import uniba.di.itps.ciceroneapp.MyEventMainFragment;
 import uniba.di.itps.ciceroneapp.R;
 import uniba.di.itps.ciceroneapp.manageProfile.ProfileMainFragment;
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestione
                         selectedFragment = new AddEventMainFragment();
                         break;
                     case R.id.navigation_event:
-                        selectedFragment = new MyEventMainFragment();
+                        selectedFragment = new MyEventCreatedFragment();
                         break;
                     case R.id.navigation_profile:
                         selectedFragment = new ProfileMainFragment();

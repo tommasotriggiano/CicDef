@@ -3,23 +3,21 @@ package uniba.di.itps.ciceroneapp.GestioneAttività;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import uniba.di.itps.ciceroneapp.base.mvp.callback.ICallbackListener;
+import uniba.di.itps.ciceroneapp.GestioneAttività.gestioneMyEvent.RecyclerViewMyEventAdapter;
 import uniba.di.itps.ciceroneapp.data.DataFetch;
 import uniba.di.itps.ciceroneapp.model.Event;
 import uniba.di.itps.ciceroneapp.model.Stage;
@@ -33,16 +31,18 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
     private Context mcontext;
     private FirebaseUser user;
     private  FirebaseFirestore db;
-    private List<Event> events;
+    private ArrayList<Event> events;
+    private RecyclerViewMyEventAdapter adapter;
 
-    PresenterGestioneAttività(Context context){
+    public PresenterGestioneAttività(Context context){
         mView= (InterfaceGestioneAttività.MvpView) context;
         mcontext = context;
     }
-    PresenterGestioneAttività(Context context, FirebaseFirestore db, FirebaseUser user){
+    public PresenterGestioneAttività(Context context, FirebaseFirestore db, FirebaseUser user){
         mcontext = context;
         this.db = db;
         this.user = user;
+        events = new ArrayList<>();
     }
 
 
@@ -89,7 +89,7 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
         Map<String, Object> map = new HashMap<>();
         map.put("io","tu");
         //Creazione Evento
-        Event event = new Event(title,description,categoria,num,data,oraIncontro,oraInizio,prezzo,valutes,map, "ciao");
+        Event event = new Event(title,description,categoria,num,data,oraIncontro,oraInizio,prezzo,valutes,map, user.getUid());
         if(b.getString("requirementsPartecipanti") != null){
             requirements = b.getString("requirementsPartecipanti");
             event.setRequisiti(requirements);
@@ -116,15 +116,7 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
         return events.size();
     }
 
-    @Override
-    public void onBindEventiRowsViewAtPosition(int position, InterfaceGestioneAttività.MvpView rowView) {
-        Event event = events.get(position);
-        rowView.setFotoEvento(event.getFoto());
-        rowView.setDate(event.getDateEvento());
-        rowView.setTitolo(event.getTitolo());
-        int nDisponibili = event.getnMaxPartecipanti() - event.getPartecipanti().size();
-        rowView.setnIscritti(""+nDisponibili);
-    }
+
 
     @Override
     public void showMyEventCreated() {
@@ -132,25 +124,23 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
     }
 
     @Override
-    public void fetchAttivitaCreate(ArrayList<Event> events, ICallbackListener listener) {
-        FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                for(DocumentSnapshot documentSnapshot : task.getResult()){
-                    Event event = documentSnapshot.toObject(Event.class);
-                    events.add(event);
-                    listener.onCallback(events);
-                }
+    public void initRecyclerViewCreate(RecyclerView recyclerView) {
+        Query created = FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).whereEqualTo("idCicerone",user.getUid());
+        created.get().addOnSuccessListener(queryDocumentSnapshots -> {
+            for(DocumentSnapshot d : queryDocumentSnapshots.getDocuments()){
+                Event event = d.toObject(Event.class);
+                if(event.getStato().equals("IN CORSO")){
+                events.add(event);}
             }
+            adapter = new RecyclerViewMyEventAdapter(mcontext,events);
+            recyclerView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+
         });
         events.clear();
     }
 
-    @Override
-    public void fetchAttivitaRichieste() {
 
-
-    }
 
 
 }

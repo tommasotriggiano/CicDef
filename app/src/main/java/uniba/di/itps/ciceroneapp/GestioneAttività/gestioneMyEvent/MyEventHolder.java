@@ -25,10 +25,8 @@ public  class MyEventHolder extends RecyclerView.ViewHolder implements Interface
 
     public MyEventHolder(@NonNull View itemView) {
         super(itemView);
-        root = itemView.findViewById(R.id.rootMyEventCreated);
         fotoEvento = itemView.findViewById(R.id.picEventIW);
         titolo = itemView.findViewById(R.id.titleTW);
-        cart_badge=itemView.findViewById(R.id.cart_badge);
         date = itemView.findViewById(R.id.dateTW);
         nIscritti = itemView.findViewById(R.id.subsAvaibleTW);
     }

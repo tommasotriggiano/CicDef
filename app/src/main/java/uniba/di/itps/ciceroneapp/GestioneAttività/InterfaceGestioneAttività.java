@@ -2,6 +2,7 @@ package uniba.di.itps.ciceroneapp.GestioneAttività;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 import java.util.ArrayList;
 
@@ -36,10 +37,8 @@ public interface InterfaceGestioneAttività {
         void addStage(ArrayList<Stage> stage,String name,String description);
         void createEvent(Bundle b);
         int getEventiRowsCount();
-        void onBindEventiRowsViewAtPosition(int position,MvpView rowView);
         void showMyEventCreated();
-        void fetchAttivitaCreate(ArrayList<Event> events,ICallbackListener listener);
-        void fetchAttivitaRichieste();
+        void initRecyclerViewCreate(RecyclerView recyclerView);
 
 
     }

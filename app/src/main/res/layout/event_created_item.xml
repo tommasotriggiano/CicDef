@@ -1,113 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <android.support.v7.widget.CardView
-        android:id="@+id/eventeCreateCW"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp">
 
-        <LinearLayout
-            android:id="@+id/rootMyEventCreated"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:padding="8dp">
 
-            <LinearLayout
-                android:id="@+id/generalLayout"
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/picEventIW"
+                android:layout_width="136dp"
+                android:layout_height="161dp"
+                android:padding="4dp" />
+
+            <TextView
+                android:id="@+id/titleTW"
+                android:layout_width="240dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="9dp"
+                android:layout_toRightOf="@id/picEventIW"
+                android:fontFamily="sans-serif-black"
+                android:text="titolo"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/dateTW"
+                android:layout_width="249dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/titleTW"
+                android:layout_marginLeft="9dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/picEventIW"
+                android:fontFamily="serif"
+                android:text="data"
+                android:drawableStart="@drawable/ic_date_range_black_24dp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/maxPartecipant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dateTW"
                 android:layout_marginStart="10dp"
-                android:orientation="vertical">
+                android:layout_marginTop="5dp"
+                android:drawableStart="@drawable/ic_people"
+                android:layout_toEndOf="@+id/picEventIW"
+                android:fontFamily="serif"
+                android:text="@string/nump"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/subsAvaibleTW"
+                android:layout_width="42dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dateTW"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="6dp"
+                android:layout_toEndOf="@+id/maxPartecipant"
+                android:fontFamily="serif"
+                android:text="num"
+                android:textSize="15sp" />
 
 
-                <ImageView
-                    android:id="@+id/picEventIW"
-                    android:layout_width="match_parent"
-                    android:layout_height="174dp"
-                    app:srcCompat="@android:drawable/ic_menu_gallery" />
+        </RelativeLayout>
 
-
-                <TextView
-                    android:id="@+id/titleTW"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TextView"
-                    android:textAlignment="center"
-                    android:textSize="24sp"
-                    tools:text="@string/title" />
-
-                <TextView
-                    android:id="@+id/cart_badge"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="right"
-                    android:background="@drawable/badge_background"
-                    android:gravity="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat"
-                    android:textColor="@color/white"
-                    android:visibility="gone" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="57dp"
-                android:layout_marginStart="10dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="65dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_today_black" />
-
-                <TextView
-                    android:id="@+id/dateTW"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:textSize="20sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/subsLayout"
-                android:layout_width="match_parent"
-                android:layout_height="57dp"
-                android:layout_marginStart="10dp">
-
-
-                <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="10dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    tools:ignore="VectorDrawableCompat"
-                    tools:srcCompat="@drawable/ic_people" />
-
-                <TextView
-                    android:id="@+id/subsLabel"
-                    android:layout_width="157dp"
-                    android:layout_height="wrap_content"
-                    android:text="Subscriber: "
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/subsAvaibleTW"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="TextView" />
-
-                <ImageView
-                    android:id="@+id/freccia"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="right"
-                    android:src="@drawable/ic_arrow_right" />
-            </LinearLayout>
-        </LinearLayout>
     </android.support.v7.widget.CardView>
+
 </LinearLayout>

@@ -74,21 +74,21 @@ public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia
                 Event event = document.toObject(Event.class);
                 switch(dc.getType()){
                     case ADDED:
-                        if(!(event.getCicerone().equals(user.getUid())) && event.getStato().equals("IN CORSO")){
+                        if(!(event.getIdCicerone().equals(user.getUid())) && event.getStato().equals("IN CORSO")){
                             //se non c'è il filtro data
                             events.add(event);
                             listener.onCallback(events);
                             break;
                         }
                     case MODIFIED:
-                        if(!(event.getCicerone().equals(user.getUid())) && event.getStato().equals("IN CORSO")){
+                        if(!(event.getIdCicerone().equals(user.getUid())) && event.getStato().equals("IN CORSO")){
                             events.set(dc.getNewIndex(),event);
                             listener.onCallback(events);
                             break;
                         }
 
                     case REMOVED:
-                        if(!(event.getCicerone().equals(user.getUid())) && event.getStato().equals("IN CORSO")){
+                        if(!(event.getIdCicerone().equals(user.getUid())) && event.getStato().equals("IN CORSO")){
                             events.remove(dc.getOldIndex());
                             listener.onCallback(events);
                         }
