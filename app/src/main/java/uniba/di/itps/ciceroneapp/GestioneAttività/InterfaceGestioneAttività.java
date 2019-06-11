@@ -36,8 +36,6 @@ public interface InterfaceGestioneAttività {
         boolean setArguument(Fragment fragment, Bundle bundle);
         void addStage(ArrayList<Stage> stage,String name,String description);
         void createEvent(Bundle b);
-        int getEventiRowsCount();
-        void showMyEventCreated();
         void initRecyclerViewCreate(RecyclerView recyclerView);
 
 
