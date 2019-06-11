@@ -133,4 +133,7 @@
     <string name="applyFilters">Applica Filtri</string>
     <string name="nump">Massimo partecipanti:</string>
     <string name="toPerson">a persona</string>
+    <string name="nump">Massimo partecipanti:</string>
+    <string name="requestedTab">Requested</string>
+    <string name="createdTab">Created</string>
 </resources>
