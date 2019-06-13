@@ -114,7 +114,8 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
 
     @Override
     public void initRecyclerViewCreate(RecyclerView recyclerView) {
-        Query created = FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).whereEqualTo("idCicerone",user.getUid());
+        Query created = FirebaseFirestore.getInstance().collection(DataFetch.EVENTI)
+                .whereEqualTo("idCicerone",user.getUid());
         created.get().addOnSuccessListener(queryDocumentSnapshots -> {
             for(DocumentSnapshot d : queryDocumentSnapshots.getDocuments()){
                 Event event = d.toObject(Event.class);
@@ -131,6 +132,7 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
 
     @Override
     public void initRecyclerViewRichieste(RecyclerView recyclerView) {
+
         Query requested;
     }
 

@@ -18,7 +18,6 @@ public  class MyEventHolder extends RecyclerView.ViewHolder  {
     LinearLayout root;
     ImageView fotoEvento;
     TextView titolo;
-    TextView cart_badge;
     TextView date;
     TextView nIscritti;
 
