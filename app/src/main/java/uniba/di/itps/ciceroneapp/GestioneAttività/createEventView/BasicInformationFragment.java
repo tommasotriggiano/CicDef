@@ -1,4 +1,4 @@
-package uniba.di.itps.ciceroneapp.GestioneAttività;
+package uniba.di.itps.ciceroneapp.GestioneAttività.createEventView;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -13,6 +13,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+
+import uniba.di.itps.ciceroneapp.GestioneAttività.InterfaceGestioneAttività;
+import uniba.di.itps.ciceroneapp.GestioneAttività.PresenterGestioneAttività;
 import uniba.di.itps.ciceroneapp.R;
 
 

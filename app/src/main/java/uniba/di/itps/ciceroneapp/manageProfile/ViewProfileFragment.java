@@ -29,11 +29,9 @@ import java.util.Calendar;
 import de.hdodenhof.circleimageview.CircleImageView;
 import uniba.di.itps.ciceroneapp.GestioneAttività.InterfaceGestioneAttività;
 import uniba.di.itps.ciceroneapp.R;
-import uniba.di.itps.ciceroneapp.base.mvp.callback.ICallbackListener;
-import uniba.di.itps.ciceroneapp.base.mvp.callback.IFirebaseCallbackListener;
 import uniba.di.itps.ciceroneapp.model.User;
 
-import static uniba.di.itps.ciceroneapp.GestioneAttività.BasicInformationFragment.PICK_IMAGE;
+import static uniba.di.itps.ciceroneapp.GestioneAttività.createEventView.BasicInformationFragment.PICK_IMAGE;
 
 public class ViewProfileFragment extends Fragment implements InterfacciaGestioneProfilo.MvpView {
     private Toolbar toolbar;

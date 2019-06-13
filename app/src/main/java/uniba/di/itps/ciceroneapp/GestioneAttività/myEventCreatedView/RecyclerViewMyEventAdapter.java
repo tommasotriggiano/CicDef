@@ -1,4 +1,4 @@
-package uniba.di.itps.ciceroneapp.GestioneAttività.gestioneMyEvent;
+package uniba.di.itps.ciceroneapp.GestioneAttività.myEventCreatedView;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,7 +10,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import uniba.di.itps.ciceroneapp.GestioneAttività.InterfaceGestioneAttività;
 import uniba.di.itps.ciceroneapp.R;
 import uniba.di.itps.ciceroneapp.model.Event;
 

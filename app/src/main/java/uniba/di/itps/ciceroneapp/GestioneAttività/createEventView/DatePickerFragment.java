@@ -1,4 +1,4 @@
-package uniba.di.itps.ciceroneapp.GestioneAttività;
+package uniba.di.itps.ciceroneapp.GestioneAttività.createEventView;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;

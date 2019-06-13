@@ -1,4 +1,4 @@
-package uniba.di.itps.ciceroneapp.GestioneAttività.gestioneMyEvent;
+package uniba.di.itps.ciceroneapp.GestioneAttività.myEventCreatedView;
 
 import android.content.Context;
 import android.net.Uri;

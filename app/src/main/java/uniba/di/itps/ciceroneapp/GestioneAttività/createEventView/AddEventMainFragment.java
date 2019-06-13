@@ -1,4 +1,4 @@
-package uniba.di.itps.ciceroneapp.GestioneAttività;
+package uniba.di.itps.ciceroneapp.GestioneAttività.createEventView;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import uniba.di.itps.ciceroneapp.GestioneAttività.InterfaceGestioneAttività;
+import uniba.di.itps.ciceroneapp.GestioneAttività.PresenterGestioneAttività;
 import uniba.di.itps.ciceroneapp.R;
 
 public class AddEventMainFragment extends Fragment {

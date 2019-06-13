@@ -14,11 +14,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
 
-import uniba.di.itps.ciceroneapp.GestioneAttività.AddEventMainFragment;
-import uniba.di.itps.ciceroneapp.GestioneAttività.DatePickerFragment;
+import uniba.di.itps.ciceroneapp.GestioneAttività.createEventView.AddEventMainFragment;
+import uniba.di.itps.ciceroneapp.GestioneAttività.createEventView.DatePickerFragment;
 import uniba.di.itps.ciceroneapp.GestioneAttività.EventFragment;
 import uniba.di.itps.ciceroneapp.GestioneAttività.InterfaceGestioneAttività;
-import uniba.di.itps.ciceroneapp.GestioneAttività.gestioneMyEvent.MyEventCreatedFragment;
 import uniba.di.itps.ciceroneapp.R;
 import uniba.di.itps.ciceroneapp.manageProfile.ProfileMainFragment;
 import uniba.di.itps.ciceroneapp.searchActivity.SearchActivityFragment;

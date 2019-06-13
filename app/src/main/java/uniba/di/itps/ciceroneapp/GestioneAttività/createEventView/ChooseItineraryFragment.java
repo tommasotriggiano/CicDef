@@ -1,4 +1,4 @@
-package uniba.di.itps.ciceroneapp.GestioneAttività;
+package uniba.di.itps.ciceroneapp.GestioneAttività.createEventView;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,6 +15,9 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import uniba.di.itps.ciceroneapp.GestioneAttività.InterfaceGestioneAttività;
+import uniba.di.itps.ciceroneapp.GestioneAttività.LastInformationFragment;
+import uniba.di.itps.ciceroneapp.GestioneAttività.PresenterGestioneAttività;
 import uniba.di.itps.ciceroneapp.GestioneAttività.adapter.StageAdapter;
 import uniba.di.itps.ciceroneapp.R;
 import uniba.di.itps.ciceroneapp.model.Stage;

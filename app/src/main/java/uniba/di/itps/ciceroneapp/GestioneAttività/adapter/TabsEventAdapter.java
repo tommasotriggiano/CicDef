@@ -7,9 +7,6 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import uniba.di.itps.ciceroneapp.GestioneAttività.TabRequestedFragment;
-import uniba.di.itps.ciceroneapp.GestioneAttività.gestioneMyEvent.MyEventCreatedFragment;
-
 public class TabsEventAdapter extends FragmentStatePagerAdapter {
 
 

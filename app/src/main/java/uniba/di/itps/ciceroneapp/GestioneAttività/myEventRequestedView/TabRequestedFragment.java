@@ -1,4 +1,4 @@
-package uniba.di.itps.ciceroneapp.GestioneAttività;
+package uniba.di.itps.ciceroneapp.GestioneAttività.myEventRequestedView;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
