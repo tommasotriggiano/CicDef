@@ -20,7 +20,7 @@ import uniba.di.itps.ciceroneapp.GestioneAttività.EventFragment;
 import uniba.di.itps.ciceroneapp.GestioneAttività.InterfaceGestioneAttività;
 import uniba.di.itps.ciceroneapp.R;
 import uniba.di.itps.ciceroneapp.manageProfile.ProfileMainFragment;
-import uniba.di.itps.ciceroneapp.gestioneRichieste.searchActivity.SearchActivityFragment;
+import uniba.di.itps.ciceroneapp.gestioneRichieste.search.SearchActivityFragment;
 
 
 public class MainActivity extends AppCompatActivity implements InterfaceGestioneAttività.MvpView {

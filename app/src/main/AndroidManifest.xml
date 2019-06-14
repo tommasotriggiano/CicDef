@@ -28,7 +28,7 @@
         </activity>
         <activity android:name=".registration.RegistrationActivity" />
         <activity android:name=".main.MainActivity" />
-        <activity android:name=".gestioneRichieste.searchActivity.DettaglioAttivita" />
+        <activity android:name=".gestioneRichieste.search.DettaglioAttivita" />
         <activity android:name=".resetPass.PasswordActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
