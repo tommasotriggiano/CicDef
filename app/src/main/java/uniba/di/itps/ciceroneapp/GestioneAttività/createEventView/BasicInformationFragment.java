@@ -16,7 +16,6 @@ import android.widget.Spinner;
 
 import uniba.di.itps.ciceroneapp.GestioneAttività.InterfaceGestioneAttività;
 import uniba.di.itps.ciceroneapp.GestioneAttività.PresenterGestioneAttività;
-import uniba.di.itps.ciceroneapp.GestioneAttività.createEvent.ChooseLocationFragment;
 import uniba.di.itps.ciceroneapp.R;
 
 
