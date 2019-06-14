@@ -18,7 +18,6 @@ public class User {
     private String sesso;
     private String email;
 
-
     public User(String nome, String cognome, String email, String uid) {
         this.uid = uid;
         this.nome = nome;

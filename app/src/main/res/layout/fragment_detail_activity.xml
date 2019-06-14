@@ -1,7 +1,280 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:scrollbarStyle="insideOverlay">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
 
-</android.support.constraint.ConstraintLayout>
+        <RelativeLayout
+            android:id="@+id/container"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/modify"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_above="@+id/titolo"
+                android:layout_marginBottom="27dp"
+                android:background="@color/white"
+                android:src="@drawable/ic_edit"
+                android:visibility="invisible" />
+
+            <ImageButton
+                android:id="@+id/delete"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_above="@+id/titolo"
+                android:layout_alignTop="@+id/imageView"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="41dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="41dp"
+                android:background="@color/white"
+                android:src="@drawable/ic_delete_black_24dp"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="43dp"
+                android:layout_marginTop="0dp"
+                android:layout_toEndOf="@+id/modify"
+                app:layout_constraintBottom_toTopOf="@+id/titolo"
+                app:layout_constraintEnd_toEndOf="@id/modify"
+                app:layout_constraintStart_toStartOf="@+id/modify"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+            <TextView
+                android:id="@+id/titolo"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/imageView"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:text="TITOLO"
+                android:textAlignment="gravity"
+                android:textAllCaps="true"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="16dp" />
+
+            <TextView
+                android:id="@+id/categoria"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/titolo"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:text="Categoria"
+                android:textAlignment="gravity"
+                android:textSize="20sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/luogo"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@+id/categoria"
+                android:layout_marginTop="10dp"
+                android:drawableStart="@drawable/ic_location_on_black_24dp"
+                android:drawablePadding="15dp"
+                android:gravity="center_vertical"
+                android:paddingStart="10dp"
+                android:text="Altamura"
+                android:textAlignment="gravity"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/durata"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@+id/luogo"
+                android:layout_marginTop="2dp"
+                android:drawableStart="@drawable/ic_access_time_black"
+                android:drawablePadding="15dp"
+                android:gravity="center_vertical"
+                android:paddingStart="10dp"
+                android:text="Durata"
+                android:textAlignment="gravity"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/lingua"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@+id/durata"
+                android:layout_marginTop="2dp"
+                android:drawableStart="@drawable/ic_language_black_24dp"
+                android:drawablePadding="15dp"
+                android:gravity="center_vertical"
+                android:paddingStart="10dp"
+                android:text="Offerto in Italiano"
+                android:textAlignment="gravity"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/data"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@+id/lingua"
+                android:layout_marginTop="2dp"
+                android:drawableStart="@drawable/ic_date_range_black_24dp"
+                android:drawablePadding="15dp"
+                android:gravity="center_vertical"
+                android:paddingStart="10dp"
+                android:text="15/06/2018"
+                android:textAlignment="gravity"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/cicerone"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@+id/data"
+                android:layout_marginTop="30dp"
+                android:gravity="center_vertical"
+                android:paddingStart="10dp"
+                android:text="Conosci il Cicerone"
+                android:textAlignment="gravity"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/linearProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cicerone"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imageProfile"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:paddingStart="10dp"
+                    android:src="@drawable/ic_image_profile" />
+
+                <TextView
+                    android:id="@+id/nome"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="Nome" />
+
+                <TextView
+                    android:id="@+id/cognome"
+                    android:layout_width="201dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:text="Cognome" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/descrizione"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@+id/linearProfile"
+                android:layout_marginTop="30dp"
+                android:gravity="center_vertical"
+                android:paddingStart="10dp"
+                android:text="Cosa faremo"
+                android:textAlignment="gravity"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/descrizioneText"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_below="@+id/descrizione"
+                android:layout_marginTop="8dp"
+                android:gravity="start"
+                android:paddingStart="10dp"
+                android:text="Descrizione comeonfiebfbru  febfurebgygbubvindfi  gingiuneusgnrjinre girgiunreigingi gnirigunteign"
+                android:textAlignment="gravity"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/dove"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@+id/descrizioneText"
+                android:layout_marginTop="30dp"
+                android:gravity="center_vertical"
+                android:paddingStart="10dp"
+                android:text="Dove saremo"
+                android:textAlignment="gravity"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/doveText"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@+id/dove"
+                android:layout_marginTop="8dp"
+                android:gravity="start"
+                android:paddingStart="10dp"
+                android:text="Indirizzo"
+                android:textAlignment="gravity"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/oraText"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@+id/doveText"
+                android:layout_marginTop="8dp"
+                android:gravity="start"
+                android:paddingStart="10dp"
+                android:text="Orario incontro"
+                android:textAlignment="gravity"
+                android:textSize="20sp" />
+            <TextView
+                android:id="@+id/visualizzaTappe"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_below="@+id/oraText"
+                android:layout_marginTop="20dp"
+                android:drawablePadding="15dp"
+                android:gravity="center"
+                android:paddingStart="10dp"
+                android:text="Visualizza Tappe"
+                android:textColor="@color/colorPrimaryDark"
+                android:textAlignment="gravity"
+                android:background="@drawable/text_shape_1"
+                android:textSize="20sp" />
+            <TextView
+                android:id="@+id/effettuaRichiesta"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_below="@+id/visualizzaTappe"
+                android:layout_marginTop="0dp"
+                android:drawablePadding="15dp"
+                android:gravity="center"
+                android:paddingStart="10dp"
+                android:text="Effettua Richiesta"
+                android:textColor="@color/coral"
+                android:textAlignment="gravity"
+                android:background="@drawable/text_view_shape"
+                android:textSize="20sp" />
+
+
+        </RelativeLayout>
+    </LinearLayout>
+</ScrollView>
+

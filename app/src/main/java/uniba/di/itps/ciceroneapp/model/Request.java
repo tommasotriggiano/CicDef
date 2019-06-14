@@ -1,26 +1,58 @@
 package uniba.di.itps.ciceroneapp.model;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.List;
 
+import uniba.di.itps.ciceroneapp.data.DataFetch;
+
 public class Request {
-    User globetrotter;
+    String idCicerone;
+    String idAttivita;
+    String idGlobetrotter;
+    String stato;
     List<Guest> ospiti;
-    int nPartecipanti;
-    Event attivita;
 
-    public Request(User globetrotter, List<Guest> ospiti, int nPartecipanti, Event attivita) {
-        this.globetrotter = globetrotter;
-        this.ospiti = ospiti;
-        this.nPartecipanti = nPartecipanti;
-        this.attivita = attivita;
+
+    public Request(String idCicerone, String idAttivita, String idGlobetrotter, String stato) {
+        this.idCicerone = idCicerone;
+        this.idAttivita = idAttivita;
+        this.idGlobetrotter = idGlobetrotter;
+        this.stato = stato;
+    }
+   public Request(){}
+
+    public String getIdCicerone() {
+        return idCicerone;
     }
 
-    public User getGlobetrotter() {
-        return globetrotter;
+    public void setIdCicerone(String idCicerone) {
+        this.idCicerone = idCicerone;
     }
 
-    public void setGlobetrotter(User globetrotter) {
-        this.globetrotter = globetrotter;
+    public String getIdAttivita() {
+        return idAttivita;
+    }
+
+    public void setIdAttivita(String idAttivita) {
+        this.idAttivita = idAttivita;
+    }
+
+    public String getIdGlobetrotter() {
+        return idGlobetrotter;
+    }
+
+    public void setIdGlobetrotter(String idGlobetrotter) {
+        this.idGlobetrotter = idGlobetrotter;
+    }
+
+    public String getStato() {
+        return stato;
+    }
+
+    public void setStato(String stato) {
+        this.stato = stato;
     }
 
     public List<Guest> getOspiti() {
@@ -31,19 +63,10 @@ public class Request {
         this.ospiti = ospiti;
     }
 
-    public int getnPartecipanti() {
-        return nPartecipanti;
-    }
+    public boolean addRequestToDatabase(){
+        FirebaseFirestore.getInstance().collection(DataFetch.RICHIESTE).document().set(this).addOnSuccessListener(aVoid -> {
 
-    public void setnPartecipanti(int nPartecipanti) {
-        this.nPartecipanti = nPartecipanti;
-    }
-
-    public Event getAttivita() {
-        return attivita;
-    }
-
-    public void setAttivita(Event attivita) {
-        this.attivita = attivita;
+        });
+        return true;
     }
 }

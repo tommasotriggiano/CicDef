@@ -11,6 +11,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,8 +22,9 @@ import java.util.Map;
 import io.opencensus.tags.Tag;
 import uniba.di.itps.ciceroneapp.data.DataFetch;
 
-public class Event {
+public class Event implements Serializable {
     private static final String TAG ="Event";
+    private String id;
     private String titolo;
     private String foto;
     private String descrizione;
@@ -269,6 +271,14 @@ public class Event {
     public void createEventToDatabase(){
 
         FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document().set(this);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void initStatus(){

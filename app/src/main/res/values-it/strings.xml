@@ -135,5 +135,7 @@
     <string name="createdTab">Create</string>
     <string name="nump">Massimo partecipanti</string>
     <string name="requestedTab">Richieste</string>
+    <string name="offeredLanguage">Offerto in </string>
+    <string name="hours">ore</string>
 
 </resources>

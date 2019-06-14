@@ -31,7 +31,7 @@ import uniba.di.itps.ciceroneapp.GestioneAttività.InterfaceGestioneAttività;
 import uniba.di.itps.ciceroneapp.R;
 import uniba.di.itps.ciceroneapp.model.User;
 
-import static uniba.di.itps.ciceroneapp.GestioneAttività.createEventView.BasicInformationFragment.PICK_IMAGE;
+import static uniba.di.itps.ciceroneapp.GestioneAttività.createEvent.BasicInformationFragment.PICK_IMAGE;
 
 public class ViewProfileFragment extends Fragment implements InterfacciaGestioneProfilo.MvpView {
     private Toolbar toolbar;

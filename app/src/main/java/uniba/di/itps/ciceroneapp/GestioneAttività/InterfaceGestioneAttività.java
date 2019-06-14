@@ -16,6 +16,7 @@ public interface InterfaceGestioneAttività {
         void hideBottomNavigation();
         void showBottomNavigation();
         void showDialogDate(TextView date,boolean birth);
+
     }
     interface Presenter{
         void addFragment(Fragment fragment);
@@ -23,7 +24,6 @@ public interface InterfaceGestioneAttività {
         void addStage(ArrayList<Stage> stage,String name,String description);
         void createEvent(Bundle b);
         void initRecyclerViewCreate(RecyclerView recyclerView);
-
 
         void initRecyclerViewRichieste(RecyclerView recyclerView);
     }
