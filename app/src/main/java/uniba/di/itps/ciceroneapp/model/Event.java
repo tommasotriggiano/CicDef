@@ -37,12 +37,11 @@ public class Event implements Serializable {
     private String orarioFine;
     private double prezzo;
     private String valuta;
-    private Map<String,Object> itinerario;
     private String noteAggiuntive;
     private String idCicerone;
     private String lingua;
     private String linguaSecondaria;
-    private Map<String,Object> tappe;
+    private List<Stage> itinerario;
     private String requisiti;
     private String luogo;
     private String indirizzo;
@@ -53,7 +52,7 @@ public class Event implements Serializable {
 
     public Event(String titolo, String descrizione, String categoria, int nMaxPartecipanti, String dateEvento,
                  String orarioIncontro, String orarioInizio, double prezzo,
-                 String valuta, Map<String,Object> itinerario,String idCicerone) {
+                 String valuta, List<Stage> itinerario,String idCicerone) {
         this.titolo = titolo;
         this.descrizione = descrizione;
         this.categoria = categoria;
@@ -63,7 +62,7 @@ public class Event implements Serializable {
         this.orarioInizio = orarioInizio;
         this.prezzo = prezzo;
         this.valuta = valuta;
-        this.tappe= tappe;
+        this.itinerario= itinerario;
         this.idCicerone = idCicerone;
     }
 
@@ -83,13 +82,6 @@ public class Event implements Serializable {
         this.idCicerone = idCicerone;
     }
 
-    public Map<String, Object> getTappe() {
-        return tappe;
-    }
-
-    public void setTappe(Map<String, Object> tappe) {
-        this.tappe = tappe;
-    }
 
     public void setLinguaSecondaria(String linguaSecondaria) {
         this.linguaSecondaria = linguaSecondaria;
@@ -193,11 +185,11 @@ public class Event implements Serializable {
         this.valuta = valuta;
     }
 
-    public Map<String, Object> getItinerario() {
+    public List<Stage> getItinerario() {
         return itinerario;
     }
 
-    public void setItinerario(Map<String, Object> itinerario) {
+    public void setItinerario(List<Stage> itinerario) {
         this.itinerario = itinerario;
     }
 
@@ -255,12 +247,11 @@ public class Event implements Serializable {
         event.put("orarioFine",this.orarioFine);
         event.put("prezzo",this.prezzo);
         event.put("valuta",this.valuta);
-        event.put("itinerario",this.itinerario);
         event.put("noteAggiuntive",this.noteAggiuntive);
         event.put("idCicerone",this.idCicerone);
         event.put("lingua",this.lingua);
         event.put("linguaSecondaria",this.linguaSecondaria);
-        event.put("tappe",this.tappe);
+        event.put("itinerario",this.itinerario);
         event.put("requisiti",this.requisiti);
         event.put("luogo",this.luogo);
         event.put("indirizzo",this.indirizzo);
@@ -269,6 +260,7 @@ public class Event implements Serializable {
     }
 
     public void createEventToDatabase(){
+
 
         FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document().set(this);
     }

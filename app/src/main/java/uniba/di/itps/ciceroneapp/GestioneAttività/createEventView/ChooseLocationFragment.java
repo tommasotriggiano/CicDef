@@ -27,7 +27,6 @@ import com.google.android.libraries.places.compat.ui.PlaceAutocomplete;
 
 import uniba.di.itps.ciceroneapp.GestioneAttività.InterfaceGestioneAttività;
 import uniba.di.itps.ciceroneapp.GestioneAttività.PresenterGestioneAttività;
-import uniba.di.itps.ciceroneapp.GestioneAttività.createEvent.ChooseMeetingFragment;
 import uniba.di.itps.ciceroneapp.R;
 
 import static android.app.Activity.RESULT_CANCELED;

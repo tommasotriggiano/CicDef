@@ -3,6 +3,7 @@ package uniba.di.itps.ciceroneapp.gestioneRichieste.search;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
@@ -14,9 +15,6 @@ import java.util.ArrayList;
 
 import uniba.di.itps.ciceroneapp.R;
 import uniba.di.itps.ciceroneapp.data.DataFetch;
-import uniba.di.itps.ciceroneapp.gestioneRichieste.search.AdapterAttivitaRicercate;
-import uniba.di.itps.ciceroneapp.gestioneRichieste.search.DettaglioAttivita;
-import uniba.di.itps.ciceroneapp.gestioneRichieste.search.GestioneRichiesteInterfaccia;
 import uniba.di.itps.ciceroneapp.model.Event;
 import uniba.di.itps.ciceroneapp.model.Request;
 import uniba.di.itps.ciceroneapp.model.User;

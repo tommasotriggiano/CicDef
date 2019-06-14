@@ -136,6 +136,14 @@
     <string name="nump">Massimo partecipanti</string>
     <string name="requestedTab">Richieste</string>
     <string name="offeredLanguage">Offerto in </string>
-    <string name="hours">ore</string>
+    <string name="hours"> ore</string>
+    <string name="address">Indirizzo:</string>
+    <string name="meetingHour">Incontro alle:</string>
+    <string name="DoRequest">Effettua Richiesta</string>
+    <string name="hostRequirements">Requisiti Dei Globetrotters</string>
+    <string name="meetCicerone">Conosci il Cicerone</string>
+    <string name="viewStages">Visualizza Itinerario</string>
+    <string name="whatWillWeDo">Cosa Faremo</string>
+    <string name="whereWeWillStay">Dove Saremo</string>
 
 </resources>

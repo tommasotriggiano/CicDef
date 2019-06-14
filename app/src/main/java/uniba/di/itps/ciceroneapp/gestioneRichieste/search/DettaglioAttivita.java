@@ -67,10 +67,10 @@ public class DettaglioAttivita extends AppCompatActivity implements GestioneRich
     public void setTextLuogo(String string) {this.luogo.setText(string);}
 
     @Override
-    public void setTextDurata(String string) { this.durata.setText(string + getResources().getString(R.string.hours)); }
+    public void setTextDurata(String string) { this.durata.setText(string +" "+ getResources().getString(R.string.hours)); }
 
     @Override
-    public void setTextLingua(String string) { this.lingua.setText(getResources().getString(R.string.offeredLanguage) +string);}
+    public void setTextLingua(String string) { this.lingua.setText(getResources().getString(R.string.offeredLanguage)+ " " +string);}
 
     @Override
     public void setTextData(String string) { this.data.setText(string);}
@@ -82,11 +82,11 @@ public class DettaglioAttivita extends AppCompatActivity implements GestioneRich
     public void setTextCognomeC(String string) { this.cognomeC.setText(string); }
 
     @Override
-    public void setTextOraInizio(String string) { this.oraInizio.setText(string); }
+    public void setTextOraInizio(String string) { this.oraInizio.setText(getResources().getString(R.string.address)+" "+string); }
     @Override
     public void setTextDescrizione(String string) { this.descrizione.setText(string); }
     @Override
-    public void setTextIndirizzo(String string) { this.indirizzo.setText(string); }
+    public void setTextIndirizzo(String string) { this.indirizzo.setText(getResources().getString(R.string.address)+" "+string); }
     @Override
     public void setImmagineProfilo(String fotoprofilo) { Picasso.get().load(fotoprofilo).into(this.ciceroneProfile); }
     @Override

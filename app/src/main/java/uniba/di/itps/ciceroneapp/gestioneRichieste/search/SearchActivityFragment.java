@@ -128,7 +128,6 @@ public class SearchActivityFragment extends Fragment implements GestioneRichiest
                 //mostra filtri
                 date.setVisibility(View.VISIBLE);
                 category.setVisibility(View.VISIBLE);
-                //filtro.setVisibility(View.VISIBLE);
 
                 //mostra recyclerView con la risposta della query
                 presenter.initRecyclerViewCerca(recyclerView,searchBox.getText().toString(),date.getText().toString(),category.getText().toString());
@@ -161,77 +160,91 @@ public class SearchActivityFragment extends Fragment implements GestioneRichiest
 
     @Override
     public void setTextTitolo(String string) {
-
+        //nested
     }
 
     @Override
     public void setTextCategoria(String string) {
-
+        //nested
     }
 
     @Override
     public void setTextLuogo(String string) {
+        //nested
 
     }
 
     @Override
     public void setTextDurata(String string) {
+        //nested
 
     }
 
     @Override
     public void setTextLingua(String string) {
+        //nested
 
     }
 
     @Override
     public void setTextData(String string) {
+        //nested
 
     }
 
     @Override
     public void setTextNomeC(String string) {
+        //nested
 
     }
 
     @Override
     public void setTextCognomeC(String string) {
+        //nested
 
     }
 
     @Override
     public void setTextOraInizio(String string) {
+        //nested
 
     }
 
     @Override
     public void setTextDescrizione(String string) {
+        //nested
 
     }
 
     @Override
     public void setTextIndirizzo(String string) {
+        //nested
 
     }
 
     @Override
     public void setImmagineProfilo(String fotoprofilo) {
+        //nested
 
     }
 
     @Override
     public void setImmagineAttività(String img) {
+        //nested
 
     }
 
     @Override
     public void goToGuests() {
+        //nested
 
     }
 
     @Override
     public void goToEvent() {
+        //nested
 
     }
+
 
 }

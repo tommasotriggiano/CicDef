@@ -168,7 +168,15 @@
     <string name="requestedTab">Requested</string>
     <string name="createdTab">Created</string>
     <string name="offeredLanguage">Offered in </string>
-    <string name="hours">hours</string>
+    <string name="hours"> hours</string>
+    <string name="address">Address:</string>
+    <string name="meetingHour">Meeting Hour:</string>
+    <string name="meetCicerone">Meet Cicerone</string>
+    <string name="whatWillWeDo">What We Will Do</string>
+    <string name="whereWeWillStay">Where We Will Stay</string>
+    <string name="viewStages">View Stages</string>
+    <string name="hostRequirements">Host Requirements</string>
+    <string name="DoRequest">Do Request</string>
 
 
 </resources>
