@@ -60,9 +60,12 @@ public class GestioneProfiloPresenter implements InterfacciaGestioneProfilo.Pres
         if(foto != null){
             userUpdate.setFotoprofilo(foto);
         }
+       if(userUpdate.updateUsertoDatabase()){
+           Toast.makeText(mcontext,mcontext.getResources().getString(R.string.saved),Toast.LENGTH_LONG).show();
 
-        db.collection("utenti").document(user.getUid()).update(userUpdate.toMap()).
-                addOnSuccessListener(aVoid -> Toast.makeText(mcontext,mcontext.getResources().getString(R.string.saved),Toast.LENGTH_LONG).show());
+       }
+
+
     }
 
 

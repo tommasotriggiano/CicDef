@@ -85,10 +85,9 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
         String valutes = b.getString("valutes");
         //String nomeTappa = stage.get(0).getIndirizzo();
         //String descrizioneTappa = stage.get(0).getDescrizione();
-        Map<String, Object> map = new HashMap<>();
-        map.put("io","tu");
+        ArrayList<Stage> stageArray = new ArrayList<>();
         //Creazione Evento
-        Event event = new Event(title,description,categoria,num,data,oraIncontro,oraInizio,prezzo,valutes,map, user.getUid());
+        Event event = new Event(title,description,categoria,num,data,oraIncontro,oraInizio,prezzo,valutes,stageArray, user.getUid());
         if(b.getString("requirementsPartecipanti") != null){
             requirements = b.getString("requirementsPartecipanti");
             event.setRequisiti(requirements);

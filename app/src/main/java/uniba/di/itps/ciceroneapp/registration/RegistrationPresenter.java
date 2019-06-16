@@ -70,7 +70,6 @@ public class RegistrationPresenter implements RegistrationInterface {
             if (task.isSuccessful()) {
                 User userDatabase = new User(name1,surname1,user.getEmail(),user.getUid());
                 userDatabase.createUsertoDatabase();
-
                 user.sendEmailVerification().addOnCompleteListener(task1 -> {
                     if(task1.isSuccessful()){
                         Toast.makeText(mContext, R.string.Emailsent, Toast.LENGTH_SHORT).show();

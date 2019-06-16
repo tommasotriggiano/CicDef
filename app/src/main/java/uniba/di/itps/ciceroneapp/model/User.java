@@ -96,6 +96,13 @@ public class User {
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         FirebaseFirestore.getInstance().collection(DataFetch.UTENTI).document(uid).set(this);
     }
+    public boolean updateUsertoDatabase(){
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseFirestore.getInstance().collection(DataFetch.UTENTI).document(uid).update(this.toMap());
+
+        return true;
+
+    }
 
 
 }
