@@ -134,5 +134,25 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestione
 
     }
 
+    @Override
+    public void setTextTitolo(String titolo) {
+
+    }
+
+    @Override
+    public void setTextPartecipanti(String partecipanti) {
+
+    }
+
+    @Override
+    public void setTextData(String data) {
+
+    }
+
+    @Override
+    public void setImmatività(String url) {
+
+    }
+
 
 }

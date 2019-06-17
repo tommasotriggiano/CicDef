@@ -145,6 +145,11 @@ public class SearchActivityFragment extends Fragment implements GestioneRichiest
     }
 
     @Override
+    public void enableButton(Intent receive) {
+
+    }
+
+    @Override
     public void showCategories(TextView category) {
         String[]categories = getContext().getResources().getStringArray(R.array.Categories);
         //Crea il dialog Radio Button
@@ -223,6 +228,11 @@ public class SearchActivityFragment extends Fragment implements GestioneRichiest
     }
 
     @Override
+    public void setTextPrezzo(String prezzo, String valuta) {
+
+    }
+
+    @Override
     public void setImmagineProfilo(String fotoprofilo) {
         //nested
 
@@ -231,6 +241,11 @@ public class SearchActivityFragment extends Fragment implements GestioneRichiest
     @Override
     public void setImmagineAttività(String img) {
         //nested
+
+    }
+
+    @Override
+    public void setNMaxPartecipanti(String nMaxPartecipanti) {
 
     }
 

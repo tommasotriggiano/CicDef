@@ -16,7 +16,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import de.hdodenhof.circleimageview.CircleImageView;
 import uniba.di.itps.ciceroneapp.GestioneAttività.InterfaceGestioneAttività;
 import uniba.di.itps.ciceroneapp.R;
-import uniba.di.itps.ciceroneapp.login.LoginActivity;
+import uniba.di.itps.ciceroneapp.auth.LoginActivity;
 
 
 public class ProfileMainFragment extends Fragment {

@@ -2,6 +2,7 @@ package uniba.di.itps.ciceroneapp.GestioneAttività;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -12,12 +13,18 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import uniba.di.itps.ciceroneapp.GestioneAttività.myEventCreatedView.MyEventHolder;
 import uniba.di.itps.ciceroneapp.GestioneAttività.myEventCreatedView.RecyclerViewMyEventAdapter;
 import uniba.di.itps.ciceroneapp.data.DataFetch;
+import uniba.di.itps.ciceroneapp.gestioneRichieste.search.DettaglioAttivita;
+import uniba.di.itps.ciceroneapp.gestioneRichieste.search.GestioneRichiesteInterfaccia;
+import uniba.di.itps.ciceroneapp.main.MainActivity;
 import uniba.di.itps.ciceroneapp.model.Event;
 import uniba.di.itps.ciceroneapp.model.Stage;
 
@@ -26,7 +33,7 @@ import uniba.di.itps.ciceroneapp.model.Stage;
  */
 
 public class PresenterGestioneAttività  implements InterfaceGestioneAttività.Presenter{
-    private InterfaceGestioneAttività.MvpView mView;
+    private InterfaceGestioneAttività.MvpView mView =  new MainActivity();
     private Context mcontext;
     private FirebaseUser user;
     private  FirebaseFirestore db;
@@ -34,7 +41,6 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
     private RecyclerViewMyEventAdapter adapter;
 
     public PresenterGestioneAttività(Context context){
-        mView= (InterfaceGestioneAttività.MvpView) context;
         mcontext = context;
     }
     public PresenterGestioneAttività(Context context, FirebaseFirestore db, FirebaseUser user){
@@ -104,6 +110,7 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
         event.setLingua(linguaPrimaria);
         event.setLuogo(luogo);
         event.setIndirizzo(indirizzo);
+        event.setId(event.getIdCicerone() +"-"+event.getDateEvento()+"-"+event.getOrarioInizio());
 
         //aggiunge l'oggetto al database
         event.createEventToDatabase();
@@ -114,12 +121,11 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
     @Override
     public void initRecyclerViewCreate(RecyclerView recyclerView) {
         Query created = FirebaseFirestore.getInstance().collection(DataFetch.EVENTI)
-                .whereEqualTo("idCicerone",user.getUid());
+                .whereEqualTo("idCicerone",user.getUid()).whereEqualTo("stato","IN CORSO");
         created.get().addOnSuccessListener(queryDocumentSnapshots -> {
             for(DocumentSnapshot d : queryDocumentSnapshots.getDocuments()){
                 Event event = d.toObject(Event.class);
-                if(event.getStato().equals("IN CORSO")){
-                events.add(event);}
+                events.add(event);
             }
             adapter = new RecyclerViewMyEventAdapter(mcontext,events);
             recyclerView.setAdapter(adapter);
@@ -133,6 +139,32 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
     public void initRecyclerViewRichieste(RecyclerView recyclerView) {
 
         Query requested;
+    }
+
+    @Override
+    public void onBindHolder(InterfaceGestioneAttività.MvpView mvpView, int i, ArrayList<Event> events) {
+        mvpView.setTextTitolo(events.get(i).getTitolo());
+        mvpView.setTextData(events.get(i).getDateEvento());
+        mvpView.setTextPartecipanti(String.valueOf(events.get(i).getnMaxPartecipanti()));
+        mvpView.setImmatività(events.get(i).getFoto());
+
+    }
+
+    @Override
+    public void sendEventDetail(int position,ArrayList<Event> events) {
+        Intent goToDetail = new Intent(mcontext, DettaglioAttivita.class);
+        goToDetail.putExtra("evento", events.get(position));
+        goToDetail.putExtra("create",true);
+        mcontext.startActivity(goToDetail);
+    }
+
+    @Override
+    public void deleteEvent(Intent receive, GestioneRichiesteInterfaccia.MvpView mvpView) {
+        Event event = (Event) receive.getSerializableExtra("evento");
+        if(event.delete()){
+            mvpView.goToEvent();
+
+        };
     }
 
 

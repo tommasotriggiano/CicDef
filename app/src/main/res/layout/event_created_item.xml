@@ -5,6 +5,7 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
+        android:id="@+id/cardViewCreated"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp">
@@ -40,9 +41,9 @@
                 android:layout_marginLeft="9dp"
                 android:layout_marginTop="5dp"
                 android:layout_toRightOf="@id/immagineA"
+                android:drawableStart="@drawable/ic_date_range_black_24dp"
                 android:fontFamily="serif"
                 android:text="data"
-                android:drawableStart="@drawable/ic_date_range_black_24dp"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textSize="17sp" />
 
@@ -53,8 +54,8 @@
                 android:layout_below="@+id/data"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
-                android:drawableStart="@drawable/ic_people"
                 android:layout_toEndOf="@+id/immagineA"
+                android:drawableStart="@drawable/ic_people"
                 android:fontFamily="serif"
                 android:text="@string/nump"
                 android:textSize="15sp" />

@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import uniba.di.itps.ciceroneapp.R;
 import uniba.di.itps.ciceroneapp.model.Event;
 
-public class AdapterAttivitaRicercate extends RecyclerView.Adapter<AdapterAttivitaRicercate.ViewHolderAttivitaRicercate> {
+public class AdapterAttivitaRicercate extends RecyclerView.Adapter<ViewHolderAttivitàRicercate> {
 
     //this context we will use to inflate the layout
     private Context mCtx;
@@ -25,19 +25,40 @@ public class AdapterAttivitaRicercate extends RecyclerView.Adapter<AdapterAttivi
     //we are storing all the products in a list
     private ArrayList<Event> eventList;
 
+    private GestioneRichiesteInterfaccia.Presenter presenter;
+
     public AdapterAttivitaRicercate(Context mCtx, ArrayList<Event> eventList) {
         this.mCtx = mCtx;
         this.eventList = eventList;
+        presenter = new GestioneRichiestePresenter(mCtx);
     }
     //getting the context and product list with constructor
 
-    public ViewHolderAttivitaRicercate onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ViewHolderAttivitàRicercate onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(mCtx);
         View view = inflater.inflate(R.layout.item_search, null);
-        return new ViewHolderAttivitaRicercate(view);
+        return new ViewHolderAttivitàRicercate(view,mCtx);
     }
 
     @Override
+    public void onBindViewHolder(@NonNull ViewHolderAttivitàRicercate holder, int i) {
+        presenter.onBindHolder(holder,i,eventList);
+        holder.cardView.setOnClickListener(v -> {
+          presenter.sendEventDetail(i,eventList);
+        });
+        /*Event event = eventList.get(i);
+        holder.categoria.setText(event.getCategoria());
+        holder.titolo.setText(event.getTitolo());
+        holder.lingua.setText(event.getLingua());
+        holder.prezzo.setText(String.valueOf(event.getPrezzo()));
+        holder.numPartecipanti.setText(String.valueOf(event.getnMaxPartecipanti()));
+        holder.valuta.setText(event.getValuta());
+        if(event.getFoto() != null){
+            Picasso.get().load(event.getFoto()).into(holder.image);}*/
+
+    }
+
+    /*@Override
     public void onBindViewHolder(@NonNull ViewHolderAttivitaRicercate holder, int i) {
         Event event = eventList.get(i);
         holder.categoria.setText(event.getCategoria());
@@ -48,7 +69,7 @@ public class AdapterAttivitaRicercate extends RecyclerView.Adapter<AdapterAttivi
         holder.valuta.setText(event.getValuta());
         if(event.getFoto() != null){
         Picasso.get().load(event.getFoto()).into(holder.image);}
-    }
+    }*/
 
 
     @Override
@@ -56,12 +77,12 @@ public class AdapterAttivitaRicercate extends RecyclerView.Adapter<AdapterAttivi
         return eventList.size();
     }
 
-    class ViewHolderAttivitaRicercate extends RecyclerView.ViewHolder implements View.OnClickListener{
+    /*class ViewHolderAttivitaRicercate extends RecyclerView.ViewHolder implements View.OnClickListener{
         GestioneRichiesteInterfaccia.Presenter presenter;
         TextView titolo,categoria,numPartecipanti,lingua,prezzo,rating,valuta;
         ImageView image;
         CardView cardView;
-        ViewHolderAttivitaRicercate(@NonNull View itemView) {
+        /*ViewHolderAttivitaRicercate(@NonNull View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
             presenter = new GestioneRichiestePresenter(mCtx);
@@ -84,4 +105,4 @@ public class AdapterAttivitaRicercate extends RecyclerView.Adapter<AdapterAttivi
             presenter.sendEventDetail(eventList.get(position));
         }
 
-}}
+}*/}

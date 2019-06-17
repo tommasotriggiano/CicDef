@@ -9,7 +9,7 @@ import android.os.Bundle;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import uniba.di.itps.ciceroneapp.login.LoginActivity;
+import uniba.di.itps.ciceroneapp.auth.LoginActivity;
 import uniba.di.itps.ciceroneapp.main.MainActivity;
 
 

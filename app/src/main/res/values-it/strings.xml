@@ -4,7 +4,7 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_password">MainActivity</string>
     <string name="title_activity_registration">MainActivity</string>
-    <string name="welcome">Welcome to Cicerone!</string>
+    <string name="welcome">Benvenuto in Cicerone</string>
 
     <!-- login and registration activity-->
     <string name="etUsername">Username</string>
@@ -12,40 +12,40 @@
     <string name="etUserEmail">E-MAIL</string>
     <string name="etUserPassword">PASSWORD</string>
     <string name="registrazione">SIGN UP</string>
-    <string name="btnRegister">Create new account</string>
-    <string name="Welcome">Welcome back!</string>
-    <string name="Welcome2">Let\'s get started!</string>
+    <string name="btnRegister">Crea un nuovo account</string>
+    <string name="Welcome">Bentornato</string>
+    <string name="Welcome2">Iniziamo!</string>
     <string name="tvUserLogin">Login</string>
-    <string name="Register">Aren\'t you registered?</string>
-    <string name="CompleteRegistration">  Complete your registration  </string>
-    <string name="Login">Are you registered yet?</string>
-    <string name="Register2">Sign up now</string>
-    <string name="Messaggio">By clicking "Create New Account", it will send you a verification email</string>
-    <string name="Toast1">Enter email!</string>
-    <string name="Toast2">Enter password!</string>
-    <string name="errorName">Enter Your Name!</string>
-    <string name="errorSurname">Enter Your Surname!</string>
-    <string name="TstPassShort">Password is too short(at least 6 characters)</string>
-    <string name="Authenticationf">Authentication failed</string>
-    <string name="Successful">Login successful</string>
-    <string name="NotVerified">Email is not verified yet</string>
-    <string name="ForgotPassword">Forgot password?</string>
+    <string name="Register">Non sei registrato?</string>
+    <string name="CompleteRegistration">Completa la tua registrazione</string>
+    <string name="Login">Sei già registrato?</string>
+    <string name="Register2">Registrati!</string>
+    <string name="Messaggio">Cliccando su Crea Nuovo Account ti verrà mandata un\'email di verifica</string>
+    <string name="Toast1">Inserisci l\'email!</string>
+    <string name="Toast2">Inserisci la password!</string>
+    <string name="errorName">Inserisci il tuo nome</string>
+    <string name="errorSurname">Inserisci il tuo cognome</string>
+    <string name="TstPassShort">Password troppo corta(almeno 7 caratteri)</string>
+    <string name="Authenticationf">Autenticazione Fallita!</string>
+    <string name="Successful">Successo!</string>
+    <string name="NotVerified">Email non ancora verificata</string>
+    <string name="ForgotPassword">Hai dimenticato la password?</string>
     <string name="ResetPassword">Reset Password</string>
-    <string name="Description">Enter your registration email and we will send you a link in order to reset your password</string>
-    <string name="Emailsent">Email sent</string>
-    <string name="EmailNotRegistered">This email is not registered</string>
+    <string name="Description">Inserisci la tua email di registrazione e ti manderemo un link sull\'email per resettare la password</string>
+    <string name="Emailsent">Email inviata</string>
+    <string name="EmailNotRegistered">Questa email non è registrata</string>
     <string name="NotifyApproved">Your account has been approved</string>
-    <string name="Failure">Registration not successful</string>
+    <string name="Failure">Insuccesso</string>
     <string name="title_activity_bottom_navigation">BottomNavigation</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="search">Cerca un posto</string>
-    <string name="add_event">Add Event</string>
-    <string name="event">Event</string>
-    <string name="profile">Profile</string>
-    <string name="create_a_new_activity">Create new Event</string>
-    <string name="activity">Activity</string>
+    <string name="add_event">Crea Attività</string>
+    <string name="event">Attività</string>
+    <string name="profile">Profilo</string>
+    <string name="create_a_new_activity">Crea nuova Attività</string>
+    <string name="activity">Attività</string>
     <string name="title_profile">Profile</string>
     <string name="title_activity">Activity</string>
     <string name="title_create_activity">Create Activity</string>
@@ -59,7 +59,7 @@
     <!--Profile -->
     <string name="name">NOME</string>
     <string name="surname">COGNOME</string>
-    <string name="Auth_Failed">authentication failed</string>
+    <string name="Auth_Failed">autenticazione fallita</string>
 
     <!--Create Activity-->
     <string name="createActivity">Cliccando qui crei una nuova Attività</string>
@@ -145,5 +145,8 @@
     <string name="viewStages">Visualizza Itinerario</string>
     <string name="whatWillWeDo">Cosa Faremo</string>
     <string name="whereWeWillStay">Dove Saremo</string>
+    <string name="viewPartecipants">Conosci i partecipanti</string>
+    <string name="viewRequests">Visualizza Richieste</string>
+    <string name="AuthSuccess">Autenticazione Avvenuta!</string>
 
 </resources>

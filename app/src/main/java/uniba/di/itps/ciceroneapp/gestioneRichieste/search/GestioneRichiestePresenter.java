@@ -4,16 +4,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 import uniba.di.itps.ciceroneapp.R;
+import uniba.di.itps.ciceroneapp.base.mvp.callback.ICallbackListener;
 import uniba.di.itps.ciceroneapp.data.DataFetch;
 import uniba.di.itps.ciceroneapp.model.Event;
 import uniba.di.itps.ciceroneapp.model.Request;
@@ -35,11 +38,11 @@ public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia
 
 
     @Override
-    public void sendEventDetail(Event event) {
+    public void sendEventDetail(int position,ArrayList<Event> events) {
         Intent goToDetail = new Intent(context, DettaglioAttivita.class);
-        goToDetail.putExtra("evento", event);
+        goToDetail.putExtra("evento", events.get(position));
+        goToDetail.putExtra("create",false);
         context.startActivity(goToDetail);
-
     }
 
     @Override
@@ -53,6 +56,7 @@ public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia
         mvpView.setTextDescrizione(event.getDescrizione());
         mvpView.setTextIndirizzo(event.getIndirizzo());
         mvpView.setTextOraInizio(event.getOrarioIncontro());
+        mvpView.setTextPrezzo(String.valueOf(event.getPrezzo()),event.getValuta());
         String[] partsEnd = event.getOrarioFine().split(":");
         String[] partStart =  event.getOrarioInizio().split(":");
         int durata = Integer.valueOf(partsEnd[0]) - Integer.valueOf(partStart[0]);
@@ -105,9 +109,7 @@ public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia
                 switch(dc.getType()){
                     case ADDED:
                         if(!(event.getIdCicerone().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) && event.getStato().equals("IN CORSO")){
-                            //se non c'è il filtro data
                             events.add(event);
-
                         }
                         break;
                     case MODIFIED:
@@ -133,7 +135,7 @@ public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia
     }
 
     @Override
-    public void createRequestToDatabase(Intent receive) {
+    public void createRequestToDatabase(Intent receive,GestioneRichiesteInterfaccia.MvpView mvpView) {
         Event event = (Event) receive.getSerializableExtra("evento");
         String status = "IN ATTESA";
         Request request = new Request(event.getIdCicerone(),event.getId(), FirebaseAuth.getInstance().getCurrentUser().getUid(),status);
@@ -142,4 +144,17 @@ public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia
         };
 
     }
+
+    @Override
+    public void onBindHolder(GestioneRichiesteInterfaccia.MvpView mvpView, int i,ArrayList<Event> events) {
+        mvpView.setTextTitolo(events.get(i).getTitolo());
+        mvpView.setTextLingua(events.get(i).getLingua());
+        mvpView.setTextCategoria(events.get(i).getCategoria());
+        if(events.get(i).getFoto() != null){
+            mvpView.setImmagineAttività(events.get(i).getFoto());}
+        mvpView.setTextPrezzo(String.valueOf(events.get(i).getPrezzo()),events.get(i).getValuta());
+        mvpView.setNMaxPartecipanti(String.valueOf(events.get(i).getnMaxPartecipanti()));
+        }
+
+
 }

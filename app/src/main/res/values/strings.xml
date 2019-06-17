@@ -177,6 +177,9 @@
     <string name="viewStages">View Stages</string>
     <string name="hostRequirements">Host Requirements</string>
     <string name="DoRequest">Do Request</string>
+    <string name="viewPartecipants">Meet Partecipants</string>
+    <string name="viewRequests">View Requests</string>
+    <string name="AuthSuccess">Auth Success</string>
 
 
 </resources>

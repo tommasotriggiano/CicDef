@@ -246,11 +246,24 @@
                 android:text="Orario incontro"
                 android:textAlignment="gravity"
                 android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/prezzo"
+                android:layout_width="200dp"
+                android:layout_height="36dp"
+                android:layout_below="@+id/oraText"
+                android:layout_marginTop="30dp"
+                android:gravity="center_vertical"
+                android:paddingStart="10dp"
+                android:text="@string/price"
+                android:textAlignment="gravity"
+                android:textSize="20sp"
+                android:textStyle="bold" />
             <TextView
                 android:id="@+id/visualizzaTappe"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
-                android:layout_below="@+id/oraText"
+                android:layout_below="@+id/prezzo"
                 android:layout_marginTop="20dp"
                 android:drawablePadding="15dp"
                 android:gravity="center"
@@ -288,6 +301,19 @@
                 android:textAlignment="gravity"
                 android:background="@drawable/text_view_shape"
                 android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/prezzoText"
+                android:layout_width="100dp"
+                android:layout_height="36dp"
+                android:layout_below="@+id/oraText"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="5dp"
+                android:textAlignment="gravity"
+                android:gravity="center"
+                android:layout_toRightOf="@+id/prezzo"
+                android:text="10.0"
+                android:textSize="17sp" />
 
 
         </RelativeLayout>

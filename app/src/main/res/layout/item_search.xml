@@ -112,25 +112,13 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/valuta"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/posti"
-                android:layout_marginStart="3dp"
-                android:layout_marginTop="60dp"
-                android:layout_toEndOf="@+id/textViewPrice"
-                android:text="euro"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="20sp" />
-
-            <TextView
                 android:id="@+id/aPersona"
                 android:layout_width="104dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/posti"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="63dp"
-                android:layout_toEndOf="@+id/valuta"
+                android:layout_marginStart="53dp"
+                android:layout_marginTop="65dp"
+                android:layout_toEndOf="@+id/textViewPrice"
                 android:fontFamily="serif"
                 android:text="@string/toPerson"
                 android:textSize="15sp"

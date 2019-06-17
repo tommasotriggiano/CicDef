@@ -258,11 +258,12 @@ public class Event implements Serializable {
         event.put("stato",this.stato);
         return event;
     }
-
+    public boolean delete(){
+        FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document(this.id).delete();
+        return true;
+    }
     public void createEventToDatabase(){
-
-
-        FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document().set(this);
+        FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document(this.id).set(this);
     }
 
     public String getId() {

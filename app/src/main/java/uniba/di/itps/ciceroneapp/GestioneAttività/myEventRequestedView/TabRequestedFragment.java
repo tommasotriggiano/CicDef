@@ -30,7 +30,7 @@ public class TabRequestedFragment extends Fragment {
         user = FirebaseAuth.getInstance().getCurrentUser();
         db = FirebaseFirestore.getInstance();
         presenter = new PresenterGestioneAttività(getContext(),db,user);
-        recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView = view.findViewById(R.id.recyclerRichieste);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         presenter.initRecyclerViewRichieste(recyclerView);
