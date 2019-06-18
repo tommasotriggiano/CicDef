@@ -12,7 +12,6 @@ import java.util.Map;
 import uniba.di.itps.ciceroneapp.GestioneAttività.InterfaceGestioneAttività;
 import uniba.di.itps.ciceroneapp.GestioneAttività.PresenterGestioneAttività;
 import uniba.di.itps.ciceroneapp.R;
-import uniba.di.itps.ciceroneapp.model.Event;
 
 public class RecyclerViewMyEventAdapter extends RecyclerView.Adapter<MyEventHolder> {
     private Context context;
