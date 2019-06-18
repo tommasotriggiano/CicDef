@@ -14,25 +14,6 @@
         android:layout_marginBottom="2dp"
         android:foreground="?android:attr/selectableItemBackground">
 
-        <RelativeLayout
-            android:id="@+id/viewBackground"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#c1fd0202">
-
-            <ImageView
-                android:id="@+id/delete"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="10dp"
-                android:src="@drawable/ic_delete_white"
-                tools:srcCompat="@drawable/ic_delete_black_24dp" />
-
-
-        </RelativeLayout>
-
         <LinearLayout
             android:id="@+id/LinearRichiesti"
             android:layout_width="match_parent"

@@ -1,16 +1,13 @@
 package uniba.di.itps.ciceroneapp.auth;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import uniba.di.itps.ciceroneapp.R;
 
@@ -27,8 +24,6 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
         registrationPresenter = new AuthPresenter(this);
 
         Button signUp = findViewById(R.id.Reg2);
@@ -47,11 +42,8 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()){
-            case R.id.Reg2:
-                    registrationPresenter.createUser(inputName.getText().toString(),inputSurname.getText().toString(),inputEmail.getText().toString().trim(),inputPassword.getText().toString().trim(),this);
-                break;
-            default:break;
+        if (v.getId() == R.id.Reg2) {
+            registrationPresenter.createUser(inputName.getText().toString(), inputSurname.getText().toString(), inputEmail.getText().toString().trim(), inputPassword.getText().toString().trim(), this);
         }
 
     }
@@ -85,7 +77,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void setErrorSurname(String string) {
-        this.layout_password.setError(getResources().getString(R.string.errorSurname));
+        this.layout_surname.setError(getResources().getString(R.string.errorSurname));
 
 
     }

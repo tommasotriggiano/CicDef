@@ -3,20 +3,13 @@ package uniba.di.itps.ciceroneapp.gestioneRichieste.search;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
-
 import uniba.di.itps.ciceroneapp.R;
-import uniba.di.itps.ciceroneapp.base.mvp.callback.ICallbackListener;
 import uniba.di.itps.ciceroneapp.data.DataFetch;
 import uniba.di.itps.ciceroneapp.model.Event;
 import uniba.di.itps.ciceroneapp.model.Request;
@@ -27,12 +20,10 @@ public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia
     private Context context;
     private ArrayList<Event> events;
     private AdapterAttivitaRicercate adapter;
-    private GestioneRichiesteInterfaccia.MvpView mvpView;
 
     GestioneRichiestePresenter(Context context) {
         this.context = context;
         events = new ArrayList<>();
-        mvpView = new DettaglioAttivita();
     }
 
 

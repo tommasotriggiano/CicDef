@@ -1,9 +1,5 @@
 package uniba.di.itps.ciceroneapp.auth;
 
-import android.support.design.widget.TextInputLayout;
-import android.widget.EditText;
-
-import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 /**

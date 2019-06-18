@@ -1,16 +1,15 @@
 package uniba.di.itps.ciceroneapp.auth;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.content.Intent;
-import uniba.di.itps.ciceroneapp.main.MainActivity;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -21,9 +20,9 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import uniba.di.itps.ciceroneapp.R;
+import uniba.di.itps.ciceroneapp.main.MainActivity;
 
 
 /**
@@ -37,8 +36,6 @@ public class LoginActivity extends AppCompatActivity implements AuthInterface.Mv
 
     private EditText inputEmail, inputPassword;
     private TextInputLayout layout_email,layout_password;
-    private SignInButton signin;
-    private ProgressBar progressBar;
     private GoogleApiClient mGoogleApiClient;
 
 
@@ -51,19 +48,18 @@ public class LoginActivity extends AppCompatActivity implements AuthInterface.Mv
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         mAuth.signOut();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         presenter = new AuthPresenter(this);
 
         //findView methods
-        signin = findViewById(R.id.sign_in_button);
+        SignInButton signin = findViewById(R.id.sign_in_button);
         inputEmail = findViewById(R.id.email);
         inputPassword = findViewById(R.id.password);
         layout_password= findViewById(R.id.layout_password) ;
         layout_email= findViewById(R.id.layout_email) ;
         TextView resetPassword = findViewById(R.id.tvForgotPassword);
         Button btnLogin = findViewById(R.id.Reg2);
-        progressBar= findViewById(R.id.progressBar2);
+        ProgressBar progressBar = findViewById(R.id.progressBar2);
         progressBar.setVisibility(View.INVISIBLE);
         Button register = findViewById(R.id.Register);
 

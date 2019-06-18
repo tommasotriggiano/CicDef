@@ -2,7 +2,6 @@ package uniba.di.itps.ciceroneapp.auth;
 
 import android.app.Activity;
 import android.content.Context;
-import android.text.TextUtils;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.AuthCredential;

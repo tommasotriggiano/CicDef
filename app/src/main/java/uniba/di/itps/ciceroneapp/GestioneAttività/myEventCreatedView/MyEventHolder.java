@@ -1,31 +1,28 @@
 package uniba.di.itps.ciceroneapp.GestioneAttività.myEventCreatedView;
 
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
 import uniba.di.itps.ciceroneapp.GestioneAttività.InterfaceGestioneAttività;
-import uniba.di.itps.ciceroneapp.GestioneAttività.InterfaceGestioneAttività.MvpView;
 import uniba.di.itps.ciceroneapp.R;
 
 public  class MyEventHolder extends RecyclerView.ViewHolder implements InterfaceGestioneAttività.MvpView  {
 
     CardView root;
-    ImageView fotoEvento;
-    TextView titolo;
-    TextView date;
-    TextView nIscritti;
+    private ImageView fotoEvento;
+    private TextView titolo;
+    private TextView date;
+    private TextView nIscritti;
 
 
-    public MyEventHolder(@NonNull View itemView) {
+    MyEventHolder(@NonNull View itemView) {
         super(itemView);
         root = itemView.findViewById(R.id.cardViewCreated);
         fotoEvento = itemView.findViewById(R.id.immagineA);
@@ -63,5 +60,25 @@ public  class MyEventHolder extends RecyclerView.ViewHolder implements Interface
     @Override
     public void setImmatività(String url) {
         Picasso.get().load(url).into(this.fotoEvento);
+    }
+
+    @Override
+    public void setTextOrario(String orarioIncontro) {
+
+    }
+
+    @Override
+    public void setTextLuogo(String luogo) {
+
+    }
+
+    @Override
+    public void setTextIndirizzo(String indirizzo) {
+
+    }
+
+    @Override
+    public void setTextStato(String stato) {
+
     }
 }

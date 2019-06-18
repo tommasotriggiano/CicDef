@@ -19,21 +19,17 @@ import uniba.di.itps.ciceroneapp.R;
 
 
 public class TabRequestedFragment extends Fragment {
-    private RecyclerView recyclerView;
-    private InterfaceGestioneAttività.Presenter presenter;
-    private FirebaseUser user;
-    private FirebaseFirestore db;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tab_requested,container,false);
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        db = FirebaseFirestore.getInstance();
-        presenter = new PresenterGestioneAttività(getContext(),db,user);
-        recyclerView = view.findViewById(R.id.recyclerRichieste);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        presenter.initRecyclerViewRichieste(recyclerView);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        InterfaceGestioneAttività.Presenter presenter = new PresenterGestioneAttività(getContext(), db, user);
+        RecyclerView recyclerViewR = view.findViewById(R.id.recyclerRichieste);
+        recyclerViewR.setHasFixedSize(true);
+        recyclerViewR.setLayoutManager(new LinearLayoutManager(getContext()));
+        presenter.initRecyclerViewRichieste(recyclerViewR);
         return view;
     }
 
