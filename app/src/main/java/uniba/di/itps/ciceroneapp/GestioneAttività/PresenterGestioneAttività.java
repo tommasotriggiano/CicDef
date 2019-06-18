@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseUser;
@@ -13,20 +14,21 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import uniba.di.itps.ciceroneapp.GestioneAttività.myEventCreatedView.MyEventHolder;
 import uniba.di.itps.ciceroneapp.GestioneAttività.myEventCreatedView.RecyclerViewMyEventAdapter;
+import uniba.di.itps.ciceroneapp.GestioneAttività.myEventRequestedView.RequestedAdapter;
 import uniba.di.itps.ciceroneapp.data.DataFetch;
 import uniba.di.itps.ciceroneapp.gestioneRichieste.search.DettaglioAttivita;
 import uniba.di.itps.ciceroneapp.gestioneRichieste.search.GestioneRichiesteInterfaccia;
 import uniba.di.itps.ciceroneapp.main.MainActivity;
 import uniba.di.itps.ciceroneapp.model.Event;
+import uniba.di.itps.ciceroneapp.model.Request;
 import uniba.di.itps.ciceroneapp.model.Stage;
+import uniba.di.itps.ciceroneapp.model.User;
 
 /**
  * Created by tommaso on 27/05/2019.
@@ -36,23 +38,24 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
     private InterfaceGestioneAttività.MvpView mView =  new MainActivity();
     private Context mcontext;
     private FirebaseUser user;
-    private  FirebaseFirestore db;
-    private ArrayList<Event> events;
+    private ArrayList<Event> events = new ArrayList<>();
+    private ArrayList<Map<String,Object>> ric;
     private RecyclerViewMyEventAdapter adapter;
+    private RequestedAdapter ra;
 
     public PresenterGestioneAttività(Context context){
         mcontext = context;
     }
     public PresenterGestioneAttività(Context context, FirebaseFirestore db, FirebaseUser user){
         mcontext = context;
-        this.db = db;
         this.user = user;
         events = new ArrayList<>();
+        ric = new ArrayList<>();
     }
 
 
     @Override
-    public void addFragment(Fragment fragment) {
+    public void addFragment(Fragment fragment,InterfaceGestioneAttività.MvpView mView) {
         mView.setFragment(fragment);
     }
 
@@ -85,15 +88,14 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
         String oraFine = b.getString("oraFine");
         String linguaPrimaria = b.getString("linguaPrimaria");
 
-        ArrayList<Stage> stage = (ArrayList<Stage>) b.getSerializable("tappe");
         int num = b.getInt("numPartecipanti");
         double prezzo = b.getDouble("price");
         String valutes = b.getString("valutes");
-        //String nomeTappa = stage.get(0).getIndirizzo();
-        //String descrizioneTappa = stage.get(0).getDescrizione();
-        ArrayList<Stage> stageArray = new ArrayList<>();
+
+        ArrayList<Stage> stage;
+        stage = (ArrayList<Stage>) b.getSerializable("tappe");
         //Creazione Evento
-        Event event = new Event(title,description,categoria,num,data,oraIncontro,oraInizio,prezzo,valutes,stageArray, user.getUid());
+        Event event = new Event(title,description,categoria,num,data,oraIncontro,oraInizio,prezzo,valutes,stage, user.getUid());
         if(b.getString("requirementsPartecipanti") != null){
             requirements = b.getString("requirementsPartecipanti");
             event.setRequisiti(requirements);
@@ -111,7 +113,7 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
         event.setLuogo(luogo);
         event.setIndirizzo(indirizzo);
         event.setId(event.getIdCicerone() +"-"+event.getDateEvento()+"-"+event.getOrarioInizio());
-
+        event.setStato("IN CORSO");
         //aggiunge l'oggetto al database
         event.createEventToDatabase();
     }
@@ -137,8 +139,41 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
 
     @Override
     public void initRecyclerViewRichieste(RecyclerView recyclerView) {
+        Query requested = FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).whereEqualTo("idGlobetrotter",user.getUid());
+        HashMap<String,Object> richiesta = new HashMap<>();
+        requested.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for(DocumentSnapshot dc :queryDocumentSnapshots.getDocuments()){
+                    Request req = dc.toObject(Request.class);
+                    String idcicerone = req.getIdCicerone();
+                    String idattivita = req.getIdAttivita();
+                    FirebaseFirestore.getInstance().collection(DataFetch.UTENTI).document(idcicerone).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            User user = documentSnapshot.toObject(User.class);
+                            richiesta.put("utente",user.toMap());
+                        }});
+                    FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document(idattivita).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            Event event = documentSnapshot.toObject(Event.class);
+                            richiesta.put("attività",event.toMap());
+                            ric.add(richiesta);
+                            Toast.makeText(mcontext,""+ric.toString(),Toast.LENGTH_SHORT).show();
 
-        Query requested;
+                        }
+                    });
+
+
+                }
+                ra = new RequestedAdapter(mcontext,ric);
+                recyclerView.setAdapter(ra);
+                ra.notifyDataSetChanged();
+
+
+            }
+        });
     }
 
     @Override
@@ -165,6 +200,12 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
             mvpView.goToEvent();
 
         };
+    }
+
+    @Override
+    public void onBindHolderR(InterfaceGestioneAttività.MvpView mvpView, int i, ArrayList<Map<String, Object>> requests) {
+        HashMap<String,Object>userMap = (HashMap<String, Object>) requests.get(i).get("utente");
+        mvpView.setTextTitolo(userMap.get("nome").toString());
     }
 
 

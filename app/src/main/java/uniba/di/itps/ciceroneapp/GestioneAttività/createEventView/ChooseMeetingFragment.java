@@ -85,7 +85,7 @@ public class ChooseMeetingFragment extends Fragment {
             receive.putString("oraInizio",start.getSelectedItem().toString());
             receive.putString("oraFine",end.getSelectedItem().toString());
             if(presenter.setArguument(f,receive))
-                presenter.addFragment(f);
+                presenter.addFragment(f,(InterfaceGestioneAttività.MvpView) getActivity());
 
         });
     }

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +12,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import uniba.di.itps.ciceroneapp.GestioneAttività.InterfaceGestioneAttività;
 import uniba.di.itps.ciceroneapp.GestioneAttività.PresenterGestioneAttività;
 import uniba.di.itps.ciceroneapp.GestioneAttività.adapter.StageAdapter;
-import uniba.di.itps.ciceroneapp.GestioneAttività.createEventView.LastInformationFragment;
 import uniba.di.itps.ciceroneapp.R;
 import uniba.di.itps.ciceroneapp.model.Stage;
 
@@ -30,6 +29,7 @@ public class ChooseItineraryFragment extends Fragment  {
     private ListView listViewStages;
     private ArrayList<Stage> stages = new ArrayList<>();
     private InterfaceGestioneAttività.Presenter presenter;
+    private Toolbar toolbar;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -44,6 +44,7 @@ public class ChooseItineraryFragment extends Fragment  {
         viewMvp.hideBottomNavigation();
         listViewStages = view.findViewById(R.id.listViewStages);
         goOn = view.findViewById(R.id.button10);
+        toolbar = view.findViewById(R.id.toolbar);
         presenter = new PresenterGestioneAttività(getActivity());
         return view;
     }
@@ -51,6 +52,10 @@ public class ChooseItineraryFragment extends Fragment  {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        toolbar.setNavigationOnClickListener(v -> {
+            presenter.addFragment(new AddEventMainFragment(), (InterfaceGestioneAttività.MvpView) getActivity());
+
+        });
         //add
         add.setOnClickListener(v -> {
             if(name.getText().toString().isEmpty()){
@@ -72,9 +77,8 @@ public class ChooseItineraryFragment extends Fragment  {
             Fragment f = new LastInformationFragment();
             Bundle receive = getArguments();
             receive.putSerializable("tappe",stages);
-            Toast.makeText(getContext(),"1"+receive.get("tappe").toString(),Toast.LENGTH_LONG).show();
-            if(presenter.setArguument(f,receive)){
-                presenter.addFragment(f);
+                if(presenter.setArguument(f,receive)){
+                presenter.addFragment(f,(InterfaceGestioneAttività.MvpView) getActivity());
             }});
     }
 }

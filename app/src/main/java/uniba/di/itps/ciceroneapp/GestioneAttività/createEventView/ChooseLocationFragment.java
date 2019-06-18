@@ -94,7 +94,7 @@ public class ChooseLocationFragment extends Fragment  {
             receive.putString("indirizzo",address.getText().toString());
             receive.putString("data",date.getText().toString());
             if(presenter.setArguument(f,receive))
-                presenter.addFragment(f);
+                presenter.addFragment(f,(InterfaceGestioneAttività.MvpView) getActivity());
         });
     }
 

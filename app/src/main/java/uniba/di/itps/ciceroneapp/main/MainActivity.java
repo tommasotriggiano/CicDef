@@ -101,17 +101,17 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestione
 
             if(month<10){
                 if(day<10){
-                    dateString="0"+ dayOfMonth + "/" + "0"+ (monthOfYear + 1) + "/" + year;
+                    dateString="0"+ dayOfMonth + "-" + "0"+ (monthOfYear + 1) + "-" + year;
                     date.setText(dateString);
                 }
                 else{
-                    dateString= dayOfMonth + "/" +"0"+ (monthOfYear + 1) + "/" + year;
+                    dateString= dayOfMonth + "-" +"0"+ (monthOfYear + 1) + "-" + year;
                     date.setText(dateString);}
             } else if(day<10){
-                dateString="0"+ dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                dateString="0"+ dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
                 date.setText(dateString);}
             else{
-                dateString= dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                dateString= dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
                 date.setText(dateString);}
         };
 

@@ -5,6 +5,7 @@ package uniba.di.itps.ciceroneapp.model;
 
 import android.annotation.SuppressLint;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -275,27 +276,24 @@ public class Event implements Serializable {
     }
 
     public void initStatus(){
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         Date currentDate = new Date();
         String date = sdf.format(currentDate);
 
-        FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                for(DocumentSnapshot ds : queryDocumentSnapshots.getDocuments()){
-                    Event event = ds.toObject(Event.class);
-                    try {
-                        if(sdf.parse(event.getDateEvento()).before(sdf.parse(date))){
-                            event.setStato("PASSATO");
-                            FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document(ds.getId()).update(event.toMap());
-                        }
-                        else if (sdf.parse(event.getDateEvento()).equals(sdf.parse(date))||sdf.parse(event.getDateEvento()).after(sdf.parse(date))){
-                            event.setStato("IN CORSO");
-                            FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document(ds.getId()).update(event.toMap());
-                        }
-                    } catch (ParseException e) {
-                        Log.d(TAG,e.getMessage());
+        FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).get().addOnSuccessListener(queryDocumentSnapshots -> {
+            for(DocumentSnapshot ds : queryDocumentSnapshots.getDocuments()){
+                Event event = ds.toObject(Event.class);
+                try {
+                    if(sdf.parse(event.getDateEvento()).before(sdf.parse(date))){
+                        event.setStato("PASSATO");
+                        FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document(ds.getId()).update(event.toMap());
                     }
+                    else if (sdf.parse(event.getDateEvento()).equals(sdf.parse(date))||sdf.parse(event.getDateEvento()).after(sdf.parse(date))){
+                        event.setStato("IN CORSO");
+                        FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document(ds.getId()).update(event.toMap());
+                    }
+                } catch (ParseException e) {
+                    Log.d(TAG,e.getMessage());
                 }
             }
         });

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ public class BasicInformationFragment extends Fragment {
     private EditText title;
     private EditText description;
     private Spinner category;
+    private Toolbar toolbar;
 
     private InterfaceGestioneAttività.Presenter presenter;
 
@@ -42,6 +44,7 @@ public class BasicInformationFragment extends Fragment {
         title = view.findViewById(R.id.titleEdit);
         description = view.findViewById(R.id.descriptionEdit);
         category = view.findViewById(R.id.spinnerCategory);
+        toolbar = view.findViewById(R.id.toolbar);
         presenter = new PresenterGestioneAttività(getActivity());
         assert viewMvp != null;
         viewMvp.hideBottomNavigation();
@@ -51,6 +54,8 @@ public class BasicInformationFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        toolbar.setNavigationOnClickListener(v -> presenter.addFragment(new AddEventMainFragment(), (InterfaceGestioneAttività.MvpView) getActivity()));
 
         //button addPhoto
         addImage.setOnClickListener(v -> {
@@ -81,7 +86,7 @@ public class BasicInformationFragment extends Fragment {
             b.putString("categoria",category.getSelectedItem().toString());
 
             if(presenter.setArguument(f,b)){
-                presenter.addFragment(f);}});
+                presenter.addFragment(f,(InterfaceGestioneAttività.MvpView) getActivity());}});
 
     }
     @Override

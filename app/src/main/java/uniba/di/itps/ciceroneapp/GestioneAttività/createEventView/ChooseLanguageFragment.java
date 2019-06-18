@@ -46,7 +46,7 @@ public class ChooseLanguageFragment extends Fragment {
             if(!(secondaryLanguage.getSelectedItem().toString().isEmpty())){
                 receive.putString("linguaSecondaria",secondaryLanguage.getSelectedItem().toString());}
             if(presenter.setArguument(f,receive))
-                presenter.addFragment(f);
+                presenter.addFragment(f,(InterfaceGestioneAttività.MvpView) getActivity());
 
         });
     }

@@ -5,14 +5,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="22dp"
+        android:backgroundTint="@color/white"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@+id/itinerary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/quantum_ic_arrow_back_grey600_24" />
+
     <TextView
         android:id="@+id/itinerary"
         android:layout_width="307dp"
         android:layout_height="31dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="36dp"
         android:layout_marginStart="41dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/Itinerary"
         android:textAlignment="center"
         android:textSize="20sp"
@@ -21,7 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
         android:id="@+id/stage"
@@ -71,14 +86,16 @@
         android:id="@+id/button9"
         android:layout_width="338dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="340dp"
-        android:layout_marginEnd="23dp"
         android:layout_marginStart="23dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="23dp"
+        android:layout_marginBottom="340dp"
         android:text="@string/AddStage"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descrizioneTappa" />
 
     <ImageButton
         android:id="@+id/button10"
@@ -101,7 +118,7 @@
         android:id="@+id/listViewStages"
         android:layout_width="359dp"
         android:layout_height="188dp"
-        android:layout_below="@id/linearLayout"
+        android:layout_below="@id/button10"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="17dp"

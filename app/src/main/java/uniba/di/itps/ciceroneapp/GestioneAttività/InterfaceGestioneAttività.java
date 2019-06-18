@@ -7,8 +7,10 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import uniba.di.itps.ciceroneapp.GestioneAttività.myEventCreatedView.MyEventHolder;
+import uniba.di.itps.ciceroneapp.GestioneAttività.myEventRequestedView.MyEventRequestedHolder;
 import uniba.di.itps.ciceroneapp.gestioneRichieste.search.GestioneRichiesteInterfaccia;
 import uniba.di.itps.ciceroneapp.model.Event;
 import uniba.di.itps.ciceroneapp.model.Stage;
@@ -27,7 +29,7 @@ public interface InterfaceGestioneAttività {
 
     }
     interface Presenter{
-        void addFragment(Fragment fragment);
+        void addFragment(Fragment fragment,MvpView mvpView);
         boolean setArguument(Fragment fragment, Bundle bundle);
         void addStage(ArrayList<Stage> stage,String name,String description);
         void createEvent(Bundle b);
@@ -40,5 +42,7 @@ public interface InterfaceGestioneAttività {
         void sendEventDetail(int position,ArrayList<Event> events);
 
         void deleteEvent(Intent receive, GestioneRichiesteInterfaccia.MvpView mvpView);
+
+        void onBindHolderR(MvpView mvpView, int i, ArrayList<Map<String, Object>> requests);
     }
 }

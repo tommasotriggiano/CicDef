@@ -11,7 +11,7 @@ public class Stage implements Serializable{
         this.indirizzo = indirizzo;
         this.descrizione = descrizione;
     }
-
+    public Stage(){}
     public String getIndirizzo() {
         return indirizzo;
     }

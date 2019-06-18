@@ -205,17 +205,17 @@ public class ViewProfileFragment extends Fragment implements InterfacciaGestione
 
             if(month1 <10){
                 if(day1 <10){
-                    dateString="0"+ dayOfMonth + "/" + "0"+ (month1 + 1) + "/" + year1;
+                    dateString="0"+ dayOfMonth + "-" + "0"+ (month1 + 1) + "-" + year1;
                     dataNascita.setText(dateString);
                 }
                 else{
-                    dateString= dayOfMonth + "/" +"0"+ (month1 + 1) + "/" + year1;
+                    dateString= dayOfMonth + "-" +"0"+ (month1 + 1) + "-" + year1;
                     dataNascita.setText(dateString);}
             } else if(day1 <10){
-                dateString="0"+ dayOfMonth + "/" + (month1 + 1) + "/" + year1;
+                dateString="0"+ dayOfMonth + "-" + (month1 + 1) + "-" + year1;
                 dataNascita.setText(dateString);}
             else{
-                dateString= dayOfMonth + "/" + (month1 + 1) + "/" + year1;
+                dateString= dayOfMonth + "-" + (month1 + 1) + "-" + year1;
                 dataNascita.setText(dateString);}
         };
         DatePickerDialog dialog= new DatePickerDialog(getActivity(),R.style.MyDialogTheme,mDateSetListner,year,month,day);
