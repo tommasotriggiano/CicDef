@@ -6,15 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,24 +25,21 @@ import uniba.di.itps.ciceroneapp.GestioneAttività.myEventRequestedView.Requeste
 import uniba.di.itps.ciceroneapp.data.DataFetch;
 import uniba.di.itps.ciceroneapp.gestioneRichieste.search.DettaglioAttivita;
 import uniba.di.itps.ciceroneapp.gestioneRichieste.search.GestioneRichiesteInterfaccia;
-import uniba.di.itps.ciceroneapp.main.MainActivity;
 import uniba.di.itps.ciceroneapp.model.Event;
-import uniba.di.itps.ciceroneapp.model.Request;
 import uniba.di.itps.ciceroneapp.model.Stage;
-import uniba.di.itps.ciceroneapp.model.User;
 
 /**
  * Created by tommaso on 27/05/2019.
  */
 
 public class PresenterGestioneAttività  implements InterfaceGestioneAttività.Presenter{
-    private InterfaceGestioneAttività.MvpView mView =  new MainActivity();
     private Context mcontext;
     private FirebaseUser user;
-    private ArrayList<Event> events = new ArrayList<>();
-    private ArrayList<Map<String,Object>> ric;
+    private ArrayList<Map<String,Object>> events = new ArrayList<>();
+    private ArrayList<Map<String,Object>> ric = new ArrayList<>();
     private RecyclerViewMyEventAdapter adapter;
     private RequestedAdapter ra;
+    private Map<String,Object> richiesta = new HashMap<>();
 
     public PresenterGestioneAttività(Context context){
         mcontext = context;
@@ -127,7 +125,7 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
         created.get().addOnSuccessListener(queryDocumentSnapshots -> {
             for(DocumentSnapshot d : queryDocumentSnapshots.getDocuments()){
                 Event event = d.toObject(Event.class);
-                events.add(event);
+                events.add(event.toMap());
             }
             adapter = new RecyclerViewMyEventAdapter(mcontext,events);
             recyclerView.setAdapter(adapter);
@@ -139,56 +137,36 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
 
     @Override
     public void initRecyclerViewRichieste(RecyclerView recyclerView) {
-        Query requested = FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).whereEqualTo("idGlobetrotter",user.getUid());
-        HashMap<String,Object> richiesta = new HashMap<>();
+        Query requested = FirebaseFirestore.getInstance().collection(DataFetch.RICHIESTE).whereEqualTo("idGlobetrotter", FirebaseAuth.getInstance().getCurrentUser().getUid());
         requested.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 for(DocumentSnapshot dc :queryDocumentSnapshots.getDocuments()){
-                    Request req = dc.toObject(Request.class);
-                    String idcicerone = req.getIdCicerone();
-                    String idattivita = req.getIdAttivita();
-                    FirebaseFirestore.getInstance().collection(DataFetch.UTENTI).document(idcicerone).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                        @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            User user = documentSnapshot.toObject(User.class);
-                            richiesta.put("utente",user.toMap());
-                        }});
-                    FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document(idattivita).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                        @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            Event event = documentSnapshot.toObject(Event.class);
-                            richiesta.put("attività",event.toMap());
-                            ric.add(richiesta);
-                            Toast.makeText(mcontext,""+ric.toString(),Toast.LENGTH_SHORT).show();
-
-                        }
-                    });
-
-
+                    richiesta = dc.getData();
+                    ric.add(richiesta);
                 }
                 ra = new RequestedAdapter(mcontext,ric);
                 recyclerView.setAdapter(ra);
                 ra.notifyDataSetChanged();
-
-
             }
         });
+        ric.clear();
     }
 
     @Override
-    public void onBindHolder(InterfaceGestioneAttività.MvpView mvpView, int i, ArrayList<Event> events) {
-        mvpView.setTextTitolo(events.get(i).getTitolo());
-        mvpView.setTextData(events.get(i).getDateEvento());
-        mvpView.setTextPartecipanti(String.valueOf(events.get(i).getnMaxPartecipanti()));
-        mvpView.setImmatività(events.get(i).getFoto());
+    public void onBindHolder(InterfaceGestioneAttività.MvpView mvpView, int i, ArrayList<Map<String,Object>> events) {
+        mvpView.setTextTitolo(events.get(i).get("titolo").toString());
+        mvpView.setTextData(events.get(i).get("dateEvento").toString());
+        mvpView.setTextPartecipanti(String.valueOf(events.get(i).get("nMaxPartecipanti")));
+        if(events.get(i).get("foto") != null){
+        mvpView.setImmatività(events.get(i).get("foto").toString());}
 
     }
 
     @Override
-    public void sendEventDetail(int position,ArrayList<Event> events) {
+    public void sendEventDetail(int position,ArrayList<Map<String,Object>> events) {
         Intent goToDetail = new Intent(mcontext, DettaglioAttivita.class);
-        goToDetail.putExtra("evento", events.get(position));
+        goToDetail.putExtra("evento", (Serializable) events.get(position));
         goToDetail.putExtra("create",true);
         mcontext.startActivity(goToDetail);
     }
@@ -198,14 +176,26 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
         Event event = (Event) receive.getSerializableExtra("evento");
         if(event.delete()){
             mvpView.goToEvent();
-
         };
     }
 
     @Override
     public void onBindHolderR(InterfaceGestioneAttività.MvpView mvpView, int i, ArrayList<Map<String, Object>> requests) {
-        HashMap<String,Object>userMap = (HashMap<String, Object>) requests.get(i).get("utente");
-        mvpView.setTextTitolo(userMap.get("nome").toString());
+        String idAttivita = requests.get(i).get("idAttivita").toString();
+        FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document(idAttivita).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Event event = documentSnapshot.toObject(Event.class);
+                mvpView.setTextTitolo(event.getTitolo());
+                mvpView.setTextData(event.getDateEvento());
+                mvpView.setTextOrario(event.getOrarioIncontro());
+                mvpView.setTextLuogo(event.getLuogo());
+                mvpView.setTextIndirizzo(event.getIndirizzo());
+                if(event.getFoto() != null){
+                mvpView.setImmatività(event.getFoto());}
+            }
+        });
+        mvpView.setTextStato(requests.get(i).get("stato").toString());
     }
 
 

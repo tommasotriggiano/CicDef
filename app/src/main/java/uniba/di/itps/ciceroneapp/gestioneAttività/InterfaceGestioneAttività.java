@@ -5,14 +5,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.Map;
-
-import uniba.di.itps.ciceroneapp.GestioneAttività.myEventCreatedView.MyEventHolder;
-import uniba.di.itps.ciceroneapp.GestioneAttività.myEventRequestedView.MyEventRequestedHolder;
 import uniba.di.itps.ciceroneapp.gestioneRichieste.search.GestioneRichiesteInterfaccia;
-import uniba.di.itps.ciceroneapp.model.Event;
 import uniba.di.itps.ciceroneapp.model.Stage;
 
 
@@ -26,7 +21,10 @@ public interface InterfaceGestioneAttività {
         void setTextPartecipanti(String partecipanti);
         void setTextData(String data);
         void setImmatività(String url);
-
+        void setTextOrario(String orarioIncontro);
+        void setTextLuogo(String luogo);
+        void setTextIndirizzo(String indirizzo);
+        void setTextStato(String stato);
     }
     interface Presenter{
         void addFragment(Fragment fragment,MvpView mvpView);
@@ -34,15 +32,10 @@ public interface InterfaceGestioneAttività {
         void addStage(ArrayList<Stage> stage,String name,String description);
         void createEvent(Bundle b);
         void initRecyclerViewCreate(RecyclerView recyclerView);
-
         void initRecyclerViewRichieste(RecyclerView recyclerView);
-
-        void onBindHolder(InterfaceGestioneAttività.MvpView mvpView, int i, ArrayList<Event> events);
-
-        void sendEventDetail(int position,ArrayList<Event> events);
-
+        void onBindHolder(InterfaceGestioneAttività.MvpView mvpView, int i, ArrayList<Map<String,Object>> events);
+        void sendEventDetail(int position,ArrayList<Map<String,Object>> events);
         void deleteEvent(Intent receive, GestioneRichiesteInterfaccia.MvpView mvpView);
-
         void onBindHolderR(MvpView mvpView, int i, ArrayList<Map<String, Object>> requests);
     }
 }
