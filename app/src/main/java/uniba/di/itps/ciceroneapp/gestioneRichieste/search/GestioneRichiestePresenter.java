@@ -74,24 +74,24 @@ public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia
 
         //se sono stati scelti sia i filtri per la data che per la categoria esegui la query anche sugli altri due campi
         if(!(data.equals(context.getResources().getString(R.string.Date))) && !(categoria.equals(context.getResources().getString(R.string.category1)))){
-            cities = FirebaseFirestore.getInstance().collection("Eventi").
-                    whereEqualTo("luogo",city).
-                    whereEqualTo("dateEvento",data).
-                    whereEqualTo("categoria",categoria);}
+            cities = FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).
+                    whereEqualTo(Event.LUOGO_INCONTRO,city).
+                    whereEqualTo(Event.DATAEVENTO,data).
+                    whereEqualTo(Event.CATEGORIA,categoria);}
 
         //se è stato sceltro solo il campo data esegui le query solo sul campo data
         else if(!(data.equals(context.getResources().getString(R.string.Date))) && (categoria.equals(context.getResources().getString(R.string.category1)))){
             cities = FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).
-                    whereEqualTo("luogo",city).
-                    whereEqualTo("dateEvento",data);}
+                    whereEqualTo(Event.LUOGO_INCONTRO,city).
+                    whereEqualTo(Event.DATAEVENTO,data);}
 
         //se è stato scelto il campo categoria esegui ale query solo sul campo categoria
         else if((data.equals(context.getResources().getString(R.string.Date))) && !(categoria.equals(context.getResources().getString(R.string.category1)))){
             cities = FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).
-                    whereEqualTo("luogo",city).
-                    whereEqualTo("categoria",categoria);}
+                    whereEqualTo(Event.LUOGO_INCONTRO,city).
+                    whereEqualTo(Event.CATEGORIA,categoria);}
         else{
-            cities = FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).whereEqualTo("luogo",city);}
+            cities = FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).whereEqualTo(Event.LUOGO_INCONTRO,city);}
 
         cities.get().addOnSuccessListener(queryDocumentSnapshots -> {
             for(DocumentChange dc : queryDocumentSnapshots.getDocumentChanges()){
@@ -99,19 +99,22 @@ public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia
                 Event event = document.toObject(Event.class);
                 switch(dc.getType()){
                     case ADDED:
-                        if(!(event.getIdCicerone().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) && event.getStato().equals("IN CORSO")){
+                        if(!(event.getIdCicerone().equals(FirebaseAuth.getInstance()
+                                .getCurrentUser().getUid())) && event.getStato().equals(Event.STATO_IN_CORSO)){
                             events.add(event);
                         }
                         break;
                     case MODIFIED:
-                        if(!(event.getIdCicerone().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) && event.getStato().equals("IN CORSO")){
+                        if(!(event.getIdCicerone().equals(FirebaseAuth.getInstance().getCurrentUser()
+                                .getUid())) && event.getStato().equals(Event.STATO_IN_CORSO)){
                             events.set(dc.getNewIndex(),event);
 
                         }
                         break;
 
                     case REMOVED:
-                        if(!(event.getIdCicerone().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) && event.getStato().equals("IN CORSO")){
+                        if(!(event.getIdCicerone().equals(FirebaseAuth.getInstance().getCurrentUser()
+                                .getUid())) && event.getStato().equals(Event.STATO_IN_CORSO)){
                             events.remove(dc.getOldIndex());
                         }
                         break;
@@ -128,8 +131,9 @@ public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia
     @Override
     public void createRequestToDatabase(Intent receive,GestioneRichiesteInterfaccia.MvpView mvpView) {
         Event event = (Event) receive.getSerializableExtra("evento");
-        String status = "IN ATTESA";
-        Request request = new Request(event.getIdCicerone(),event.getId(), FirebaseAuth.getInstance().getCurrentUser().getUid(),status);
+        String status = Event.STATO_PASSATO;
+        Request request = new Request(event.getIdCicerone(),event.getId(), FirebaseAuth.getInstance()
+                .getCurrentUser().getUid(),status);
         if(request.addRequestToDatabase()){
             mvpView.goToEvent();
         };

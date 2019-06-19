@@ -26,6 +26,7 @@ import uniba.di.itps.ciceroneapp.data.DataFetch;
 import uniba.di.itps.ciceroneapp.gestioneRichieste.search.DettaglioAttivita;
 import uniba.di.itps.ciceroneapp.gestioneRichieste.search.GestioneRichiesteInterfaccia;
 import uniba.di.itps.ciceroneapp.model.Event;
+import uniba.di.itps.ciceroneapp.model.Request;
 import uniba.di.itps.ciceroneapp.model.Stage;
 
 /**
@@ -111,7 +112,7 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
         event.setLuogo(luogo);
         event.setIndirizzo(indirizzo);
         event.setId(event.getIdCicerone() +"-"+event.getDateEvento()+"-"+event.getOrarioInizio());
-        event.setStato("IN CORSO");
+        event.setStato(Event.STATO_IN_CORSO);
         //aggiunge l'oggetto al database
         event.createEventToDatabase();
     }
@@ -121,7 +122,7 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
     @Override
     public void initRecyclerViewCreate(RecyclerView recyclerView) {
         Query created = FirebaseFirestore.getInstance().collection(DataFetch.EVENTI)
-                .whereEqualTo("idCicerone",user.getUid()).whereEqualTo("stato","IN CORSO");
+                .whereEqualTo("idCicerone",user.getUid()).whereEqualTo(Event.STATO_EVENTO,Event.STATO_IN_CORSO);
         created.get().addOnSuccessListener(queryDocumentSnapshots -> {
             for(DocumentSnapshot d : queryDocumentSnapshots.getDocuments()){
                 Event event = d.toObject(Event.class);
@@ -137,7 +138,7 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
 
     @Override
     public void initRecyclerViewRichieste(RecyclerView recyclerView) {
-        Query requested = FirebaseFirestore.getInstance().collection(DataFetch.RICHIESTE).whereEqualTo("idGlobetrotter", FirebaseAuth.getInstance().getCurrentUser().getUid());
+        Query requested = FirebaseFirestore.getInstance().collection(DataFetch.RICHIESTE).whereEqualTo(Request.ID_GLOBETROTTER, FirebaseAuth.getInstance().getCurrentUser().getUid());
         requested.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -155,11 +156,11 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
 
     @Override
     public void onBindHolder(InterfaceGestioneAttività.MvpView mvpView, int i, ArrayList<Map<String,Object>> events) {
-        mvpView.setTextTitolo(events.get(i).get("titolo").toString());
-        mvpView.setTextData(events.get(i).get("dateEvento").toString());
-        mvpView.setTextPartecipanti(String.valueOf(events.get(i).get("nMaxPartecipanti")));
-        if(events.get(i).get("foto") != null){
-        mvpView.setImmatività(events.get(i).get("foto").toString());}
+        mvpView.setTextTitolo(events.get(i).get(Event.TITOLO).toString());
+        mvpView.setTextData(events.get(i).get(Event.DATAEVENTO).toString());
+        mvpView.setTextPartecipanti(String.valueOf(events.get(i).get(Event.MAX_PARTECIPANTI)));
+        if(events.get(i).get(Event.FOTO) != null){
+        mvpView.setImmatività(events.get(i).get(Event.FOTO).toString());}
 
     }
 
@@ -181,7 +182,7 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
 
     @Override
     public void onBindHolderR(InterfaceGestioneAttività.MvpView mvpView, int i, ArrayList<Map<String, Object>> requests) {
-        String idAttivita = requests.get(i).get("idAttivita").toString();
+        String idAttivita = requests.get(i).get(Request.ID_ATTIVITA).toString();
         FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document(idAttivita).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -195,7 +196,7 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
                 mvpView.setImmatività(event.getFoto());}
             }
         });
-        mvpView.setTextStato(requests.get(i).get("stato").toString());
+        mvpView.setTextStato(requests.get(i).get(Request.STATO_RICHIESTA).toString());
     }
 
 
