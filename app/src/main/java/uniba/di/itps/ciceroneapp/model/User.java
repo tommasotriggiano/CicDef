@@ -9,7 +9,7 @@ import java.util.Map;
 
 import uniba.di.itps.ciceroneapp.data.DataFetch;
 
-public class User {
+public class User implements UserInterface {
     private String uid;
     private String nome;
     private String cognome;
@@ -81,6 +81,7 @@ public class User {
         this.uid = uid;
     }
 
+    @Override
     public Map<String,Object> toMap(){
         Map<String,Object>user = new HashMap<>();
         user.put("uid",this.uid);
@@ -92,10 +93,12 @@ public class User {
         user.put("email",this.email);
         return user;
     }
+    @Override
     public void createUsertoDatabase(){
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         FirebaseFirestore.getInstance().collection(DataFetch.UTENTI).document(uid).set(this);
     }
+    @Override
     public boolean updateUsertoDatabase(){
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         FirebaseFirestore.getInstance().collection(DataFetch.UTENTI).document(uid).update(this.toMap());

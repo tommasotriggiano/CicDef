@@ -1,13 +1,12 @@
 package uniba.di.itps.ciceroneapp.model;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
 import uniba.di.itps.ciceroneapp.data.DataFetch;
 
-public class Request {
+public class Request implements RequestInterface {
 
     public final static String ID_CICERONE = "idCicerone";
     public final static String ID_ATTIVITA = "idAttivita";
@@ -76,6 +75,7 @@ public class Request {
         this.ospiti = ospiti;
     }
 
+    @Override
     public boolean addRequestToDatabase(){
         FirebaseFirestore.getInstance().collection(DataFetch.RICHIESTE).document().set(this).addOnSuccessListener(aVoid -> {
 

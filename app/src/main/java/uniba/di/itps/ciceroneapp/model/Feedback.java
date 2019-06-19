@@ -1,6 +1,6 @@
 package uniba.di.itps.ciceroneapp.model;
 
-public class Feedback {
+public class Feedback implements FeedbackInterface {
 
 
     public final static String COMMENTO = "commento";

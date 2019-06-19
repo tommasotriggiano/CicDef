@@ -20,7 +20,7 @@ import java.util.Map;
 
 import uniba.di.itps.ciceroneapp.data.DataFetch;
 
-public class Event implements Serializable {
+public class Event implements Serializable, EventInterface {
     private static final String TAG ="Event";
     private String id;
     private String titolo;
@@ -282,10 +282,12 @@ public class Event implements Serializable {
         event.put("stato",this.stato);
         return event;
     }
+    @Override
     public boolean delete(){
         FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document(this.id).delete();
         return true;
     }
+    @Override
     public void createEventToDatabase(){
         FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document(this.id).set(this);
     }
@@ -298,6 +300,7 @@ public class Event implements Serializable {
         this.id = id;
     }
 
+    @Override
     public void initStatus(){
         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         Date currentDate = new Date();
@@ -323,6 +326,7 @@ public class Event implements Serializable {
 
     }
 
+    @Override
     public void updateEventToDatabase(String idDocument){
         FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document(idDocument).update(this.toMap());
     }
