@@ -5,12 +5,10 @@ package uniba.di.itps.ciceroneapp.model;
 
 import android.annotation.SuppressLint;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.google.protobuf.Enum;
 
 import java.io.Serializable;
 import java.text.ParseException;
@@ -20,7 +18,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import io.opencensus.tags.Tag;
 import uniba.di.itps.ciceroneapp.data.DataFetch;
 
 public class Event implements Serializable {
@@ -48,7 +45,33 @@ public class Event implements Serializable {
     private String indirizzo;
     private String stato;
 
-    public Event() {
+    public final static String IDEVENTO = "id";
+    public final static String TITOLO = "categoria";
+    public final static String FOTO = "foto";
+    public final static String DESCRIZIONE = "descrizione";
+    public final static String CATEGORIA = "categoria";
+    public final static String MAX_PARTECIPANTI = "nMaxPartecipanti";
+    public final static String PARECIPANTI = "partecipanti";
+    public final static String DATAEVENTO = "dateEvento";
+    public final static String ORARIO_INCONTRO = "orarioIncontro";
+    public final static String ORARIO_INIZIO = "orarioInizio";
+    public final static String ORARIO_FINE = "orarioFine";
+    public final static String PREZZO = "prezzo";
+    public final static String VALUTA = "valuta";
+    public final static String NOTE_AGGIUNTIVE = "noteAggiuntive";
+    public final static String IDCICERONE = "idCicerone";
+    public final static String LINGUA = "lingua";
+    public final static String LINGUA_SECONDARIA = "linguaSecondaria";
+    public final static String ITINERARIO = "itinerario";
+    public final static String REQUISITI = "requisiti";
+    public final static String LUOGO_INCONTRO = "luogo";
+    public final static String INDIRIZZO = "indirizzo";
+    public final static String STATO_EVENTO = "stato";
+    public final static String STATO_IN_CORSO = "IN CORSO";
+    public final static String STATO_PASSATO = "PASSATO";
+
+
+        public Event() {
     } //per firebase.
 
     public Event(String titolo, String descrizione, String categoria, int nMaxPartecipanti, String dateEvento,

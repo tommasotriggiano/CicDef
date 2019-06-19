@@ -10,6 +10,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import uniba.di.itps.ciceroneapp.GestioneAttività.InterfaceGestioneAttività;
 import uniba.di.itps.ciceroneapp.R;
 import uniba.di.itps.ciceroneapp.base.mvp.callback.IFirebaseCallbackListener;
+import uniba.di.itps.ciceroneapp.data.DataFetch;
 import uniba.di.itps.ciceroneapp.model.User;
 
 public class GestioneProfiloPresenter implements InterfacciaGestioneProfilo.Presenter {
@@ -36,7 +37,7 @@ public class GestioneProfiloPresenter implements InterfacciaGestioneProfilo.Pres
 
     @Override
     public void readDataProfile(IFirebaseCallbackListener listener) {
-        db.collection("utenti").document(user.getUid()).get().addOnSuccessListener(documentSnapshot -> {
+        db.collection(DataFetch.UTENTI).document(user.getUid()).get().addOnSuccessListener(documentSnapshot -> {
         if(documentSnapshot.exists()){
             User user = documentSnapshot.toObject(User.class);
             listener.onCallback(user);

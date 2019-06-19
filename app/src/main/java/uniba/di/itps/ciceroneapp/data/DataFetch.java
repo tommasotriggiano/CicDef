@@ -5,4 +5,5 @@ public class DataFetch {
     public final static String EVENTI = "Eventi";
     public final static String RICHIESTE = "Richieste";
 
+
 }

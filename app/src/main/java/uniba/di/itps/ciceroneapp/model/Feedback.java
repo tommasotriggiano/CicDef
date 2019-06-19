@@ -1,14 +1,21 @@
 package uniba.di.itps.ciceroneapp.model;
 
 public class Feedback {
-    private String commento;
-    private String titole;
-    private int rating;
-    private User utente;
 
-    public Feedback(String commento, String titole, int rating, User utente) {
+
+    public final static String COMMENTO = "commento";
+    public final static String TITOLO = "titolo";
+    public final static String RATING = "rating";
+    public final static String ID_UTENTE = "utente";
+
+    private String commento;
+    private String titolo;
+    private int rating;
+    private String utente;
+
+    public Feedback(String commento, String titole, int rating, String utente) {
         this.commento = commento;
-        this.titole = titole;
+        this.titolo = titole;
         this.rating = rating;
         this.utente = utente;
     }
@@ -21,12 +28,12 @@ public class Feedback {
         this.commento = commento;
     }
 
-    public String getTitole() {
-        return titole;
+    public String getTitolo() {
+        return titolo;
     }
 
-    public void setTitole(String titole) {
-        this.titole = titole;
+    public void setTitolo(String titolo) {
+        this.titolo = titolo;
     }
 
     public int getRating() {
@@ -37,11 +44,11 @@ public class Feedback {
         this.rating = rating;
     }
 
-    public User getUtente() {
+    public String getUtente() {
         return utente;
     }
 
-    public void setUtente(User utente) {
+    public void setUtente(String utente) {
         this.utente = utente;
     }
 }

@@ -8,6 +8,19 @@ import java.util.List;
 import uniba.di.itps.ciceroneapp.data.DataFetch;
 
 public class Request {
+
+    public final static String ID_CICERONE = "idCicerone";
+    public final static String ID_ATTIVITA = "idAttivita";
+    public final static String ID_GLOBETROTTER = "idGlobetrotter";
+    public final static String STATO_RICHIESTA = "stato";
+    public final static String OSPITI = "ospiti";
+    public final static String STATO_RIFIUTATA = "RIFIUTATA";
+    public final static String STATO_IN_ATTESA = "IN ATTESA";
+    public final static String STATO_CONFERMATA = "CONFERMATA";
+
+
+
+
     String idCicerone;
     String idAttivita;
     String idGlobetrotter;
