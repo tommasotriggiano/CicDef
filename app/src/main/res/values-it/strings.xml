@@ -148,5 +148,7 @@
     <string name="viewPartecipants">Conosci i partecipanti</string>
     <string name="viewRequests">Visualizza Richieste</string>
     <string name="AuthSuccess">Autenticazione Avvenuta!</string>
+    <string name="viewRequest">Visualizza Richieste</string>
+    <string name="meetPartecipants">Conosci i partecipanti</string>
 
 </resources>

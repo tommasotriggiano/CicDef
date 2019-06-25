@@ -4,33 +4,25 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import de.hdodenhof.circleimageview.CircleImageView;
-import uniba.di.itps.ciceroneapp.GestioneAttività.InterfaceGestioneAttività;
-import uniba.di.itps.ciceroneapp.GestioneAttività.PresenterGestioneAttività;
 import uniba.di.itps.ciceroneapp.R;
 import uniba.di.itps.ciceroneapp.main.MainActivity;
 
-public class DettaglioAttivita extends AppCompatActivity implements GestioneRichiesteInterfaccia.MvpView {
+public class DetailEventRequest extends AppCompatActivity implements GestioneRichiesteInterfaccia.MvpView {
     private TextView titolo,categoria,lingua,durata,luogo,data,descrizione,indirizzo,requisiti,nomeC,cognomeC,prezzo,valuta,nMaxPartecipanti,oraInizio,tappe,richiedi,cic;
     private ImageView immagineAtt;
-    private ImageButton modify,delete;
     private LinearLayout linear;
     private CircleImageView ciceroneProfile;
     private GestioneRichiesteInterfaccia.Presenter presenter;
-    private InterfaceGestioneAttività.Presenter presenter1;
     private Intent receive;
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
-        modify = findViewById(R.id.modify);
-        delete = findViewById(R.id.delete);
+        setContentView(R.layout.activity_detail_request);
         cic = findViewById(R.id.cicerone);
         immagineAtt = findViewById(R.id.imageView);
         titolo = findViewById(R.id.titolo);
@@ -51,33 +43,25 @@ public class DettaglioAttivita extends AppCompatActivity implements GestioneRich
         prezzo = findViewById(R.id.prezzoText);
         //valuta = findViewById(R.id.valuta);
         //nMaxPartecipanti = findViewById(R.id.numeroPartecipanti);
-        presenter1 = new PresenterGestioneAttività(this);
+        //presenter1 = new PresenterGestioneAttività(this);
         presenter = new GestioneRichiestePresenter(this);
         receive =  getIntent();
-        this.enableButton(receive);
+        //this.enableButton(receive);
 
 
         presenter.setEventDetail(receive,this);
         richiedi.setOnClickListener(v -> {
-            presenter.createRequestToDatabase(receive,this);
-            startActivity(new Intent(DettaglioAttivita.this, MainActivity.class));
-
+            if(richiedi.getText().toString().equals(getResources().getString(R.string.viewRequests))){
+                presenter.createRequestToDatabase(receive,this);}
         });
-        delete.setOnClickListener(v -> {
-            presenter1.deleteEvent(receive,this);
 
-        });
     }
 
 
     @Override
     public void enableButton(Intent receive) {
         if(receive.getBooleanExtra("create",true)){
-            modify.setVisibility(View.VISIBLE);
-            delete.setVisibility(View.VISIBLE);
-            linear.setVisibility(View.INVISIBLE);
-            richiedi.setText(getResources().getString(R.string.viewRequests));
-            cic.setText(getResources().getString(R.string.viewPartecipants));
+            richiedi.setText("stato");
         }
 
     }
@@ -132,12 +116,17 @@ public class DettaglioAttivita extends AppCompatActivity implements GestioneRich
     }
 
     @Override
+    public void setTextStato(String stato) {
+        this.richiedi.setText(stato);
+    }
+
+    @Override
     public void goToGuests() {
 
     }
 
     @Override
     public void goToEvent() {
-        this.startActivity(new Intent(DettaglioAttivita.this,MainActivity.class));
+        this.startActivity(new Intent(DetailEventRequest.this,MainActivity.class));
     }
 }

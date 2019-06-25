@@ -1,5 +1,6 @@
 package uniba.di.itps.ciceroneapp.GestioneAttività.myEventRequestedView;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -12,8 +13,9 @@ import com.squareup.picasso.Picasso;
 
 import uniba.di.itps.ciceroneapp.GestioneAttività.InterfaceGestioneAttività;
 import uniba.di.itps.ciceroneapp.R;
+import uniba.di.itps.ciceroneapp.gestioneRichieste.search.GestioneRichiesteInterfaccia;
 
-public class MyEventRequestedHolder extends RecyclerView.ViewHolder implements InterfaceGestioneAttività.MvpView {
+public class MyEventRequestedHolder extends RecyclerView.ViewHolder implements GestioneRichiesteInterfaccia.MvpView {
     LinearLayout root;
     private ImageView fotoEvento;
     private TextView titolo;
@@ -37,17 +39,17 @@ public class MyEventRequestedHolder extends RecyclerView.ViewHolder implements I
         stato = itemView.findViewById(R.id.statusReqTW);
     }
 
-    @Override
-    public void setFragment(Fragment fragment) { }
+
 
     @Override
-    public void hideBottomNavigation() { }
+    public void enableButton(Intent receive) {
+
+    }
 
     @Override
-    public void showBottomNavigation() { }
+    public void showCategories(TextView category) {
 
-    @Override
-    public void showDialogDate(TextView date, boolean birth) { }
+    }
 
     @Override
     public void setTextTitolo(String titolo) {
@@ -55,7 +57,9 @@ public class MyEventRequestedHolder extends RecyclerView.ViewHolder implements I
     }
 
     @Override
-    public void setTextPartecipanti(String partecipanti) { }
+    public void setTextCategoria(String string) {
+    }
+
 
     @Override
     public void setTextData(String data) {
@@ -64,29 +68,65 @@ public class MyEventRequestedHolder extends RecyclerView.ViewHolder implements I
     }
 
     @Override
-    public void setImmatività(String url) {
-        Picasso.get().load(url).into(this.fotoEvento);
-
-    }
+    public void setTextNomeC(String string) {}
 
     @Override
-    public void setTextOrario(String orarioIncontro) {
-        this.orarioIncontro.setText(orarioIncontro);
+    public void setTextCognomeC(String string) {}
 
-    }
+    @Override
+    public void setTextOraInizio(String string) {
+        this.orarioIncontro.setText(string); }
+
+    @Override
+    public void setTextDescrizione(String string) { }
+
 
     @Override
     public void setTextLuogo(String luogo) {
         this.luogoIncontro.setText(luogo); }
 
     @Override
+    public void setTextDurata(String string) {
+
+    }
+
+    @Override
+    public void setTextLingua(String string) {
+    }
+
+    @Override
     public void setTextIndirizzo(String indirizzo) {
         this.indirizzoIncontro.setText(indirizzo); }
 
     @Override
+    public void setTextPrezzo(String prezzo, String valuta) { }
+
+    @Override
+    public void setImmagineProfilo(String fotoprofilo) {}
+
+    @Override
+    public void setImmagineAttività(String img) {
+        Picasso.get().load(img).into(this.fotoEvento);
+    }
+
+    @Override
+    public void setNMaxPartecipanti(String nMaxPartecipanti) {
+        this.orarioIncontro.setText(nMaxPartecipanti);
+
+    }
+
+    @Override
     public void setTextStato(String stato) {
         this.stato.setText(stato);
+    }
 
+    @Override
+    public void goToGuests() {
+
+    }
+
+    @Override
+    public void goToEvent() {
 
     }
 }

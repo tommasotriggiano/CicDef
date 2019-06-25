@@ -18,8 +18,6 @@ public class Request implements RequestInterface {
     public final static String STATO_CONFERMATA = "CONFERMATA";
 
 
-
-
     String idCicerone;
     String idAttivita;
     String idGlobetrotter;

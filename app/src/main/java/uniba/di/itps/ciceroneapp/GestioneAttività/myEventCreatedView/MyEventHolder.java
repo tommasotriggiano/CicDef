@@ -81,4 +81,9 @@ public  class MyEventHolder extends RecyclerView.ViewHolder implements Interface
     public void setTextStato(String stato) {
 
     }
+
+    @Override
+    public void goToEvent() {
+
+    }
 }

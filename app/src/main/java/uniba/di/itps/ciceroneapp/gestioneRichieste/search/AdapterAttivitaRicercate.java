@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import uniba.di.itps.ciceroneapp.R;
 import uniba.di.itps.ciceroneapp.model.Event;
@@ -23,11 +24,11 @@ public class AdapterAttivitaRicercate extends RecyclerView.Adapter<ViewHolderAtt
     private Context mCtx;
 
     //we are storing all the products in a list
-    private ArrayList<Event> eventList;
+    private ArrayList<Map<String,Object>> eventList;
 
     private GestioneRichiesteInterfaccia.Presenter presenter;
 
-    public AdapterAttivitaRicercate(Context mCtx, ArrayList<Event> eventList) {
+    public AdapterAttivitaRicercate(Context mCtx, ArrayList<Map<String,Object>> eventList) {
         this.mCtx = mCtx;
         this.eventList = eventList;
         presenter = new GestioneRichiestePresenter(mCtx);
@@ -44,7 +45,7 @@ public class AdapterAttivitaRicercate extends RecyclerView.Adapter<ViewHolderAtt
     public void onBindViewHolder(@NonNull ViewHolderAttivitàRicercate holder, int i) {
         presenter.onBindHolder(holder,i,eventList);
         holder.cardView.setOnClickListener(v -> {
-          presenter.sendEventDetail(i,eventList);
+          presenter.sendEventDetail(i,eventList,true);
         });
         /*Event event = eventList.get(i);
         holder.categoria.setText(event.getCategoria());

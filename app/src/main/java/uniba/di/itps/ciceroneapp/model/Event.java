@@ -46,7 +46,7 @@ public class Event implements Serializable, EventInterface {
     private String stato;
 
     public final static String IDEVENTO = "id";
-    public final static String TITOLO = "categoria";
+    public final static String TITOLO = "titolo";
     public final static String FOTO = "foto";
     public final static String DESCRIZIONE = "descrizione";
     public final static String CATEGORIA = "categoria";
@@ -280,6 +280,7 @@ public class Event implements Serializable, EventInterface {
         event.put("luogo",this.luogo);
         event.put("indirizzo",this.indirizzo);
         event.put("stato",this.stato);
+        event.put("id",this.id);
         return event;
     }
     @Override

@@ -169,5 +169,10 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestione
 
     }
 
+    @Override
+    public void goToEvent() {
+
+    }
+
 
 }

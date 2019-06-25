@@ -4,11 +4,8 @@ import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-
-import uniba.di.itps.ciceroneapp.model.Event;
+import java.util.Map;
 
 public interface GestioneRichiesteInterfaccia {
     interface MvpView{
@@ -29,16 +26,16 @@ public interface GestioneRichiesteInterfaccia {
         void setImmagineProfilo(String fotoprofilo);
         void setImmagineAttività(String img);
         void setNMaxPartecipanti(String nMaxPartecipanti);
+        void setTextStato(String stato);
         void goToGuests();
         void goToEvent();
     }
     interface Presenter{
-        void sendEventDetail(int position,ArrayList<Event> events);
+        void sendEventDetail(int position, ArrayList<Map<String, Object>> events, boolean b);
         void setEventDetail(Intent intent,GestioneRichiesteInterfaccia.MvpView mvpView);
         void initRecyclerViewCerca(RecyclerView recyclerView, String city, String data, String categoria);
         void createRequestToDatabase(Intent receive,GestioneRichiesteInterfaccia.MvpView mvpView);
-
-        void onBindHolder(GestioneRichiesteInterfaccia.MvpView mvpView, int i, ArrayList<Event> events);
-
+        void onBindHolder(GestioneRichiesteInterfaccia.MvpView mvpView, int i, ArrayList<Map<String,Object>> events);
+        void onBindHolderR(MvpView mvpView, int i, ArrayList<Map<String, Object>> requests);
     }
 }

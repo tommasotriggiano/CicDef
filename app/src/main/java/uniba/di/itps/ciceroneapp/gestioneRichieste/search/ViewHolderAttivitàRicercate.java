@@ -124,6 +124,11 @@ public class ViewHolderAttivitàRicercate extends RecyclerView.ViewHolder implem
     }
 
     @Override
+    public void setTextStato(String stato) {
+
+    }
+
+    @Override
     public void goToGuests() {
 
     }

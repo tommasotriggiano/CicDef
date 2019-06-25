@@ -12,14 +12,16 @@ import java.util.Map;
 import uniba.di.itps.ciceroneapp.GestioneAttività.InterfaceGestioneAttività;
 import uniba.di.itps.ciceroneapp.GestioneAttività.PresenterGestioneAttività;
 import uniba.di.itps.ciceroneapp.R;
+import uniba.di.itps.ciceroneapp.gestioneRichieste.search.GestioneRichiesteInterfaccia;
+import uniba.di.itps.ciceroneapp.gestioneRichieste.search.GestioneRichiestePresenter;
 
 public class RequestedAdapter extends RecyclerView.Adapter<MyEventRequestedHolder> {
     private ArrayList<Map<String,Object>> requests;
-    private InterfaceGestioneAttività.Presenter presenter;
+    private GestioneRichiesteInterfaccia.Presenter presenter;
 
     public RequestedAdapter(Context context, ArrayList<Map<String, Object>> requests) {
         this.requests = requests;
-        this.presenter = new PresenterGestioneAttività(context);
+        this.presenter = new GestioneRichiestePresenter(context);
     }
 
     @NonNull
@@ -31,7 +33,7 @@ public class RequestedAdapter extends RecyclerView.Adapter<MyEventRequestedHolde
     @Override
     public void onBindViewHolder(@NonNull MyEventRequestedHolder myEventRequestedHolder, int i) {
         presenter.onBindHolderR(myEventRequestedHolder,i,requests);
-        myEventRequestedHolder.root.setOnClickListener(v -> presenter.sendEventDetail(i,requests));
+        myEventRequestedHolder.root.setOnClickListener(v -> presenter.sendEventDetail(i,requests,false));
 
     }
 

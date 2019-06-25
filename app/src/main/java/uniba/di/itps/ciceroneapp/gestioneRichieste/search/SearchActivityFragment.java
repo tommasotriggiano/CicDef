@@ -250,6 +250,11 @@ public class SearchActivityFragment extends Fragment implements GestioneRichiest
     }
 
     @Override
+    public void setTextStato(String stato) {
+
+    }
+
+    @Override
     public void goToGuests() {
         //nested
 
