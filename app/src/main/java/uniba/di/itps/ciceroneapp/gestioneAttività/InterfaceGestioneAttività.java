@@ -25,6 +25,8 @@ public interface InterfaceGestioneAttività {
         void setTextLuogo(String luogo);
         void setTextIndirizzo(String indirizzo);
         void setTextStato(String stato);
+
+        void goToEvent();
     }
     interface Presenter{
         void addFragment(Fragment fragment,MvpView mvpView);
@@ -35,7 +37,8 @@ public interface InterfaceGestioneAttività {
         void initRecyclerViewRichieste(RecyclerView recyclerView);
         void onBindHolder(InterfaceGestioneAttività.MvpView mvpView, int i, ArrayList<Map<String,Object>> events);
         void sendEventDetail(int position,ArrayList<Map<String,Object>> events);
-        void deleteEvent(Intent receive, GestioneRichiesteInterfaccia.MvpView mvpView);
+        void deleteEvent(Intent receive, MvpView mvpView);
+        void setEventDetail(Intent receive,MvpView mvpView);
         void onBindHolderR(MvpView mvpView, int i, ArrayList<Map<String, Object>> requests);
     }
 }

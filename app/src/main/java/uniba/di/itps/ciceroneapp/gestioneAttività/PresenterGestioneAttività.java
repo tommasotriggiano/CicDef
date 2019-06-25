@@ -23,7 +23,7 @@ import java.util.Map;
 import uniba.di.itps.ciceroneapp.GestioneAttività.myEventCreatedView.RecyclerViewMyEventAdapter;
 import uniba.di.itps.ciceroneapp.GestioneAttività.myEventRequestedView.RequestedAdapter;
 import uniba.di.itps.ciceroneapp.data.DataFetch;
-import uniba.di.itps.ciceroneapp.gestioneRichieste.search.DettaglioAttivita;
+import uniba.di.itps.ciceroneapp.gestioneRichieste.search.DetailEventRequest;
 import uniba.di.itps.ciceroneapp.gestioneRichieste.search.GestioneRichiesteInterfaccia;
 import uniba.di.itps.ciceroneapp.model.Event;
 import uniba.di.itps.ciceroneapp.model.Request;
@@ -143,7 +143,7 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 for(DocumentSnapshot dc :queryDocumentSnapshots.getDocuments()){
-                    richiesta = dc.getData();
+                    richiesta =  dc.getData();
                     ric.add(richiesta);
                 }
                 ra = new RequestedAdapter(mcontext,ric);
@@ -166,14 +166,14 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
 
     @Override
     public void sendEventDetail(int position,ArrayList<Map<String,Object>> events) {
-        Intent goToDetail = new Intent(mcontext, DettaglioAttivita.class);
+        Intent goToDetail = new Intent(mcontext, DetailEventRequest.class);
         goToDetail.putExtra("evento", (Serializable) events.get(position));
         goToDetail.putExtra("create",true);
         mcontext.startActivity(goToDetail);
     }
 
     @Override
-    public void deleteEvent(Intent receive, GestioneRichiesteInterfaccia.MvpView mvpView) {
+    public void deleteEvent(Intent receive, InterfaceGestioneAttività.MvpView mvpView) {
         Event event = (Event) receive.getSerializableExtra("evento");
         if(event.delete()){
             mvpView.goToEvent();
@@ -181,8 +181,14 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
     }
 
     @Override
+    public void setEventDetail(Intent receive, InterfaceGestioneAttività.MvpView mvpView) {
+        Event event = (Event) receive.getSerializableExtra("evento");
+    }
+
+    @Override
     public void onBindHolderR(InterfaceGestioneAttività.MvpView mvpView, int i, ArrayList<Map<String, Object>> requests) {
         String idAttivita = requests.get(i).get(Request.ID_ATTIVITA).toString();
+        mvpView.setTextStato(requests.get(i).get(Request.STATO_RICHIESTA).toString());
         FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document(idAttivita).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -194,9 +200,14 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
                 mvpView.setTextIndirizzo(event.getIndirizzo());
                 if(event.getFoto() != null){
                 mvpView.setImmatività(event.getFoto());}
+                Map<String,Object> req = event.toMap();
+                req.put("statoRichiesta",requests.get(i).get(Request.STATO_RICHIESTA).toString());
+
+
             }
         });
-        mvpView.setTextStato(requests.get(i).get(Request.STATO_RICHIESTA).toString());
+
+
     }
 
 
