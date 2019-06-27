@@ -11,18 +11,14 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-
 import com.squareup.picasso.Picasso;
 
-import java.util.List;
-
 import de.hdodenhof.circleimageview.CircleImageView;
-import uniba.di.itps.ciceroneapp.GestioneAttività.detailEventCreated.DetailEvent;
 import uniba.di.itps.ciceroneapp.R;
 import uniba.di.itps.ciceroneapp.gestioneRichieste.search.GestioneRichiesteInterfaccia;
 import uniba.di.itps.ciceroneapp.gestioneRichieste.search.GestioneRichiestePresenter;
 
-public class AddGuests extends DetailEventRequest {
+public class AddGuests extends AppCompatActivity implements GestioneRichiesteInterfaccia.MvpView, View.OnClickListener {
     private TextView showGuest,numberGuest,myName,mySurname,prezzo;
     private Button confirm,addGuest;
     private EditText nameGuest,surnameGuest,emailGuest;
@@ -30,6 +26,7 @@ public class AddGuests extends DetailEventRequest {
     private RelativeLayout listGuestRelative,confirmLayout;
     private ListView listGuest;
     private Toolbar exit;
+    private Intent receive;
     private GestioneRichiesteInterfaccia.Presenter presenter;
 
 
@@ -44,6 +41,7 @@ public class AddGuests extends DetailEventRequest {
         exit = findViewById(R.id.indietro);
         mySurname = findViewById(R.id.cognome);
         prezzo = findViewById(R.id.prezzoConferma);
+        receive = getIntent();
         confirm = findViewById(R.id.confermaRichiesta);
         addGuest = findViewById(R.id.addGuestButton);
         nameGuest = findViewById(R.id.nomeOspite);
@@ -53,35 +51,40 @@ public class AddGuests extends DetailEventRequest {
         listGuestRelative = findViewById(R.id.ospit);
         listGuest = findViewById(R.id.listGuests);
         confirmLayout = findViewById(R.id.conferma);
-        showGuest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listGuestRelative.setVisibility(View.VISIBLE);
-                listGuest.setVisibility(View.GONE);
-                confirmLayout.setVisibility(View.GONE);
-            }
-        });
-        addGuest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listGuestRelative.setVisibility(View.GONE);
-                listGuest.setVisibility(View.VISIBLE);
-                confirmLayout.setVisibility(View.VISIBLE);
-            }
-        });
-        exit.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        Intent receive = getIntent();
+        showGuest.setOnClickListener(this);
+        addGuest.setOnClickListener(this);
+        confirm.setOnClickListener(this);
+
+        exit.setNavigationOnClickListener(v -> finish());
         presenter.setAddGuest(receive,this);
 
 
     }
 
 
+    @Override
+    public void enableButton(Intent receive) {}
+
+    @Override
+    public void showCategories(TextView category) {}
+
+    @Override
+    public void setTextTitolo(String string) {}
+
+    @Override
+    public void setTextCategoria(String string) {}
+
+    @Override
+    public void setTextLuogo(String string) {}
+
+    @Override
+    public void setTextDurata(String string) {}
+
+    @Override
+    public void setTextLingua(String string) {}
+
+    @Override
+    public void setTextData(String string) {}
 
     @Override
     public void setTextNomeC(String string) {
@@ -90,6 +93,15 @@ public class AddGuests extends DetailEventRequest {
     @Override
     public void setTextCognomeC(String string) {
         this.mySurname.setText(string); }
+
+    @Override
+    public void setTextOraInizio(String string) {}
+
+    @Override
+    public void setTextDescrizione(String string) {}
+
+    @Override
+    public void setTextIndirizzo(String string) {}
 
 
     @Override
@@ -101,9 +113,45 @@ public class AddGuests extends DetailEventRequest {
         Picasso.get().load(fotoprofilo).into(this.myImage); }
 
     @Override
+    public void setImmagineAttività(String img) {}
+
+    @Override
+    public void setNMaxPartecipanti(String nMaxPartecipanti) {
+        this.numberGuest.setText(nMaxPartecipanti);
+    }
+
+    @Override
+    public void setTextStato(String stato) {}
+
+    @Override
+    public void goToGuests() {}
+
+    @Override
     public void goToEvent() {
         //deve andare alla sezione dove visualizza le richieste
-        startActivity(new Intent(AddGuests.this, DetailEventRequest.class));
+        startActivity(new Intent(AddGuests.this, DetailEventRequest.class)); }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+
+            case R.id.ospiti:
+                listGuestRelative.setVisibility(View.VISIBLE);
+                listGuest.setVisibility(View.GONE);
+                confirmLayout.setVisibility(View.GONE);
+                break;
+
+            case R.id.addGuestButton:
+                presenter.setListViewGuest(listGuest,nameGuest.getText().toString(),surnameGuest.getText().toString(),emailGuest.getText().toString());
+                listGuestRelative.setVisibility(View.GONE);
+                listGuest.setVisibility(View.VISIBLE);
+                confirmLayout.setVisibility(View.VISIBLE);
+                break;
+
+            case R.id.confermaRichiesta:
+                presenter.createRequestToDatabase(receive,this);
+                break;
+        }
 
     }
 }

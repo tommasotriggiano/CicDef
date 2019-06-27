@@ -2,6 +2,7 @@ package uniba.di.itps.ciceroneapp.gestioneRichieste.search;
 
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -38,5 +39,7 @@ public interface GestioneRichiesteInterfaccia {
         void createRequestToDatabase(Intent receive,MvpView mvpView);
         void onBindHolder(GestioneRichiesteInterfaccia.MvpView mvpView, int i, ArrayList<Map<String,Object>> events);
         void onBindHolderR(MvpView mvpView, int i, ArrayList<Map<String, Object>> requests);
+
+        void setListViewGuest(ListView listGuest,String nome,String cognome,String email);
     }
 }

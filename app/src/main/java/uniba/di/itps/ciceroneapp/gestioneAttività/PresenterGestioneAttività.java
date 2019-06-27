@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -14,20 +15,25 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import uniba.di.itps.ciceroneapp.GestioneAttività.detailEventCreated.AdapterRichiedenti;
+import uniba.di.itps.ciceroneapp.GestioneAttività.detailEventCreated.DetailEvent;
 import uniba.di.itps.ciceroneapp.GestioneAttività.myEventCreatedView.RecyclerViewMyEventAdapter;
 import uniba.di.itps.ciceroneapp.GestioneAttività.myEventRequestedView.RequestedAdapter;
 import uniba.di.itps.ciceroneapp.data.DataFetch;
-import uniba.di.itps.ciceroneapp.gestioneRichieste.search.DetailEventRequest;
-import uniba.di.itps.ciceroneapp.gestioneRichieste.search.GestioneRichiesteInterfaccia;
 import uniba.di.itps.ciceroneapp.model.Event;
+import uniba.di.itps.ciceroneapp.model.EventInterface;
 import uniba.di.itps.ciceroneapp.model.Request;
+import uniba.di.itps.ciceroneapp.model.RequestInterface;
 import uniba.di.itps.ciceroneapp.model.Stage;
+import uniba.di.itps.ciceroneapp.model.User;
 
 /**
  * Created by tommaso on 27/05/2019.
@@ -38,9 +44,14 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
     private FirebaseUser user;
     private ArrayList<Map<String,Object>> events = new ArrayList<>();
     private ArrayList<Map<String,Object>> ric = new ArrayList<>();
+    private ArrayList<Map<String,Object>> richiedenti = new ArrayList<>();
+    private ArrayList<String> partecipanti = new ArrayList<>();
     private RecyclerViewMyEventAdapter adapter;
     private RequestedAdapter ra;
+    private AdapterRichiedenti richiedentiAdapter;
     private Map<String,Object> richiesta = new HashMap<>();
+    private EventInterface eventInterface = new Event();
+    RequestInterface requestInterface = new Request();
 
     public PresenterGestioneAttività(Context context){
         mcontext = context;
@@ -166,49 +177,128 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
 
     @Override
     public void sendEventDetail(int position,ArrayList<Map<String,Object>> events) {
-        Intent goToDetail = new Intent(mcontext, DetailEventRequest.class);
+        Intent goToDetail = new Intent(mcontext, DetailEvent.class);
         goToDetail.putExtra("evento", (Serializable) events.get(position));
-        goToDetail.putExtra("create",true);
         mcontext.startActivity(goToDetail);
     }
 
     @Override
     public void deleteEvent(Intent receive, InterfaceGestioneAttività.MvpView mvpView) {
-        Event event = (Event) receive.getSerializableExtra("evento");
-        if(event.delete()){
+        Map<String,Object> requests= (Map<String, Object>) receive.getSerializableExtra("evento");
+        String id = String.valueOf(requests.get(Event.IDEVENTO));
+        Event event = new Event();
+        if(event.delete(id)){
             mvpView.goToEvent();
         };
     }
 
     @Override
-    public void setEventDetail(Intent receive, InterfaceGestioneAttività.MvpView mvpView) {
-        Event event = (Event) receive.getSerializableExtra("evento");
+    public void setEventDetailC(Intent receive, InterfaceGestioneAttività.MvpView mvpView) {
+        Map<String,Object> request = (Map<String, Object>) receive.getSerializableExtra("evento");
+        mvpView.setTextTitolo(request.get(Event.TITOLO).toString());
+        mvpView.setTextCategoria(request.get(Event.CATEGORIA).toString());
+        mvpView.setTextLuogo(request.get(Event.LUOGO_INCONTRO).toString());
+        mvpView.setTextLingua(request.get(Event.LINGUA).toString());
+        mvpView.setTextData(request.get(Event.DATAEVENTO).toString());
+        mvpView.setTextDescrizione(request.get(Event.DESCRIZIONE).toString());
+        mvpView.setTextIndirizzo(request.get(Event.INDIRIZZO).toString());
+        mvpView.setTextOrario(request.get(Event.ORARIO_INIZIO).toString());
+        mvpView.setTextPrezzo(String.valueOf(request.get(Event.PREZZO)),request.get(Event.VALUTA).toString());
+        String[] partsEnd = request.get(Event.ORARIO_INIZIO).toString().split(":");
+        String[] partStart =  request.get(Event.ORARIO_INIZIO).toString().split(":");
+        int durata = Integer.valueOf(partsEnd[0]) - Integer.valueOf(partStart[0]);
+        mvpView.setTextDurata(String.valueOf(durata));
+        if(request.get(Event.FOTO) != null){
+            mvpView.setImmatività(request.get(Event.FOTO).toString());
+        }
+    }
+
+
+
+    @Override
+    public void goToModify(Intent receive) {
     }
 
     @Override
-    public void onBindHolderR(InterfaceGestioneAttività.MvpView mvpView, int i, ArrayList<Map<String, Object>> requests) {
-        String idAttivita = requests.get(i).get(Request.ID_ATTIVITA).toString();
-        mvpView.setTextStato(requests.get(i).get(Request.STATO_RICHIESTA).toString());
-        FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document(idAttivita).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+    public void gotoViewRequest(InterfaceGestioneAttività.MvpView mvpView) {
+        mvpView.goToRequest();
+
+
+    }
+
+    @Override
+    public void setHolderRichiedenti(AdapterRichiedenti.Holder holder, int position,ArrayList<Map<String,Object>> richiedenti) {
+        String idGlobetrotter = richiedenti.get(position).get(Request.ID_GLOBETROTTER).toString();
+        FirebaseFirestore.getInstance().collection(DataFetch.UTENTI).document(idGlobetrotter).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                Event event = documentSnapshot.toObject(Event.class);
-                mvpView.setTextTitolo(event.getTitolo());
-                mvpView.setTextData(event.getDateEvento());
-                mvpView.setTextOrario(event.getOrarioIncontro());
-                mvpView.setTextLuogo(event.getLuogo());
-                mvpView.setTextIndirizzo(event.getIndirizzo());
-                if(event.getFoto() != null){
-                mvpView.setImmatività(event.getFoto());}
-                Map<String,Object> req = event.toMap();
-                req.put("statoRichiesta",requests.get(i).get(Request.STATO_RICHIESTA).toString());
-
+                User user = documentSnapshot.toObject(User.class);
+                holder.nome.setText(user.getNome());
+                holder.cognome.setText(user.getCognome());
+                if(user.getFotoprofilo() != null){
+                Picasso.get().load(user.getFotoprofilo()).into(holder.imageProfile);}
+                holder.email.setText(user.getEmail());
+                if(holder.telefono != null){
+                    holder.telefono.setText(user.getTelefono());
+                }
+                else{
+                    holder.telefono.setText("Telefono non inserito");
+                };
 
             }
         });
+            }
+
+
+    @Override
+    public void initRecyclerViewRichiedenti(RecyclerView richieste,Intent receive) {
+        Map<String,Object> att = (Map<String, Object>) receive.getSerializableExtra("evento");
+        String idAtt = att.get(Event.IDEVENTO).toString();
+        Query richiedentiQuery = FirebaseFirestore.getInstance().collection(DataFetch.RICHIESTE).whereEqualTo(Request.ID_ATTIVITA,idAtt).whereEqualTo(Request.ID_CICERONE,FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .whereEqualTo(Request.STATO_RICHIESTA,Request.STATO_IN_ATTESA);
+        richiedentiQuery.get().addOnSuccessListener(queryDocumentSnapshots -> {
+            for(DocumentSnapshot dc : queryDocumentSnapshots.getDocuments()){
+                Map<String,Object> richiesta =  dc.getData();
+                richiedenti.add(richiesta);
+            }
+            AdapterRichiedenti adapterRichiedenti = new AdapterRichiedenti(mcontext,richiedenti);
+            richieste.setAdapter(adapterRichiedenti);
+            adapterRichiedenti.notifyDataSetChanged();
+        });
+    }
+
+    @Override
+    public void accettaRichiesta(int position,ArrayList<Map<String,Object>> richiesta) {
+
+        String idPartecipante = (String) richiesta.get(position).get(Request.ID_GLOBETROTTER);
+        String idAttivita = (String) richiesta.get(position).get(Request.ID_ATTIVITA);
+
+        boolean resultP = eventInterface.addPartecipants(idAttivita,idPartecipante);
+
+        if(requestInterface.updateStatoToDatabase(idAttivita+"-"+idPartecipante,Request.STATO_CONFERMATA) && resultP){
+            Toast.makeText(mcontext,"Successo",Toast.LENGTH_SHORT).show();
+
+        };
+
+
+
+
+
+    }
+
+    @Override
+    public void rifiutaRichiesta(int position,ArrayList<Map<String,Object>> richiesta) {
+        String rifiutato = Request.STATO_RIFIUTATA;
+        String idPartecipante = (String) richiesta.get(position).get(Request.ID_GLOBETROTTER);
+        String idAttivita = (String) richiesta.get(position).get(Request.ID_ATTIVITA);
+        requestInterface.updateStatoToDatabase(idAttivita+""+idPartecipante,rifiutato);
+
 
 
     }
 
 
 }
+
+
+

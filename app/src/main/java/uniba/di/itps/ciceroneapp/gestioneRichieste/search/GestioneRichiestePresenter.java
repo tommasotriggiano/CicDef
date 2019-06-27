@@ -3,6 +3,7 @@ package uniba.di.itps.ciceroneapp.gestioneRichieste.search;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.widget.ListView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -18,7 +19,9 @@ import java.util.Map;
 import uniba.di.itps.ciceroneapp.R;
 import uniba.di.itps.ciceroneapp.data.DataFetch;
 import uniba.di.itps.ciceroneapp.gestioneRichieste.search.DetailEventRequested.DetailEventRequest;
+import uniba.di.itps.ciceroneapp.gestioneRichieste.search.DetailEventRequested.GuestAdapter;
 import uniba.di.itps.ciceroneapp.model.Event;
+import uniba.di.itps.ciceroneapp.model.Guest;
 import uniba.di.itps.ciceroneapp.model.Request;
 import uniba.di.itps.ciceroneapp.model.User;
 
@@ -27,6 +30,7 @@ public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia
     private Context context;
     private ArrayList<Map<String,Object>> events;
     private ArrayList<Map<String,Object>> request;
+    ArrayList<Guest> guest = new ArrayList<>();
     private AdapterAttivitaRicercate adapter;
 
     public GestioneRichiestePresenter(Context context) {
@@ -202,6 +206,9 @@ public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia
         String status = Request.STATO_IN_ATTESA;
         Request request = new Request(String.valueOf(event.get(Event.IDCICERONE)),String.valueOf(event.get(Event.IDEVENTO)), FirebaseAuth.getInstance()
                 .getCurrentUser().getUid(),status);
+        if(guest.size() != 0){
+            request.setOspiti(guest);
+        }
         if(request.addRequestToDatabase()){
             mvpView.goToEvent();
         };
@@ -235,4 +242,16 @@ public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia
             }
         });
         mvpView.setTextStato(requests.get(i).get(Request.STATO_RICHIESTA).toString());
-    }}
+    }
+
+    @Override
+    public void setListViewGuest(ListView listGuest,String nome,String cognome,String email) {
+        Guest g = new Guest(nome,cognome);
+        if(email != null){
+            g.setEmail(email);
+        }
+        guest.add(g);
+        listGuest.setAdapter(new GuestAdapter(context,guest));
+
+    }
+}
