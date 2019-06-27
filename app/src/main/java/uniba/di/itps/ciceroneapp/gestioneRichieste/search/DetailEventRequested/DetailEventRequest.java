@@ -1,4 +1,4 @@
-package uniba.di.itps.ciceroneapp.gestioneRichieste.search;
+package uniba.di.itps.ciceroneapp.gestioneRichieste.search.DetailEventRequested;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import de.hdodenhof.circleimageview.CircleImageView;
 import uniba.di.itps.ciceroneapp.R;
+import uniba.di.itps.ciceroneapp.gestioneRichieste.search.GestioneRichiesteInterfaccia;
+import uniba.di.itps.ciceroneapp.gestioneRichieste.search.GestioneRichiestePresenter;
 import uniba.di.itps.ciceroneapp.main.MainActivity;
 
 public class DetailEventRequest extends AppCompatActivity implements GestioneRichiesteInterfaccia.MvpView {
@@ -32,8 +34,8 @@ public class DetailEventRequest extends AppCompatActivity implements GestioneRic
         lingua = findViewById(R.id.lingua);
         data = findViewById(R.id.data);
         ciceroneProfile = findViewById(R.id.imageProfile);
-        nomeC = findViewById(R.id.nome);
-        cognomeC = findViewById(R.id.cognome);
+        nomeC = findViewById(R.id.nomeOspite);
+        cognomeC = findViewById(R.id.cognomeOspite);
         linear = findViewById(R.id.linearProfile);
         descrizione = findViewById(R.id.descrizioneText);
         indirizzo = findViewById(R.id.doveText);
@@ -51,8 +53,10 @@ public class DetailEventRequest extends AppCompatActivity implements GestioneRic
 
         presenter.setEventDetail(receive,this);
         richiedi.setOnClickListener(v -> {
-            if(richiedi.getText().toString().equals(getResources().getString(R.string.viewRequests))){
-                presenter.createRequestToDatabase(receive,this);}
+            if(richiedi.getText().toString().equals(getResources().getString(R.string.DoRequest))){
+                this.goToGuests();
+                //presenter.createRequestToDatabase(receive,this);
+                }
         });
 
     }
@@ -102,8 +106,7 @@ public class DetailEventRequest extends AppCompatActivity implements GestioneRic
 
     @Override
     public void setTextPrezzo(String prezzo,String valuta) {
-        this.prezzo.setText(prezzo + "  "+valuta );
-    }
+        this.prezzo.setText(prezzo + "  "+valuta ); }
 
     @Override
     public void setImmagineProfilo(String fotoprofilo) { Picasso.get().load(fotoprofilo).into(this.ciceroneProfile); }
@@ -111,9 +114,7 @@ public class DetailEventRequest extends AppCompatActivity implements GestioneRic
     public void setImmagineAttività(String img) { Picasso.get().load(img).into(this.immagineAtt); }
 
     @Override
-    public void setNMaxPartecipanti(String nMaxPartecipanti) {
-
-    }
+    public void setNMaxPartecipanti(String nMaxPartecipanti) {}
 
     @Override
     public void setTextStato(String stato) {
@@ -122,11 +123,11 @@ public class DetailEventRequest extends AppCompatActivity implements GestioneRic
 
     @Override
     public void goToGuests() {
-
+        Intent goToGuest = new Intent(DetailEventRequest.this,AddGuests.class);
+        goToGuest.putExtra("evento",receive.getSerializableExtra("evento"));
+        this.startActivity(goToGuest);
     }
 
     @Override
-    public void goToEvent() {
-        this.startActivity(new Intent(DetailEventRequest.this,MainActivity.class));
-    }
+    public void goToEvent() {}
 }

@@ -140,6 +140,26 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestione
     }
 
     @Override
+    public void setTextDescrizione(String string) {
+
+    }
+
+    @Override
+    public void setTextPrezzo(String prezzo, String valuta) {
+
+    }
+
+    @Override
+    public void setTextDurata(String string) {
+
+    }
+
+    @Override
+    public void setTextLingua(String string) {
+
+    }
+
+    @Override
     public void setTextData(String data) {
 
     }
@@ -151,6 +171,11 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestione
 
     @Override
     public void setTextOrario(String orarioIncontro) {
+
+    }
+
+    @Override
+    public void setTextCategoria(String string) {
 
     }
 
@@ -173,6 +198,12 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestione
     public void goToEvent() {
 
     }
+
+    @Override
+    public void goToRequest() {
+
+    }
+
 
 
 }

@@ -150,5 +150,12 @@
     <string name="AuthSuccess">Autenticazione Avvenuta!</string>
     <string name="viewRequest">Visualizza Richieste</string>
     <string name="meetPartecipants">Conosci i partecipanti</string>
+    <string name="approve">accetta</string>
+    <string name="reject">rifiuta</string>
+    <string name="who">Chi verrà?</string>
+    <string name="addOspiti">Aggiungi un altro ospite</string>
+    <string name="title_activity_add_guests">AddGuests</string>
+    <string name="addGuest">AGGIUNGI OSPITE</string>
+    <string name="conferma">Conferma</string>
 
 </resources>

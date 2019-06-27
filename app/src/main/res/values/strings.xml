@@ -182,6 +182,13 @@
     <string name="AuthSuccess">Auth Success</string>
     <string name="viewRequest">View Requests</string>
     <string name="meetPartecipants">meet Partecipants</string>
+    <string name="approve">confirm</string>
+    <string name="reject">deny</string>
+    <string name="title_activity_add_guests">AddGuests</string>
+    <string name="who">Who will come?</string>
+    <string name="addOspiti">Want to add some Guest?</string>
+    <string name="addGuest">ADD GUEST</string>
+    <string name="conferma">confirm</string>
 
 
 </resources>

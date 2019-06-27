@@ -1,8 +1,12 @@
 package uniba.di.itps.ciceroneapp.model;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import uniba.di.itps.ciceroneapp.data.DataFetch;
 
@@ -75,9 +79,34 @@ public class Request implements RequestInterface {
 
     @Override
     public boolean addRequestToDatabase(){
-        FirebaseFirestore.getInstance().collection(DataFetch.RICHIESTE).document().set(this).addOnSuccessListener(aVoid -> {
+        FirebaseFirestore.getInstance().collection(DataFetch.RICHIESTE).document(this.getIdAttivita()+"-"+this.getIdGlobetrotter()).set(this).addOnSuccessListener(aVoid -> {
 
         });
         return true;
+    }
+
+    @Override
+    public boolean updateStatoToDatabase(String id,String stato) {
+        FirebaseFirestore.getInstance().collection(DataFetch.RICHIESTE).document(id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Request r = documentSnapshot.toObject(Request.class);
+                r.setStato(stato);
+                FirebaseFirestore.getInstance().collection(DataFetch.RICHIESTE).document(id).update(r.toMap());
+            }
+        });
+        return true;
+    }
+
+    @Override
+    public Map<String,Object> toMap() {
+        Map<String,Object> request = new HashMap<>();
+        request.put("idAttivita",this.idAttivita);
+        request.put("idCicerone",this.idCicerone);
+        request.put("idGlobetrotter",this.idGlobetrotter);
+        request.put("stato",this.stato);
+        request.put("ospiti",this.ospiti);
+        return request;
+
     }
 }

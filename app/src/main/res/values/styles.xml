@@ -7,6 +7,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
     <style name="MyAppTheme" parent="android:Theme.Material">
         <item name="android:dialogTheme">@style/MyDialogTheme</item>
         <item name="android:datePickerStyle">@style/MyDatePicker</item>
@@ -19,6 +20,7 @@
     <style name="MyDatePicker" parent="android:Widget.Material.DatePicker">
         <item name="android:datePickerMode">spinner</item>
     </style>
+
     <style name="ColoredHandleTheme">
         <item name="colorControlActivated">@color/colorPrimaryDark</item>
     </style>

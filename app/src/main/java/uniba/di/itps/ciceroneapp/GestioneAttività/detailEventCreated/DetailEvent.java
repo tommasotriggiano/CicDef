@@ -1,18 +1,26 @@
-package uniba.di.itps.ciceroneapp.GestioneAttività;
+package uniba.di.itps.ciceroneapp.GestioneAttività.detailEventCreated;
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Map;
+
+import uniba.di.itps.ciceroneapp.GestioneAttività.InterfaceGestioneAttività;
+import uniba.di.itps.ciceroneapp.GestioneAttività.PresenterGestioneAttività;
 import uniba.di.itps.ciceroneapp.R;
-import uniba.di.itps.ciceroneapp.gestioneRichieste.search.DetailEventRequest;
-import uniba.di.itps.ciceroneapp.gestioneRichieste.search.GestioneRichiesteInterfaccia;
-import uniba.di.itps.ciceroneapp.gestioneRichieste.search.GestioneRichiestePresenter;
 import uniba.di.itps.ciceroneapp.main.MainActivity;
+import uniba.di.itps.ciceroneapp.model.Event;
+import uniba.di.itps.ciceroneapp.model.User;
 
 public class DetailEvent extends AppCompatActivity implements InterfaceGestioneAttività.MvpView {
     private TextView titolo,categoria,lingua,durata,luogo,data,descrizione,indirizzo,requisiti,prezzo,valuta,nMaxPartecipanti,oraInizio,tappe,vediRichieste,partecipanti;
@@ -45,65 +53,74 @@ public class DetailEvent extends AppCompatActivity implements InterfaceGestioneA
         //presenter1 = new PresenterGestioneAttività(this);
         presenter = new PresenterGestioneAttività(this);
         receive =  getIntent();
-        presenter.setEventDetail(receive,this);
+        presenter.setEventDetailC(receive,this);
         delete.setOnClickListener(v -> {
         presenter.deleteEvent(receive,this);
+
+        });
+        modify.setOnClickListener(v -> presenter.goToModify(receive));
+        vediRichieste.setOnClickListener(v -> {
+            presenter.gotoViewRequest(this);
 
         });
     }
 
     @Override
-    public void setFragment(Fragment fragment) {
-
-    }
+    public void setFragment(Fragment fragment) {}
 
     @Override
-    public void hideBottomNavigation() {
-
-    }
+    public void hideBottomNavigation() {}
 
     @Override
-    public void showBottomNavigation() {
-
-    }
+    public void showBottomNavigation() {}
 
     @Override
-    public void showDialogDate(TextView date, boolean birth) {
-
-    }
+    public void showDialogDate(TextView date, boolean birth) {}
 
     @Override
     public void setTextTitolo(String titolo) {
+        this.titolo.setText(titolo);}
 
-    }
+    @Override
+    public void setTextCategoria(String string) { this.categoria.setText(string); }
+
+    @Override
+    public void setTextLuogo(String string) {this.luogo.setText(string);}
+
+    @Override
+    public void setTextDurata(String string) { this.durata.setText(string +" "+ getResources().getString(R.string.hours)); }
+
+    @Override
+    public void setTextLingua(String string) { this.lingua.setText(getResources().getString(R.string.offeredLanguage)+ " " +string);}
+
+    @Override
+    public void setTextData(String string) { this.data.setText(string);}
 
     @Override
     public void setTextPartecipanti(String partecipanti) {
-
     }
 
     @Override
-    public void setTextData(String data) {
-
+    public void setTextDescrizione(String string) {
+        this.descrizione.setText(string);
     }
+
 
     @Override
     public void setImmatività(String url) {
-
+        Picasso.get().load(url).into(this.immagineAtt);
     }
 
     @Override
     public void setTextOrario(String orarioIncontro) {
+        this.oraInizio.setText(orarioIncontro);
 
     }
 
-    @Override
-    public void setTextLuogo(String luogo) {
-
-    }
 
     @Override
     public void setTextIndirizzo(String indirizzo) {
+        this.indirizzo.setText(indirizzo);
 
     }
 
@@ -111,10 +128,22 @@ public class DetailEvent extends AppCompatActivity implements InterfaceGestioneA
     public void setTextStato(String stato) {
 
     }
+    @Override
+    public void setTextPrezzo(String prezzo,String valuta) {
+        this.prezzo.setText(prezzo + "  "+valuta );
+    }
 
     @Override
     public void goToEvent() {
         this.startActivity(new Intent(DetailEvent.this, MainActivity.class));
     }
+
+    @Override
+    public void goToRequest() {
+        Intent goToRequest = new Intent(DetailEvent.this, ViewRequest.class);
+        goToRequest.putExtra("evento", receive.getSerializableExtra("evento"));
+        startActivity(goToRequest);
+    }
+
 }
 

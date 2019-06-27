@@ -6,6 +6,7 @@ package uniba.di.itps.ciceroneapp.model;
 import android.annotation.SuppressLint;
 import android.util.Log;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.protobuf.Enum;
@@ -13,6 +14,7 @@ import com.google.protobuf.Enum;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -28,7 +30,7 @@ public class Event implements Serializable, EventInterface {
     private String descrizione;
     private String categoria;
     private int nMaxPartecipanti;
-    private List<User> partecipanti;
+    private List<String> partecipanti;
     private String dateEvento;
     private String orarioIncontro;
     private String orarioInizio;
@@ -72,11 +74,13 @@ public class Event implements Serializable, EventInterface {
 
 
         public Event() {
+            partecipanti = new ArrayList<>();
     } //per firebase.
 
     public Event(String titolo, String descrizione, String categoria, int nMaxPartecipanti, String dateEvento,
                  String orarioIncontro, String orarioInizio, double prezzo,
                  String valuta, List<Stage> itinerario,String idCicerone) {
+        partecipanti = new ArrayList<>();
         this.titolo = titolo;
         this.descrizione = descrizione;
         this.categoria = categoria;
@@ -90,11 +94,11 @@ public class Event implements Serializable, EventInterface {
         this.idCicerone = idCicerone;
     }
 
-    public List<User> getPartecipanti() {
+    public List<String> getPartecipanti() {
         return partecipanti;
     }
 
-    public void setPartecipanti(List<User> partecipanti) {
+    public void setPartecipanti(List<String> partecipanti) {
         this.partecipanti = partecipanti;
     }
 
@@ -271,6 +275,7 @@ public class Event implements Serializable, EventInterface {
         event.put("orarioFine",this.orarioFine);
         event.put("prezzo",this.prezzo);
         event.put("valuta",this.valuta);
+        event.put("partecipanti",this.partecipanti);
         event.put("noteAggiuntive",this.noteAggiuntive);
         event.put("idCicerone",this.idCicerone);
         event.put("lingua",this.lingua);
@@ -284,8 +289,8 @@ public class Event implements Serializable, EventInterface {
         return event;
     }
     @Override
-    public boolean delete(){
-        FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document(this.id).delete();
+    public boolean delete(String id){
+        FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document(id).delete();
         return true;
     }
     @Override
@@ -328,10 +333,39 @@ public class Event implements Serializable, EventInterface {
     }
 
     @Override
-    public void updateEventToDatabase(String idDocument){
-        FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document(idDocument).update(this.toMap());
+    public boolean updateEventToDatabase(String idDocument){
+        FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document(idDocument).update(this.toMap()).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                return;
+            }
+        });
+        return true;
     }
 
-}
+    @Override
+    public boolean addPartecipants(String idAttivita, String idPartecipante) {
+        //modifico il database di Event
+        //aggiungo il partecipante e decremento il numero di partecipanti massimi
+        FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document(idAttivita).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Event event = documentSnapshot.toObject(Event.class);
+                if(event.getPartecipanti() != null){
+                    partecipanti =  event.getPartecipanti();
+                    partecipanti.add(idPartecipante);
+                    event.setPartecipanti(partecipanti);}
+                else{
+                    partecipanti.add(idPartecipante);
+                    event.setPartecipanti(partecipanti);}
+                event.setnMaxPartecipanti(event.getnMaxPartecipanti()-1);
+                event.updateEventToDatabase(idAttivita);
+            }
+
+    });
+
+    return true;
+
+}}
 
 

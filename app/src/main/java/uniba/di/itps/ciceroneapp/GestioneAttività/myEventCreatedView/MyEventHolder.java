@@ -52,6 +52,26 @@ public  class MyEventHolder extends RecyclerView.ViewHolder implements Interface
         this.nIscritti.setText(partecipanti); }
 
     @Override
+    public void setTextDescrizione(String string) {
+
+    }
+
+    @Override
+    public void setTextPrezzo(String prezzo, String valuta) {
+
+    }
+
+    @Override
+    public void setTextDurata(String string) {
+
+    }
+
+    @Override
+    public void setTextLingua(String string) {
+
+    }
+
+    @Override
     public void setTextData(String data) {
         this.date.setText(data);
 
@@ -64,6 +84,11 @@ public  class MyEventHolder extends RecyclerView.ViewHolder implements Interface
 
     @Override
     public void setTextOrario(String orarioIncontro) {
+
+    }
+
+    @Override
+    public void setTextCategoria(String string) {
 
     }
 
@@ -86,4 +111,11 @@ public  class MyEventHolder extends RecyclerView.ViewHolder implements Interface
     public void goToEvent() {
 
     }
+
+    @Override
+    public void goToRequest() {
+
+    }
+
+
 }

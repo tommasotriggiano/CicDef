@@ -16,6 +16,7 @@ public class User implements UserInterface {
     private String datanascita;
     private String fotoprofilo;
     private String sesso;
+    private String telefono;
     private String email;
 
     public User(String nome, String cognome, String email, String uid) {
@@ -79,6 +80,14 @@ public class User implements UserInterface {
     }
     public void setUid(String uid){
         this.uid = uid;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     @Override

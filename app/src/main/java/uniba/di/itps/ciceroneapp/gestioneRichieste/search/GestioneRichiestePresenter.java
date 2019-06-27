@@ -17,6 +17,7 @@ import java.util.Map;
 
 import uniba.di.itps.ciceroneapp.R;
 import uniba.di.itps.ciceroneapp.data.DataFetch;
+import uniba.di.itps.ciceroneapp.gestioneRichieste.search.DetailEventRequested.DetailEventRequest;
 import uniba.di.itps.ciceroneapp.model.Event;
 import uniba.di.itps.ciceroneapp.model.Request;
 import uniba.di.itps.ciceroneapp.model.User;
@@ -75,43 +76,40 @@ public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia
         });
 
     }
-    else{
+    else {
         String idAttivita = request.get(Request.ID_ATTIVITA).toString();
         String status = request.get(Request.STATO_RICHIESTA).toString();
         mvpView.setTextStato(status);
         FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document(idAttivita).get().addOnSuccessListener(
-                new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        Event event = documentSnapshot.toObject(Event.class);
-                        mvpView.setTextTitolo(event.getTitolo());
-                        mvpView.setTextCategoria(event.getCategoria());
-                        mvpView.setTextLuogo(event.getLuogo());
-                        mvpView.setTextLingua(event.getLingua());
-                        mvpView.setTextData(event.getDateEvento());
-                        mvpView.setTextDescrizione(event.getDescrizione());
-                        mvpView.setTextIndirizzo(event.getIndirizzo());
-                        mvpView.setTextOraInizio(event.getOrarioInizio());
-                        mvpView.setTextPrezzo(String.valueOf(event.getPrezzo()),event.getValuta());
-                        String[] partsEnd = event.getOrarioInizio().split(":");
-                        String[] partStart =  event.getOrarioInizio().split(":");
-                        int durata = Integer.valueOf(partsEnd[0]) - Integer.valueOf(partStart[0]);
-                        mvpView.setTextDurata(String.valueOf(durata));
-                        if(event.getFoto() != null){
-                            mvpView.setImmagineAttività(event.getFoto());
-                        }
-                        FirebaseFirestore.getInstance().collection(DataFetch.UTENTI).document(event.getIdCicerone()).get().addOnSuccessListener(docSnapshot -> {
-                            if(docSnapshot.exists()){
-                                User user = docSnapshot.toObject(User.class);
-                                mvpView.setTextNomeC(user.getNome());
-                                mvpView.setTextCognomeC(user.getCognome());
-                                if(user.getFotoprofilo() != null){
-                                    mvpView.setImmagineProfilo(user.getFotoprofilo());
-                                }}
-                        });
-
-
+                documentSnapshot -> {
+                    Event event = documentSnapshot.toObject(Event.class);
+                    mvpView.setTextTitolo(event.getTitolo());
+                    mvpView.setTextCategoria(event.getCategoria());
+                    mvpView.setTextLuogo(event.getLuogo());
+                    mvpView.setTextLingua(event.getLingua());
+                    mvpView.setTextData(event.getDateEvento());
+                    mvpView.setTextDescrizione(event.getDescrizione());
+                    mvpView.setTextIndirizzo(event.getIndirizzo());
+                    mvpView.setTextOraInizio(event.getOrarioInizio());
+                    mvpView.setTextPrezzo(String.valueOf(event.getPrezzo()),event.getValuta());
+                    String[] partsEnd = event.getOrarioInizio().split(":");
+                    String[] partStart =  event.getOrarioInizio().split(":");
+                    int durata = Integer.valueOf(partsEnd[0]) - Integer.valueOf(partStart[0]);
+                    mvpView.setTextDurata(String.valueOf(durata));
+                    if(event.getFoto() != null){
+                        mvpView.setImmagineAttività(event.getFoto());
                     }
+                    FirebaseFirestore.getInstance().collection(DataFetch.UTENTI).document(event.getIdCicerone()).get().addOnSuccessListener(docSnapshot -> {
+                        if(docSnapshot.exists()){
+                            User user = docSnapshot.toObject(User.class);
+                            mvpView.setTextNomeC(user.getNome());
+                            mvpView.setTextCognomeC(user.getCognome());
+                            if(user.getFotoprofilo() != null){
+                                mvpView.setImmagineProfilo(user.getFotoprofilo());
+                            }}
+                    });
+
+
                 }
         );
 
@@ -179,6 +177,23 @@ public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia
         });
         events.clear();
 
+    }
+
+    @Override
+    public void setAddGuest(Intent intent, GestioneRichiesteInterfaccia.MvpView mvpView) {
+        Map<String,Object> event= (Map<String, Object>) intent.getSerializableExtra("evento");
+        FirebaseFirestore.getInstance().collection(DataFetch.UTENTI).document(FirebaseAuth.getInstance().getCurrentUser().getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                User user = documentSnapshot.toObject(User.class);
+                if(user.getFotoprofilo() != null){
+                    mvpView.setImmagineProfilo(user.getFotoprofilo());}
+                mvpView.setTextNomeC(user.getNome());
+                mvpView.setTextCognomeC(user.getCognome());
+
+            }
+        });
+        mvpView.setTextPrezzo(String.valueOf(event.get(Event.PREZZO)),(String)event.get(Event.VALUTA));
     }
 
     @Override

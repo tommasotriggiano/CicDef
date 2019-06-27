@@ -32,9 +32,10 @@ public interface GestioneRichiesteInterfaccia {
     }
     interface Presenter{
         void sendEventDetail(int position, ArrayList<Map<String, Object>> events, boolean b);
-        void setEventDetail(Intent intent,GestioneRichiesteInterfaccia.MvpView mvpView);
+        void setEventDetail(Intent intent,MvpView mvpView);
         void initRecyclerViewCerca(RecyclerView recyclerView, String city, String data, String categoria);
-        void createRequestToDatabase(Intent receive,GestioneRichiesteInterfaccia.MvpView mvpView);
+        void setAddGuest(Intent intent,MvpView mvpView);
+        void createRequestToDatabase(Intent receive,MvpView mvpView);
         void onBindHolder(GestioneRichiesteInterfaccia.MvpView mvpView, int i, ArrayList<Map<String,Object>> events);
         void onBindHolderR(MvpView mvpView, int i, ArrayList<Map<String, Object>> requests);
     }
