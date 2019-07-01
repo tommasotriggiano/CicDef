@@ -1,5 +1,9 @@
 package uniba.di.itps.ciceroneapp.model;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import uniba.di.itps.ciceroneapp.data.DataFetch;
+
 public class Feedback implements FeedbackInterface {
 
 
@@ -11,13 +15,13 @@ public class Feedback implements FeedbackInterface {
     private String commento;
     private String titolo;
     private int rating;
-    private String utente;
+    private String id;
 
-    public Feedback(String commento, String titole, int rating, String utente) {
+    public Feedback(String commento, String titole, int rating, String id) {
         this.commento = commento;
         this.titolo = titole;
         this.rating = rating;
-        this.utente = utente;
+        this.id = id;
     }
 
     public String getCommento() {
@@ -45,10 +49,17 @@ public class Feedback implements FeedbackInterface {
     }
 
     public String getUtente() {
-        return utente;
+        return id;
     }
 
     public void setUtente(String utente) {
-        this.utente = utente;
+        this.id = utente;
+    }
+
+    @Override
+    public boolean createFeedbackToDatabase(String id) {
+        FirebaseFirestore.getInstance().collection(DataFetch.UTENTI).document(id).collection(DataFetch.FEEDBACK).document(id).set(this);
+        return true;
+
     }
 }

@@ -1,107 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardviewApproved"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:background="@color/white"
-    android:layout_marginBottom="5dp">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:background="@color/white">
 
-    <LinearLayout
-        android:id="@+id/view1"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="10dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/view2"
+        <ListView
+            android:id="@+id/guests"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imageProfile"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_alignParentStart="true"
-                android:src="@drawable/ic_image_profile" />
-
-            <TextView
-                android:id="@+id/nomeAut"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_toEndOf="@+id/imageProfile"
-                android:text="Nome"
-                android:textColor="@color/quantum_black_100"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/cognomeAut"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
-                android:layout_marginTop="5dp"
-                android:layout_toEndOf="@+id/nomeAut"
-                android:text="Cognome"
-                android:textColor="@color/quantum_black_100"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/emailApp"
-                android:layout_width="343dp"
-                android:layout_height="30dp"
-                android:layout_below="@+id/imageProfile"
-                android:layout_marginTop="5dp"
-                android:drawableStart="@drawable/ic_email_black_24dp"
-                android:text="Email"
-                android:textColor="@color/quantum_black_100"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/telefono"
-                android:layout_width="343dp"
-                android:layout_height="30dp"
-                android:layout_below="@+id/emailApp"
-                android:layout_marginTop="5dp"
-                android:drawableStart="@drawable/ic_phone"
-                android:gravity="center_vertical"
-                android:text="3277414719"
-                android:textAlignment="gravity"
-                android:textColor="@color/quantum_black_100"
-                android:textSize="20sp" />
-
-        </RelativeLayout>
+            android:layout_height="300dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view1" />
 
         <LinearLayout
-            android:id="@+id/viewBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
-            android:orientation="horizontal">
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <Button
-                android:id="@+id/accetta"
-                android:layout_width="150dp"
-                android:layout_height="40dp"
-                android:background="@drawable/button_rectangle_blue"
-                android:backgroundTint="@color/quantum_googgreen"
-                android:text="@string/approve"
-                android:textColor="@color/white" />
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/feedbackLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/rifiuta"
-                android:layout_width="150dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="5dp"
-                android:background="@drawable/button_rectangle_white"
-                android:backgroundTint="@color/quantum_error_light"
-                android:text="@string/reject"
-                android:textColor="@color/white" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imageProfile"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentStart="true"
+                    android:src="@drawable/ic_image_profile" />
+
+                <TextView
+                    android:id="@+id/nomeAut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toEndOf="@+id/imageProfile"
+                    android:text="Nome"
+                    android:textColor="@color/quantum_black_100"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/cognomeAut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toEndOf="@+id/nomeAut"
+                    android:text="Cognome"
+                    android:textColor="@color/quantum_black_100"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/emailApp"
+                    android:layout_width="343dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/imageProfile"
+                    android:layout_marginTop="5dp"
+                    android:drawableStart="@drawable/ic_email_black_24dp"
+                    android:text="Email"
+                    android:textColor="@color/quantum_black_100"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/telefono"
+                    android:layout_width="343dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/emailApp"
+                    android:layout_marginTop="5dp"
+                    android:drawableStart="@drawable/ic_phone"
+                    android:gravity="center_vertical"
+                    android:text="3277414719"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/quantum_black_100"
+                    android:textSize="20sp" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/viewBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/accetta"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/button_rectangle_blue"
+                    android:backgroundTint="@color/quantum_googgreen"
+                    android:text="@string/approve"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/rifiuta"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/button_rectangle_white"
+                    android:backgroundTint="@color/quantum_error_light"
+                    android:text="@string/reject"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
         </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
 
-    </LinearLayout>
 </android.support.v7.widget.CardView>

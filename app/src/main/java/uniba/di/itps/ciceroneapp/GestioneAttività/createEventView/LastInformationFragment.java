@@ -49,7 +49,7 @@ public class LastInformationFragment extends Fragment {
         if (mvpView != null) {
             mvpView.hideBottomNavigation();
         }
-        presenter = new PresenterGestioneAttività(getActivity(),db,user);
+        presenter = new PresenterGestioneAttività(getActivity());
         return view;
     }
 

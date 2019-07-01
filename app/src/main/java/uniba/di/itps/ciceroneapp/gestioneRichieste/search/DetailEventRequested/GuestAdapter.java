@@ -8,10 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import uniba.di.itps.ciceroneapp.R;
 import uniba.di.itps.ciceroneapp.model.Guest;
-import uniba.di.itps.ciceroneapp.model.Stage;
 
 public class GuestAdapter extends BaseAdapter {
     private Context context;

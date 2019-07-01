@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/indietro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorBackgroundFloating"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:navigationIcon="@drawable/ic_arrow_back_black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Cicerone"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:textAlignment="gravity"
+        android:gravity="center_vertical"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/quantum_black_100"
+        android:paddingStart="15dp"
+        android:text="Cicerone:"
+        app:layout_constraintTop_toBottomOf="@+id/indietro"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <RelativeLayout
+        android:id="@+id/ciceroneLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/text_shape_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Cicerone">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageProfile"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/ic_image_profile" />
+
+        <TextView
+            android:id="@+id/nomeAut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@+id/imageProfile"
+            android:text="Nome"
+            android:textColor="@color/quantum_black_100"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/cognomeAut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@+id/nomeAut"
+            android:text="Cognome"
+            android:textColor="@color/quantum_black_100"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/emailApp"
+            android:layout_width="343dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/imageProfile"
+            android:layout_marginTop="5dp"
+            android:drawableStart="@drawable/ic_email_black_24dp"
+            android:text="Email"
+            android:textColor="@color/quantum_black_100"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/telefono"
+            android:layout_width="343dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/emailApp"
+            android:layout_marginTop="5dp"
+            android:drawableStart="@drawable/ic_phone"
+            android:gravity="center_vertical"
+            android:text="3277414719"
+            android:textAlignment="gravity"
+            android:textColor="@color/quantum_black_100"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/feedback"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:scrollbars="vertical"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:textColor="@color/quantum_black_100"
+        android:textStyle="bold"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Recensioni:"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ciceroneLayout" />
+
+</android.support.constraint.ConstraintLayout>

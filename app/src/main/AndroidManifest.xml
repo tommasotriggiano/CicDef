@@ -17,10 +17,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".GestioneAttività.detailEventCreated.ViewPartecipants"></activity>
         <activity
             android:name=".gestioneRichieste.search.DetailEventRequested.AddGuests"
             android:label="@string/title_activity_add_guests"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".GestioneAttività.detailEventCreated.DetailEvent" />
 
         <service
@@ -54,8 +55,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".gestioneFeedback.CreateFeedback"></activity>
         <activity android:name=".auth.RegistrationActivity" />
         <activity android:name=".main.MainActivity" />
+        <activity android:name=".gestioneFeedback.ViewMyFeedback"/>
         <activity android:name=".gestioneRichieste.search.DetailEventRequested.DetailEventRequest" />
         <activity android:name=".auth.PasswordActivity" />
         <activity android:name=".GestioneAttività.detailEventCreated.ViewRequest" />

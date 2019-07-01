@@ -1,6 +1,7 @@
 package uniba.di.itps.ciceroneapp.main;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -204,6 +205,10 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestione
 
     }
 
+    @Override
+    public void enableButton(Intent receive) {
+
+    }
 
 
 }

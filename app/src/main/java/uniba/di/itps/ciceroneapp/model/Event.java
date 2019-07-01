@@ -311,17 +311,20 @@ public class Event implements Serializable, EventInterface {
         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         Date currentDate = new Date();
         String date = sdf.format(currentDate);
+        Request request = new Request();
 
         FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).get().addOnSuccessListener(queryDocumentSnapshots -> {
             for(DocumentSnapshot ds : queryDocumentSnapshots.getDocuments()){
                 Event event = ds.toObject(Event.class);
                 try {
                     if(sdf.parse(event.getDateEvento()).before(sdf.parse(date))){
-                        event.setStato("PASSATO");
+                        event.setStato(Event.STATO_PASSATO);
+                        request.addStatoEvent(ds.getId(),Event.STATO_PASSATO);
                         FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document(ds.getId()).update(event.toMap());
                     }
                     else if (sdf.parse(event.getDateEvento()).equals(sdf.parse(date))||sdf.parse(event.getDateEvento()).after(sdf.parse(date))){
-                        event.setStato("IN CORSO");
+                        event.setStato(Event.STATO_IN_CORSO);
+                        request.addStatoEvent(ds.getId(),Event.STATO_IN_CORSO);
                         FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document(ds.getId()).update(event.toMap());
                     }
                 } catch (ParseException e) {
@@ -366,6 +369,22 @@ public class Event implements Serializable, EventInterface {
 
     return true;
 
-}}
+}
+
+    @Override
+    public boolean deletePartecipants(String idAttivita, String idPartecipante) {
+        FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document(idAttivita).get().
+                addOnSuccessListener(documentSnapshot -> {
+                    Event event = documentSnapshot.toObject(Event.class);
+                    if (event.getPartecipanti() != null) {
+                        partecipanti = event.getPartecipanti();
+                        partecipanti.remove(idPartecipante);
+                        event.setPartecipanti(partecipanti);
+                        event.setnMaxPartecipanti(event.getnMaxPartecipanti() + 1);
+                        event.updateEventToDatabase(idAttivita);
+                    }
+                });
+        return true;}
+}
 
 

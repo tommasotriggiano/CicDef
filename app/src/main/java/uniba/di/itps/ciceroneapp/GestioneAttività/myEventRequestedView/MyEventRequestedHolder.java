@@ -41,10 +41,6 @@ public class MyEventRequestedHolder extends RecyclerView.ViewHolder implements G
 
 
 
-    @Override
-    public void enableButton(Intent receive) {
-
-    }
 
     @Override
     public void showCategories(TextView category) {

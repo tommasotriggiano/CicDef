@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -14,13 +15,18 @@ import com.google.firebase.firestore.Query;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
+import uniba.di.itps.ciceroneapp.GestioneAttività.myEventRequestedView.RequestedAdapter;
 import uniba.di.itps.ciceroneapp.R;
 import uniba.di.itps.ciceroneapp.data.DataFetch;
+import uniba.di.itps.ciceroneapp.gestioneFeedback.CreateFeedback;
+import uniba.di.itps.ciceroneapp.gestioneFeedback.ViewMyFeedback;
 import uniba.di.itps.ciceroneapp.gestioneRichieste.search.DetailEventRequested.DetailEventRequest;
 import uniba.di.itps.ciceroneapp.gestioneRichieste.search.DetailEventRequested.GuestAdapter;
 import uniba.di.itps.ciceroneapp.model.Event;
+import uniba.di.itps.ciceroneapp.model.Feedback;
 import uniba.di.itps.ciceroneapp.model.Guest;
 import uniba.di.itps.ciceroneapp.model.Request;
 import uniba.di.itps.ciceroneapp.model.User;
@@ -29,8 +35,10 @@ public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia
 
     private Context context;
     private ArrayList<Map<String,Object>> events;
-    private ArrayList<Map<String,Object>> request;
-    ArrayList<Guest> guest = new ArrayList<>();
+    private ArrayList<Map<String,Object>> ric = new ArrayList<>();
+    private RequestedAdapter ra;
+    private Map<String,Object> richiesta = new HashMap<>();
+    private ArrayList<Guest> guest = new ArrayList<>();
     private AdapterAttivitaRicercate adapter;
 
     public GestioneRichiestePresenter(Context context) {
@@ -53,23 +61,31 @@ public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia
         Map<String,Object> request= (Map<String, Object>) intent.getSerializableExtra("evento");
         boolean search = intent.getBooleanExtra("search",false);
         if(search){
-        mvpView.setTextTitolo(request.get(Event.TITOLO).toString());
-        mvpView.setTextCategoria(request.get(Event.CATEGORIA).toString());
-        mvpView.setTextLuogo(request.get(Event.LUOGO_INCONTRO).toString());
-        mvpView.setTextLingua(request.get(Event.LINGUA).toString());
-        mvpView.setTextData(request.get(Event.DATAEVENTO).toString());
-        mvpView.setTextDescrizione(request.get(Event.DESCRIZIONE).toString());
-        mvpView.setTextIndirizzo(request.get(Event.INDIRIZZO).toString());
-        mvpView.setTextOraInizio(request.get(Event.ORARIO_INIZIO).toString());
-        mvpView.setTextPrezzo(String.valueOf(request.get(Event.PREZZO)),request.get(Event.VALUTA).toString());
+            FirebaseFirestore.getInstance().collection(DataFetch.RICHIESTE).document(request.get(Event.IDEVENTO).toString()+"-"+FirebaseAuth.getInstance().getCurrentUser().getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    if(documentSnapshot.exists()){
+                    Request r = documentSnapshot.toObject(Request.class);
+                    mvpView.setTextStato(r.getStato());}
+                }
+            });
+        mvpView.setTextTitolo((String)request.get(Event.TITOLO));
+        mvpView.setTextCategoria((String)request.get(Event.CATEGORIA));
+        mvpView.setTextLuogo((String)request.get(Event.LUOGO_INCONTRO));
+        mvpView.setTextLingua((String)request.get(Event.LINGUA));
+        mvpView.setTextData((String)request.get(Event.DATAEVENTO));
+        mvpView.setTextDescrizione((String)request.get(Event.DESCRIZIONE));
+        mvpView.setTextIndirizzo((String)request.get(Event.INDIRIZZO));
+        mvpView.setTextOraInizio((String)request.get(Event.ORARIO_INIZIO));
+        mvpView.setTextPrezzo(String.valueOf(request.get(Event.PREZZO)),(String)request.get(Event.VALUTA));
         String[] partsEnd = request.get(Event.ORARIO_INIZIO).toString().split(":");
         String[] partStart =  request.get(Event.ORARIO_INIZIO).toString().split(":");
         int durata = Integer.valueOf(partsEnd[0]) - Integer.valueOf(partStart[0]);
         mvpView.setTextDurata(String.valueOf(durata));
         if(request.get(Event.FOTO) != null){
-            mvpView.setImmagineAttività(request.get(Event.FOTO).toString());
+            mvpView.setImmagineAttività((String)request.get(Event.FOTO));
         }
-        FirebaseFirestore.getInstance().collection(DataFetch.UTENTI).document(request.get(Event.IDCICERONE).toString()).get().addOnSuccessListener(documentSnapshot -> {
+        FirebaseFirestore.getInstance().collection(DataFetch.UTENTI).document((String)request.get(Event.IDCICERONE)).get().addOnSuccessListener(documentSnapshot -> {
             if(documentSnapshot.exists()){
                 User user = documentSnapshot.toObject(User.class);
                 mvpView.setTextNomeC(user.getNome());
@@ -81,8 +97,8 @@ public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia
 
     }
     else {
-        String idAttivita = request.get(Request.ID_ATTIVITA).toString();
-        String status = request.get(Request.STATO_RICHIESTA).toString();
+        String idAttivita = (String)request.get(Request.ID_ATTIVITA);
+        String status = (String)request.get(Request.STATO_RICHIESTA);
         mvpView.setTextStato(status);
         FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document(idAttivita).get().addOnSuccessListener(
                 documentSnapshot -> {
@@ -132,21 +148,25 @@ public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia
             cities = FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).
                     whereEqualTo(Event.LUOGO_INCONTRO,city).
                     whereEqualTo(Event.DATAEVENTO,data).
-                    whereEqualTo(Event.CATEGORIA,categoria);}
+                    whereEqualTo(Event.CATEGORIA,categoria).
+                    whereEqualTo(Event.STATO_EVENTO,Event.STATO_IN_CORSO);}
 
         //se è stato sceltro solo il campo data esegui le query solo sul campo data
         else if(!(data.equals(context.getResources().getString(R.string.Date))) && (categoria.equals(context.getResources().getString(R.string.category1)))){
             cities = FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).
                     whereEqualTo(Event.LUOGO_INCONTRO,city).
-                    whereEqualTo(Event.DATAEVENTO,data);}
+                    whereEqualTo(Event.DATAEVENTO,data).
+                    whereEqualTo(Event.STATO_EVENTO,Event.STATO_IN_CORSO);}
 
         //se è stato scelto il campo categoria esegui ale query solo sul campo categoria
         else if((data.equals(context.getResources().getString(R.string.Date))) && !(categoria.equals(context.getResources().getString(R.string.category1)))){
             cities = FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).
                     whereEqualTo(Event.LUOGO_INCONTRO,city).
-                    whereEqualTo(Event.CATEGORIA,categoria);}
+                    whereEqualTo(Event.CATEGORIA,categoria).
+                    whereEqualTo(Event.STATO_EVENTO,Event.STATO_IN_CORSO);}
         else{
-            cities = FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).whereEqualTo(Event.LUOGO_INCONTRO,city);}
+            cities = FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).whereEqualTo(Event.LUOGO_INCONTRO,city).
+                    whereEqualTo(Event.STATO_EVENTO,Event.STATO_IN_CORSO);}
 
         cities.get().addOnSuccessListener(queryDocumentSnapshots -> {
             for(DocumentChange dc : queryDocumentSnapshots.getDocumentChanges()){
@@ -155,13 +175,13 @@ public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia
                 switch(dc.getType()){
                     case ADDED:
                         if(!(event.getIdCicerone().equals(FirebaseAuth.getInstance()
-                                .getCurrentUser().getUid())) && event.getStato().equals(Event.STATO_IN_CORSO)){
+                                .getCurrentUser().getUid()))){
                             events.add(event.toMap());
                         }
                         break;
                     case MODIFIED:
                         if(!(event.getIdCicerone().equals(FirebaseAuth.getInstance().getCurrentUser()
-                                .getUid())) && event.getStato().equals(Event.STATO_IN_CORSO)){
+                                .getUid()))){
                             events.set(dc.getNewIndex(),event.toMap());
 
                         }
@@ -169,7 +189,7 @@ public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia
 
                     case REMOVED:
                         if(!(event.getIdCicerone().equals(FirebaseAuth.getInstance().getCurrentUser()
-                                .getUid())) && event.getStato().equals(Event.STATO_IN_CORSO)){
+                                .getUid()))){
                             events.remove(dc.getOldIndex());
                         }
                         break;
@@ -181,6 +201,24 @@ public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia
         });
         events.clear();
 
+    }
+
+    @Override
+    public void initRecyclerViewRichieste(RecyclerView recyclerView, String stato) {
+
+        Query requested = FirebaseFirestore.getInstance().collection(DataFetch.RICHIESTE).
+                whereEqualTo(Request.ID_GLOBETROTTER, FirebaseAuth.getInstance().getCurrentUser().getUid()).
+                whereEqualTo("statoAttivita",stato);
+        requested.get().addOnSuccessListener(queryDocumentSnapshots -> {
+            for(DocumentSnapshot dc :queryDocumentSnapshots.getDocuments()){
+                richiesta =  dc.getData();
+                ric.add(richiesta);
+            }
+            ra = new RequestedAdapter(context,ric);
+            recyclerView.setAdapter(ra);
+            ra.notifyDataSetChanged();
+        });
+        ric.clear();
     }
 
     @Override
@@ -201,7 +239,7 @@ public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia
     }
 
     @Override
-    public void createRequestToDatabase(Intent receive,GestioneRichiesteInterfaccia.MvpView mvpView) {
+    public boolean createRequestToDatabase(Intent receive,GestioneRichiesteInterfaccia.MvpView mvpView) {
         Map<String,Object> event = (Map<String, Object>) receive.getSerializableExtra("evento");
         String status = Request.STATO_IN_ATTESA;
         Request request = new Request(String.valueOf(event.get(Event.IDCICERONE)),String.valueOf(event.get(Event.IDEVENTO)), FirebaseAuth.getInstance()
@@ -209,9 +247,7 @@ public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia
         if(guest.size() != 0){
             request.setOspiti(guest);
         }
-        if(request.addRequestToDatabase()){
-            mvpView.goToEvent();
-        };
+        return request.addRequestToDatabase();
 
     }
 
@@ -231,6 +267,7 @@ public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia
         FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document(idAttivita).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists()){
                 Event event = documentSnapshot.toObject(Event.class);
                 mvpView.setTextTitolo(event.getTitolo());
                 mvpView.setTextData(event.getDateEvento());
@@ -239,9 +276,9 @@ public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia
                 mvpView.setTextIndirizzo(event.getIndirizzo());
                 if(event.getFoto() != null){
                     mvpView.setImmagineAttività(event.getFoto());}
-            }
+            }}
         });
-        mvpView.setTextStato(requests.get(i).get(Request.STATO_RICHIESTA).toString());
+        mvpView.setTextStato((String)requests.get(i).get(Request.STATO_RICHIESTA));
     }
 
     @Override
@@ -254,4 +291,39 @@ public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia
         listGuest.setAdapter(new GuestAdapter(context,guest));
 
     }
+
+    @Override
+    public void goToFeedback(Intent receive,String stato) {
+        Map<String,Object> request = (Map<String, Object>) receive.getSerializableExtra("evento");
+        String id = (String) request.get(Request.ID_CICERONE);
+        Intent passId = new Intent(context, ViewMyFeedback.class);
+        passId.putExtra("id",id);
+        passId.putExtra("stato",stato);
+        context.startActivity(passId);
+    }
+
+    @Override
+    public boolean enableButton(Intent receive) {
+        HashMap<String,Object> map = (HashMap<String, Object>) receive.getSerializableExtra("evento");
+        boolean search = receive.getBooleanExtra("search",false);
+        if(!search){
+            if(map.get("statoAttivita").equals("PASSATO") && map.get("stato").equals("CONFERMATA")){
+                return true;
+            }}
+
+        return false;
+
+    }
+
+    @Override
+    public void goToCreateFeedBack(GestioneRichiesteInterfaccia.MvpView mvpView,Intent receive) {
+        Map<String,Object> request = (Map<String, Object>) receive.getSerializableExtra("evento");
+        String id = (String) request.get(Request.ID_CICERONE);
+        Intent passId = new Intent(context, CreateFeedback.class);
+        passId.putExtra("id",id);
+        ((Context)mvpView).startActivity(passId);
+    }
 }
+
+
+

@@ -62,8 +62,7 @@ public class AddGuests extends AppCompatActivity implements GestioneRichiesteInt
     }
 
 
-    @Override
-    public void enableButton(Intent receive) {}
+
 
     @Override
     public void showCategories(TextView category) {}

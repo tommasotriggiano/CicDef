@@ -14,6 +14,7 @@ public class PresenterMain implements InterfaceMain.Presenter {
     @Override
     public void initAttivita() {
         Event event = new Event();
-        event.initStatus();}
+        event.initStatus();
+    }
 
 }

@@ -4,24 +4,27 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.squareup.picasso.Picasso;
 
-import java.io.Serializable;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import uniba.di.itps.ciceroneapp.R;
 import uniba.di.itps.ciceroneapp.gestioneRichieste.search.GestioneRichiesteInterfaccia;
 import uniba.di.itps.ciceroneapp.gestioneRichieste.search.GestioneRichiestePresenter;
-import uniba.di.itps.ciceroneapp.main.MainActivity;
 
 public class DetailEventRequest extends AppCompatActivity implements GestioneRichiesteInterfaccia.MvpView {
     private TextView titolo,categoria,lingua,durata,luogo,data,descrizione,indirizzo,requisiti,nomeC,cognomeC,prezzo,valuta,nMaxPartecipanti,oraInizio,tappe,richiedi,cic;
     private ImageView immagineAtt;
     private LinearLayout linear;
+    private Button createFeedback;
     private CircleImageView ciceroneProfile;
     private GestioneRichiesteInterfaccia.Presenter presenter;
     private Intent receive;
@@ -29,8 +32,8 @@ public class DetailEventRequest extends AppCompatActivity implements GestioneRic
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_request);
-        cic = findViewById(R.id.cicerone);
         immagineAtt = findViewById(R.id.imageView);
+        createFeedback = findViewById(R.id.goToFeedBack);
         titolo = findViewById(R.id.titolo);
         categoria = findViewById(R.id.categoria);
         luogo = findViewById(R.id.luogo);
@@ -52,27 +55,24 @@ public class DetailEventRequest extends AppCompatActivity implements GestioneRic
         //presenter1 = new PresenterGestioneAttività(this);
         presenter = new GestioneRichiestePresenter(this);
         receive =  getIntent();
-        //this.enableButton(receive);
-
-
+        if(presenter.enableButton(receive)){
+            createFeedback.setVisibility(View.VISIBLE);
+        }
         presenter.setEventDetail(receive,this);
+
+        String stato = richiedi.getText().toString();
         richiedi.setOnClickListener(v -> {
             if(richiedi.getText().toString().equals(getResources().getString(R.string.DoRequest))){
                 this.goToGuests();
-                //presenter.createRequestToDatabase(receive,this);
                 }
         });
+        linear.setOnClickListener(v -> presenter.goToFeedback(receive,stato));
+        createFeedback.setOnClickListener(v -> presenter.goToCreateFeedBack(this,receive));
 
     }
 
 
-    @Override
-    public void enableButton(Intent receive) {
-        if(receive.getBooleanExtra("create",true)){
-            richiedi.setText("stato");
-        }
 
-    }
 
     @Override
     public void showCategories(TextView category) { }

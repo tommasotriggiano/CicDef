@@ -18,6 +18,8 @@ public interface InterfacciaGestioneProfilo {
         void addFragment(Fragment nextFragment);
         void readDataProfile(IFirebaseCallbackListener listener);
         void salvaCambiamenti(String foto, String nome, String cognome, String data, String sesso);
+        void goToStorico(Fragment fragment,String stato);
+        void goToMyFeedback();
     }
 
 

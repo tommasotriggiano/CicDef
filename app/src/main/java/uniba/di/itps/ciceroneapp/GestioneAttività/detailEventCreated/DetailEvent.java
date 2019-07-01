@@ -1,28 +1,24 @@
 package uniba.di.itps.ciceroneapp.GestioneAttività.detailEventCreated;
 
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Map;
 
 import uniba.di.itps.ciceroneapp.GestioneAttività.InterfaceGestioneAttività;
 import uniba.di.itps.ciceroneapp.GestioneAttività.PresenterGestioneAttività;
 import uniba.di.itps.ciceroneapp.R;
-import uniba.di.itps.ciceroneapp.main.MainActivity;
 import uniba.di.itps.ciceroneapp.model.Event;
-import uniba.di.itps.ciceroneapp.model.User;
 
-public class DetailEvent extends AppCompatActivity implements InterfaceGestioneAttività.MvpView {
+public class DetailEvent extends AppCompatActivity implements InterfaceGestioneAttività.MvpView, View.OnClickListener {
     private TextView titolo,categoria,lingua,durata,luogo,data,descrizione,indirizzo,requisiti,prezzo,valuta,nMaxPartecipanti,oraInizio,tappe,vediRichieste,partecipanti;
     private ImageView immagineAtt;
     private ImageButton modify,delete;
@@ -48,21 +44,18 @@ public class DetailEvent extends AppCompatActivity implements InterfaceGestioneA
         tappe = findViewById(R.id.visualizzaTappe);
         vediRichieste = findViewById(R.id.effettuaRichiesta);
         prezzo = findViewById(R.id.prezzoText);
-        //valuta = findViewById(R.id.valuta);
-        //nMaxPartecipanti = findViewById(R.id.numeroPartecipanti);
-        //presenter1 = new PresenterGestioneAttività(this);
+        partecipanti = findViewById(R.id.partecipantsTextView);
+        nMaxPartecipanti = findViewById(R.id.numeroPartecipanti);
         presenter = new PresenterGestioneAttività(this);
         receive =  getIntent();
         presenter.setEventDetailC(receive,this);
-        delete.setOnClickListener(v -> {
-        presenter.deleteEvent(receive,this);
+        this.enableButton(receive);
 
-        });
-        modify.setOnClickListener(v -> presenter.goToModify(receive));
-        vediRichieste.setOnClickListener(v -> {
-            presenter.gotoViewRequest(this);
+        delete.setOnClickListener(this);
+        modify.setOnClickListener(this);
+        vediRichieste.setOnClickListener(this);
+        partecipanti.setOnClickListener(this);
 
-        });
     }
 
     @Override
@@ -135,7 +128,9 @@ public class DetailEvent extends AppCompatActivity implements InterfaceGestioneA
 
     @Override
     public void goToEvent() {
-        this.startActivity(new Intent(DetailEvent.this, MainActivity.class));
+        Intent goToPartecipants = new Intent(DetailEvent.this, ViewPartecipants.class);
+        goToPartecipants.putExtra("evento",receive.getSerializableExtra("evento"));
+        this.startActivity(goToPartecipants);
     }
 
     @Override
@@ -145,5 +140,33 @@ public class DetailEvent extends AppCompatActivity implements InterfaceGestioneA
         startActivity(goToRequest);
     }
 
+    @Override
+    public void enableButton(Intent receive) {
+        Map<String,Object> event = (Map<String, Object>) receive.getSerializableExtra("evento");
+        if(event.get("stato").equals("PASSATO")){
+            delete.setVisibility(View.INVISIBLE);
+            modify.setVisibility(View.INVISIBLE);
+            vediRichieste.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.delete:
+                presenter.deleteEvent(receive,this);
+                break;
+            case R.id.modify:
+                presenter.goToModify(receive);
+                break;
+            case R.id.effettuaRichiesta:
+                presenter.gotoViewRequest(this);
+                break;
+            case R.id.partecipantsTextView:
+                this.goToEvent();
+                break;
+        }
+
+    }
 }
 

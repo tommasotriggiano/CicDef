@@ -6,6 +6,6 @@ public interface EventInterface {
     void createEventToDatabase();
     void initStatus();
     boolean updateEventToDatabase(String idDocument);
-
     boolean addPartecipants(String idAttivita, String idPartecipante);
+    boolean deletePartecipants(String idAttivita, String idPartecipante);
 }

@@ -10,7 +10,6 @@ import java.util.Map;
 
 public interface GestioneRichiesteInterfaccia {
     interface MvpView{
-        void enableButton(Intent receive);
         void showCategories(TextView category);
         void setTextTitolo(String string);
         void setTextCategoria(String string);
@@ -35,11 +34,14 @@ public interface GestioneRichiesteInterfaccia {
         void sendEventDetail(int position, ArrayList<Map<String, Object>> events, boolean b);
         void setEventDetail(Intent intent,MvpView mvpView);
         void initRecyclerViewCerca(RecyclerView recyclerView, String city, String data, String categoria);
+        void initRecyclerViewRichieste(RecyclerView recyclerView,String stato);
         void setAddGuest(Intent intent,MvpView mvpView);
-        void createRequestToDatabase(Intent receive,MvpView mvpView);
+        boolean createRequestToDatabase(Intent receive,MvpView mvpView);
         void onBindHolder(GestioneRichiesteInterfaccia.MvpView mvpView, int i, ArrayList<Map<String,Object>> events);
         void onBindHolderR(MvpView mvpView, int i, ArrayList<Map<String, Object>> requests);
-
         void setListViewGuest(ListView listGuest,String nome,String cognome,String email);
+        void goToFeedback(Intent receive,String stato);
+        boolean enableButton(Intent receive);
+        void goToCreateFeedBack(MvpView mvpView,Intent receive);
     }
 }

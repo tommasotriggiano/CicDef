@@ -14,12 +14,15 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import uniba.di.itps.ciceroneapp.GestioneAttività.EventFragment;
 import uniba.di.itps.ciceroneapp.GestioneAttività.InterfaceGestioneAttività;
+import uniba.di.itps.ciceroneapp.GestioneAttività.myEventCreatedView.MyEventCreatedFragment;
 import uniba.di.itps.ciceroneapp.R;
 import uniba.di.itps.ciceroneapp.auth.LoginActivity;
+import uniba.di.itps.ciceroneapp.gestioneFeedback.ViewMyFeedback;
 
 
-public class ProfileMainFragment extends Fragment {
+public class ProfileMainFragment extends Fragment implements View.OnClickListener {
     private CircleImageView imageProfile;
     private InterfacciaGestioneProfilo.Presenter presenter;
     private  InterfaceGestioneAttività.MvpView mvpView;
@@ -35,6 +38,7 @@ public class ProfileMainFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile_main, container, false);
         visualizzaProfilo = view.findViewById(R.id.visualizzaProfilo);
+        attività = view.findViewById(R.id.storico);
         user = FirebaseAuth.getInstance().getCurrentUser();
         db = FirebaseFirestore.getInstance();
         mvpView = (InterfaceGestioneAttività.MvpView)getActivity();
@@ -55,18 +59,31 @@ public class ProfileMainFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
         super.onViewCreated(view,savedInstanceState);
         profileView.loadPhoto(getContext(),imageProfile,presenter);
-        visualizzaProfilo.setOnClickListener(v -> {
-            presenter.addFragment(new ViewProfileFragment());
-
-        });
-        logout.setOnClickListener(v -> {
-            startActivity(new Intent(getActivity(), LoginActivity.class));
-            getActivity().finish();
-
-        });
-    }
-
-
-
+        visualizzaProfilo.setOnClickListener(this);
+        attività.setOnClickListener(this);
+        logout.setOnClickListener(this);
+        feedback.setOnClickListener(this);
 
     }
+
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.visualizzaProfilo:
+                presenter.addFragment(new ViewProfileFragment());
+                break;
+            case R.id.storico:
+                presenter.goToStorico(new EventFragment(),"PASSATO");
+                break;
+            case R.id.logout:
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+                getActivity().finish();
+                break;
+            case R.id.feedback:
+                presenter.goToMyFeedback();
+
+        }
+
+    }
+}

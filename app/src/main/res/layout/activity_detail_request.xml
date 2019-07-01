@@ -132,6 +132,7 @@
                 android:id="@+id/linearProfile"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
+                android:background="@drawable/text_shape_1"
                 android:layout_below="@+id/cicerone"
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal">
@@ -166,7 +167,7 @@
                 android:id="@+id/descrizione"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_below="@+id/linearProfile"
+                android:layout_below="@+id/goToFeedBack"
                 android:layout_marginTop="30dp"
                 android:gravity="center_vertical"
                 android:paddingStart="10dp"
@@ -291,6 +292,22 @@
                 android:layout_toRightOf="@+id/prezzo"
                 android:text="10.0"
                 android:textSize="17sp" />
+
+            <Button
+                android:id="@+id/goToFeedBack"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/linearProfile"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="82dp"
+                android:layout_marginTop="0dp"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:visibility="gone"
+                android:layout_marginEnd="102dp"
+                android:text="Pubblica FeedBack" />
 
 
         </RelativeLayout>

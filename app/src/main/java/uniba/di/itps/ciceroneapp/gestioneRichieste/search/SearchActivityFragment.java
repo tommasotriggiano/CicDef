@@ -144,10 +144,7 @@ public class SearchActivityFragment extends Fragment implements GestioneRichiest
         }
     }
 
-    @Override
-    public void enableButton(Intent receive) {
 
-    }
 
     @Override
     public void showCategories(TextView category) {

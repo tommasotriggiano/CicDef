@@ -139,7 +139,7 @@
                 android:textSize="17sp" />
 
             <TextView
-                android:id="@+id/partecipants"
+                android:id="@+id/partecipantsTextView"
                 android:background="@drawable/text_shape_1"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
@@ -157,7 +157,7 @@
                 android:id="@+id/descrizione"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_below="@+id/partecipants"
+                android:layout_below="@+id/partecipantsTextView"
                 android:layout_marginTop="30dp"
                 android:gravity="center_vertical"
                 android:paddingStart="10dp"

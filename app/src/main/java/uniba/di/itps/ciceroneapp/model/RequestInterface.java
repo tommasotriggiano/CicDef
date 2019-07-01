@@ -6,4 +6,5 @@ public interface RequestInterface {
     boolean addRequestToDatabase();
     boolean updateStatoToDatabase(String id,String stato);
     Map<String,Object> toMap();
+    void addStatoEvent(String id, String statoInCorso);
 }

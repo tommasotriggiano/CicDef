@@ -1,5 +1,6 @@
 package uniba.di.itps.ciceroneapp.GestioneAttività.myEventCreatedView;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
@@ -114,6 +115,11 @@ public  class MyEventHolder extends RecyclerView.ViewHolder implements Interface
 
     @Override
     public void goToRequest() {
+
+    }
+
+    @Override
+    public void enableButton(Intent receive) {
 
     }
 

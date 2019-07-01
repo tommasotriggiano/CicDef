@@ -3,14 +3,16 @@ package uniba.di.itps.ciceroneapp.model;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import uniba.di.itps.ciceroneapp.data.DataFetch;
 
-public class Request implements RequestInterface {
+public class Request implements RequestInterface, Serializable {
 
     public final static String ID_CICERONE = "idCicerone";
     public final static String ID_ATTIVITA = "idAttivita";
@@ -98,6 +100,8 @@ public class Request implements RequestInterface {
         return true;
     }
 
+
+
     @Override
     public Map<String,Object> toMap() {
         Map<String,Object> request = new HashMap<>();
@@ -108,5 +112,21 @@ public class Request implements RequestInterface {
         request.put("ospiti",this.ospiti);
         return request;
 
+    }
+
+    @Override
+    public void addStatoEvent(String id, String stato) {
+        FirebaseFirestore.getInstance().collection(DataFetch.RICHIESTE).whereEqualTo(Request.ID_ATTIVITA,id).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for(DocumentSnapshot ds : queryDocumentSnapshots.getDocuments()){
+                    if(ds.exists()){
+                        Map<String,Object> request = ds.getData();
+                        request.put("statoAttivita",stato);
+                        FirebaseFirestore.getInstance().collection(DataFetch.RICHIESTE).document(ds.getId()).update(request);
+                    }
+                }
+            }
+        });
     }
 }

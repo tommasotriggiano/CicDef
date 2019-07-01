@@ -36,10 +36,7 @@ public class ViewHolderAttivitàRicercate extends RecyclerView.ViewHolder implem
     }
 
 
-    @Override
-    public void enableButton(Intent receive) {
 
-    }
 
     @Override
     public void showCategories(TextView category) {
