@@ -17,10 +17,12 @@ import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import uniba.di.itps.ciceroneapp.R;
+import uniba.di.itps.ciceroneapp.gestioneFeedback.CreateFeedback;
 import uniba.di.itps.ciceroneapp.gestioneRichieste.search.GestioneRichiesteInterfaccia;
 import uniba.di.itps.ciceroneapp.gestioneRichieste.search.GestioneRichiestePresenter;
+import uniba.di.itps.ciceroneapp.model.Request;
 
-public class DetailEventRequest extends AppCompatActivity implements GestioneRichiesteInterfaccia.MvpView {
+public class DetailEventRequest extends AppCompatActivity implements GestioneRichiesteInterfaccia.MvpView, View.OnClickListener {
     private TextView titolo,categoria,lingua,durata,luogo,data,descrizione,indirizzo,requisiti,nomeC,cognomeC,prezzo,valuta,nMaxPartecipanti,oraInizio,tappe,richiedi,cic;
     private ImageView immagineAtt;
     private LinearLayout linear;
@@ -55,9 +57,8 @@ public class DetailEventRequest extends AppCompatActivity implements GestioneRic
         //presenter1 = new PresenterGestioneAttività(this);
         presenter = new GestioneRichiestePresenter(this);
         receive =  getIntent();
-        if(presenter.enableButton(receive)){
-            createFeedback.setVisibility(View.VISIBLE);
-        }
+
+
         presenter.setEventDetail(receive,this);
 
         String stato = richiedi.getText().toString();
@@ -67,9 +68,12 @@ public class DetailEventRequest extends AppCompatActivity implements GestioneRic
                 }
         });
         linear.setOnClickListener(v -> presenter.goToFeedback(receive,stato));
-        createFeedback.setOnClickListener(v -> presenter.goToCreateFeedBack(this,receive));
-
+        if(presenter.enableButton(receive)){
+            createFeedback.setVisibility(View.VISIBLE);
+            createFeedback.setOnClickListener(this);}
     }
+
+
 
 
 
@@ -134,4 +138,12 @@ public class DetailEventRequest extends AppCompatActivity implements GestioneRic
 
     @Override
     public void goToEvent() {}
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.goToFeedBack){
+            presenter.goToCreateFeedBack(this,receive);
+        };
+
+    }
 }

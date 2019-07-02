@@ -11,9 +11,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import uniba.di.itps.ciceroneapp.GestioneAttività.InterfaceGestioneAttività;
-import uniba.di.itps.ciceroneapp.GestioneAttività.myEventCreatedView.MyEventCreatedFragment;
-import uniba.di.itps.ciceroneapp.GestioneAttività.myEventRequestedView.MyEventRequestedHolder;
-import uniba.di.itps.ciceroneapp.GestioneAttività.myEventRequestedView.TabRequestedFragment;
 import uniba.di.itps.ciceroneapp.R;
 import uniba.di.itps.ciceroneapp.base.mvp.callback.IFirebaseCallbackListener;
 import uniba.di.itps.ciceroneapp.data.DataFetch;
@@ -26,8 +23,7 @@ public class GestioneProfiloPresenter implements InterfacciaGestioneProfilo.Pres
     private FirebaseUser user;
     private  FirebaseFirestore db;
 
-    public GestioneProfiloPresenter(Context mcontext, FirebaseUser user, FirebaseFirestore db) {
-        InterfacciaGestioneProfilo.MvpView mView = new ViewProfileFragment();
+    GestioneProfiloPresenter(Context mcontext, FirebaseUser user, FirebaseFirestore db) {
         navigationView = (InterfaceGestioneAttività.MvpView)mcontext;
 
         this.mcontext = mcontext;

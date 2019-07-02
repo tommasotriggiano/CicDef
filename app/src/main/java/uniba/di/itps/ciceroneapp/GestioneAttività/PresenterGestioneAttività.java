@@ -19,13 +19,11 @@ import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 import uniba.di.itps.ciceroneapp.GestioneAttività.detailEventCreated.AdapterRichiedenti;
 import uniba.di.itps.ciceroneapp.GestioneAttività.detailEventCreated.DetailEvent;
 import uniba.di.itps.ciceroneapp.GestioneAttività.myEventCreatedView.RecyclerViewMyEventAdapter;
-import uniba.di.itps.ciceroneapp.GestioneAttività.myEventRequestedView.RequestedAdapter;
 import uniba.di.itps.ciceroneapp.data.DataFetch;
 import uniba.di.itps.ciceroneapp.gestioneRichieste.search.DetailEventRequested.GuestAdapter;
 import uniba.di.itps.ciceroneapp.model.Event;
@@ -44,19 +42,15 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
     private Context mcontext;
     private FirebaseUser user;
     private ArrayList<Map<String,Object>> events;
-    private ArrayList<Map<String,Object>> ric;
     private ArrayList<Map<String,Object>> richiedenti = new ArrayList<>();
-    private ArrayList<String> partecipanti = new ArrayList<>();
     private RecyclerViewMyEventAdapter adapter;
-    private RequestedAdapter ra;
-    private Map<String,Object> richiesta = new HashMap<>();
     private EventInterface eventInterface = new Event();
     private RequestInterface requestInterface = new Request();
 
     public PresenterGestioneAttività(Context context){
         mcontext = context;
         events = new ArrayList<>();
-        ric = new ArrayList<>();
+        ArrayList<Map<String, Object>> ric = new ArrayList<>();
         user = FirebaseAuth.getInstance().getCurrentUser();
     }
 
@@ -135,7 +129,9 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
         created.get().addOnSuccessListener(queryDocumentSnapshots -> {
             for(DocumentSnapshot d : queryDocumentSnapshots.getDocuments()){
                 Event event = d.toObject(Event.class);
-                events.add(event.toMap());
+                if (event != null) {
+                    events.add(event.toMap());
+                }
             }
             adapter = new RecyclerViewMyEventAdapter(mcontext,events);
             recyclerView.setAdapter(adapter);
@@ -170,7 +166,7 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
         Event event = new Event();
         if(event.delete(id)){
             mvpView.goToEvent();
-        };
+        }
     }
 
     @Override
@@ -185,8 +181,8 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
         mvpView.setTextIndirizzo((String)request.get(Event.INDIRIZZO));
         mvpView.setTextOrario((String)request.get(Event.ORARIO_INIZIO));
         mvpView.setTextPrezzo(String.valueOf(request.get(Event.PREZZO)),(String)request.get(Event.VALUTA));
-        String[] partsEnd = request.get(Event.ORARIO_INIZIO).toString().split(":");
-        String[] partStart =  request.get(Event.ORARIO_INIZIO).toString().split(":");
+        String[] partsEnd = String.valueOf(request.get(Event.ORARIO_INIZIO)).split(":");
+        String[] partStart =  String.valueOf(request.get(Event.ORARIO_INIZIO)).split(":");
         int durata = Integer.valueOf(partsEnd[0]) - Integer.valueOf(partStart[0]);
         mvpView.setTextDurata(String.valueOf(durata));
         if(request.get(Event.FOTO) != null){
@@ -216,15 +212,17 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
         ArrayList<Map<String,Object>> guests = (ArrayList<Map<String,Object>>) richiedenti.get(position).get(Request.OSPITI);
         ArrayList<Guest> guestArrayList = new ArrayList<>();
 
-        for(Map<String,Object> g : guests){
-           Guest gOBj = new Guest((String)g.get("nome"),(String)g.get("cognome"));
-            if(g.get("email") != null) {
-                gOBj.setEmail((String)g.get("email"));
+            if (guests != null) {
+                for(Map<String,Object> g : guests){
+                   Guest gOBj = new Guest((String)g.get("nome"),(String)g.get("cognome"));
+                    if(g.get("email") != null) {
+                        gOBj.setEmail((String)g.get("email"));
+                    }
+                    guestArrayList.add(gOBj);
+                }
             }
-            guestArrayList.add(gOBj);
-        }
 
-        holder.guests.setAdapter(new GuestAdapter(mcontext,guestArrayList));}
+            holder.guests.setAdapter(new GuestAdapter(mcontext,guestArrayList));}
 
         if(stato.equals(Request.STATO_CONFERMATA) && statoEvento.equals("IN CORSO")){
             holder.accetta.setVisibility(View.INVISIBLE);
@@ -258,7 +256,7 @@ public class PresenterGestioneAttività  implements InterfaceGestioneAttività.P
     @Override
     public void initRecyclerViewRichiedenti(RecyclerView richieste,Intent receive,String stato) {
         Map<String,Object> att = (Map<String, Object>) receive.getSerializableExtra("evento");
-        String idAtt = att.get(Event.IDEVENTO).toString();
+        String idAtt = (String)att.get(Event.IDEVENTO);
         Query richiedentiQuery = FirebaseFirestore.getInstance().collection(DataFetch.RICHIESTE).whereEqualTo(Request.ID_ATTIVITA,idAtt).whereEqualTo(Request.ID_CICERONE,FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .whereEqualTo(Request.STATO_RICHIESTA,stato);
         richiedentiQuery.get().addOnSuccessListener(queryDocumentSnapshots -> {

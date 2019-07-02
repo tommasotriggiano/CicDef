@@ -34,14 +34,14 @@ public interface InterfaceGestioneAttività {
         void setTextStato(String stato);
         void goToEvent();
         void goToRequest();
+        void enableButton(Intent receive);
     }
     interface Presenter{
         void addFragment(Fragment fragment,MvpView mvpView);
         boolean setArguument(Fragment fragment, Bundle bundle);
         void addStage(ArrayList<Stage> stage,String name,String description);
         void createEvent(Bundle b);
-        void initRecyclerViewCreate(RecyclerView recyclerView);
-        void initRecyclerViewRichieste(RecyclerView recyclerView);
+        void initRecyclerViewCreate(RecyclerView recyclerView,String stato);
         void onBindHolder(InterfaceGestioneAttività.MvpView mvpView, int i, ArrayList<Map<String,Object>> events);
         void sendEventDetail(int position,ArrayList<Map<String,Object>> events);
         void deleteEvent(Intent receive, MvpView mvpView);
@@ -49,10 +49,8 @@ public interface InterfaceGestioneAttività {
         void goToModify(Intent receive);
         void gotoViewRequest(MvpView view);
         void setHolderRichiedenti(AdapterRichiedenti.Holder holder, int position,ArrayList<Map<String,Object>> richiedenti);
-        void initRecyclerViewRichiedenti(RecyclerView richieste,Intent receive);
-
+        void initRecyclerViewRichiedenti(RecyclerView richieste,Intent receive,String stato);
         void accettaRichiesta(int position,ArrayList<Map<String,Object>> richiesta);
-
         void rifiutaRichiesta(int position,ArrayList<Map<String,Object>> richiesta);
     }
 }

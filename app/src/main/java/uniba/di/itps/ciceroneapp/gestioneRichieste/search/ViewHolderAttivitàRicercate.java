@@ -134,6 +134,11 @@ public class ViewHolderAttivitàRicercate extends RecyclerView.ViewHolder implem
     public void goToEvent() {
 
     }
+
+    @Override
+    public void startActivity(Intent passId) {
+
+    }
 }
 
 

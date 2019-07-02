@@ -1,5 +1,7 @@
 package uniba.di.itps.ciceroneapp.model;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import uniba.di.itps.ciceroneapp.data.DataFetch;
@@ -57,9 +59,8 @@ public class Feedback implements FeedbackInterface {
     }
 
     @Override
-    public boolean createFeedbackToDatabase(String id) {
-        FirebaseFirestore.getInstance().collection(DataFetch.UTENTI).document(id).collection(DataFetch.FEEDBACK).document(id).set(this);
-        return true;
-
+    public boolean createFeedbackToDatabase(String idCicerone) {
+        FirebaseFirestore.getInstance().collection(DataFetch.UTENTI).document(idCicerone).collection(DataFetch.FEEDBACK).document(this.id).set(this);
+            return true;
     }
 }

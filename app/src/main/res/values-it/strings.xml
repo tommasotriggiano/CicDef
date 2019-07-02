@@ -157,5 +157,12 @@
     <string name="title_activity_add_guests">AddGuests</string>
     <string name="addGuest">AGGIUNGI OSPITE</string>
     <string name="conferma">Conferma</string>
+    <array name="Rating">
+        <item>"1"</item>
+        <item>"2"</item>
+        <item>"3"</item>
+        <item>"4"</item>
+        <item>"5"</item>
+    </array>
 
 </resources>

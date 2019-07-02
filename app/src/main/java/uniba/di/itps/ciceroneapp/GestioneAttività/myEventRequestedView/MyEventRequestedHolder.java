@@ -125,4 +125,9 @@ public class MyEventRequestedHolder extends RecyclerView.ViewHolder implements G
     public void goToEvent() {
 
     }
+
+    @Override
+    public void startActivity(Intent passId) {
+
+    }
 }

@@ -29,6 +29,7 @@ public interface GestioneRichiesteInterfaccia {
         void setTextStato(String stato);
         void goToGuests();
         void goToEvent();
+        void startActivity(Intent passId);
     }
     interface Presenter{
         void sendEventDetail(int position, ArrayList<Map<String, Object>> events, boolean b);

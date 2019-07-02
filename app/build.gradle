@@ -29,7 +29,7 @@ android {
 }
 apply plugin: 'org.sonarqube' // added for sonar qube
 // added for sonar qube
-sonarqube {
+/*sonarqube {
     properties {
         property "sonar.projectName", "Cicerone"
         property "sonar.projectKey", "Cicerone"
@@ -41,7 +41,7 @@ sonarqube {
         property "sonar.login", "admin"
         property "sonar.password", "admin"
     }
-}
+}*/
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])

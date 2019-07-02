@@ -4,24 +4,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ListView;
-import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 import uniba.di.itps.ciceroneapp.GestioneAttività.myEventRequestedView.RequestedAdapter;
 import uniba.di.itps.ciceroneapp.R;
 import uniba.di.itps.ciceroneapp.data.DataFetch;
 import uniba.di.itps.ciceroneapp.gestioneFeedback.CreateFeedback;
+import uniba.di.itps.ciceroneapp.gestioneFeedback.Createfeedback1;
 import uniba.di.itps.ciceroneapp.gestioneFeedback.ViewMyFeedback;
 import uniba.di.itps.ciceroneapp.gestioneRichieste.search.DetailEventRequested.DetailEventRequest;
 import uniba.di.itps.ciceroneapp.gestioneRichieste.search.DetailEventRequested.GuestAdapter;
@@ -78,8 +75,8 @@ public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia
         mvpView.setTextIndirizzo((String)request.get(Event.INDIRIZZO));
         mvpView.setTextOraInizio((String)request.get(Event.ORARIO_INIZIO));
         mvpView.setTextPrezzo(String.valueOf(request.get(Event.PREZZO)),(String)request.get(Event.VALUTA));
-        String[] partsEnd = request.get(Event.ORARIO_INIZIO).toString().split(":");
-        String[] partStart =  request.get(Event.ORARIO_INIZIO).toString().split(":");
+        String[] partsEnd = String.valueOf(request.get(Event.ORARIO_INIZIO)).split(":");
+        String[] partStart =  String.valueOf(request.get(Event.ORARIO_INIZIO)).split(":");
         int durata = Integer.valueOf(partsEnd[0]) - Integer.valueOf(partStart[0]);
         mvpView.setTextDurata(String.valueOf(durata));
         if(request.get(Event.FOTO) != null){
@@ -264,19 +261,15 @@ public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia
     @Override
     public void onBindHolderR(GestioneRichiesteInterfaccia.MvpView mvpView, int i, ArrayList<Map<String, Object>> requests) {
         String idAttivita = requests.get(i).get(Request.ID_ATTIVITA).toString();
-        FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document(idAttivita).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if(documentSnapshot.exists()){
-                Event event = documentSnapshot.toObject(Event.class);
-                mvpView.setTextTitolo(event.getTitolo());
-                mvpView.setTextData(event.getDateEvento());
-                mvpView.setTextOraInizio(event.getOrarioIncontro());
-                mvpView.setTextLuogo(event.getLuogo());
-                mvpView.setTextIndirizzo(event.getIndirizzo());
-                if(event.getFoto() != null){
-                    mvpView.setImmagineAttività(event.getFoto());}
-            }}
+        FirebaseFirestore.getInstance().collection(DataFetch.EVENTI).document(idAttivita).get().addOnSuccessListener(documentSnapshot -> {
+            Event event = documentSnapshot.toObject(Event.class);
+            mvpView.setTextTitolo(event.getTitolo());
+            mvpView.setTextData(event.getDateEvento());
+            mvpView.setTextOraInizio(event.getOrarioIncontro());
+            mvpView.setTextLuogo(event.getLuogo());
+            mvpView.setTextIndirizzo(event.getIndirizzo());
+            if(event.getFoto() != null){
+                mvpView.setImmagineAttività(event.getFoto());}
         });
         mvpView.setTextStato((String)requests.get(i).get(Request.STATO_RICHIESTA));
     }
@@ -307,9 +300,8 @@ public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia
         HashMap<String,Object> map = (HashMap<String, Object>) receive.getSerializableExtra("evento");
         boolean search = receive.getBooleanExtra("search",false);
         if(!search){
-            if(map.get("statoAttivita").equals("PASSATO") && map.get("stato").equals("CONFERMATA")){
-                return true;
-            }}
+            return map.get("statoAttivita").equals("PASSATO") && map.get("stato").equals("CONFERMATA");
+        }
 
         return false;
 
@@ -317,11 +309,11 @@ public class GestioneRichiestePresenter implements  GestioneRichiesteInterfaccia
 
     @Override
     public void goToCreateFeedBack(GestioneRichiesteInterfaccia.MvpView mvpView,Intent receive) {
-        Map<String,Object> request = (Map<String, Object>) receive.getSerializableExtra("evento");
+        HashMap<String,Object> request = (HashMap<String, Object>) receive.getSerializableExtra("evento");
         String id = (String) request.get(Request.ID_CICERONE);
-        Intent passId = new Intent(context, CreateFeedback.class);
+        Intent passId = new Intent((Context)mvpView, CreateFeedback.class);
         passId.putExtra("id",id);
-        ((Context)mvpView).startActivity(passId);
+        mvpView.startActivity(passId);
     }
 }
 
