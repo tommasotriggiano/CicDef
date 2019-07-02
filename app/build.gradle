@@ -29,23 +29,24 @@ android {
 }
 apply plugin: 'org.sonarqube' // added for sonar qube
 // added for sonar qube
-/*sonarqube {
+sonarqube {
     properties {
-        property "sonar.projectName", "Cicerone"
-        property "sonar.projectKey", "Cicerone"
-        property "sonar.host.url", "http://localhost:9000"
+        //property "sonar.projectName", "Cicerone"
+        property "sonar.projectKey", "cicerone"
+        property "sonar.organization","tom740-github"
+        property "sonar.host.url", "httpw://sonarcloud.io"
         property "sonar.language", "java"
         property "sonar.sources", "src/main/java"
         property "sonar.java.sources", "src/main/java"
-        property "sonar.sourceEncoding", "UTF-8"
-        property "sonar.login", "admin"
-        property "sonar.password", "admin"
+        //property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.login", "cicerone"
+        //property "sonar.password", "admin"
     }
-}*/
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    //noinspection GradleCompatible
+    
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support:support-media-compat:28.0.0'
     implementation 'com.android.support:support-v4:28.0.0'
